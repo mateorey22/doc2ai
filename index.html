@@ -7,12 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="font-sans bg-gray-100">
+<body class="font-sans bg-gray-100 overflow-x-hidden">
 
     <!-- Navigation -->
     <nav class="bg-white shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-          <a href="index.html" class="text-xl font-bold text-gray-800"><img src="images/logo.png" alt="Doc2AI Logo" class="w-40"></a>
+            <a href="index.html" class="text-xl font-bold text-gray-800"><img src="images/logo.png" alt="Doc2AI Logo" class="w-40"></a>
             <ul class="hidden md:flex space-x-6">
                 <li><a href="index.html" class="hover:text-blue-600">Home</a></li>
                 <li><a href="services.html" class="hover:text-blue-600">Services</a></li>
@@ -21,7 +21,6 @@
                 <li><a href="faq.html" class="hover:text-blue-600">FAQ</a></li>
                 <li><a href="contact.html" class="hover:text-blue-600">Contact</a></li>
                  <li><a href="blog.html" class="hover:text-blue-600">Blog</a></li>
-
             </ul>
             <button class="md:hidden text-gray-700 focus:outline-none">
               <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
@@ -39,52 +38,61 @@
                 <li><a href="faq.html" class="block py-2 hover:bg-gray-200">FAQ</a></li>
                 <li><a href="contact.html" class="block py-2 hover:bg-gray-200">Contact</a></li>
                  <li><a href="blog.html" class="block py-2 hover:bg-gray-200">Blog</a></li>
-
             </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <header class="bg-gradient-to-r from-blue-200 to-blue-50 py-16 text-center">
-        <div class="container mx-auto">
-            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">Transform Your Documents with AI</h1>
-            <p class="text-lg md:text-xl text-gray-700 mb-8">Digitize, analyze, and extract insights from your documents with our AI-powered platform.</p>
-            <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Try for Free</a>
+       <div class="container mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px] ">Transform Your Documents with AI</h1>
+            <p class="text-lg md:text-xl text-gray-700 mb-8 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">Digitize, analyze, and extract insights from your documents with our AI-powered platform.</p>
+           <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">Try for Free</a>
         </div>
     </header>
 
-    <!-- Features Section -->
-    <section class="py-12">
+   <!-- Features Section -->
+   <section class="py-12">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-semibold text-gray-800 text-center mb-8">Key Features</h2>
+            <h2 class="text-3xl font-semibold text-gray-800 text-center mb-8 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">Key Features</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center p-6 bg-white rounded-md shadow-md">
-                    <img src="images/digitization.svg" alt="Digitization" class="mx-auto h-20 mb-4">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Document Digitization</h3>
-                    <p class="text-gray-700">Convert your paper documents to digital format with high accuracy.</p>
+
+                <div class="card frosted-glass">
+                    <div class="icon-container">
+                       <img src="images/digitization-example.png" alt="Digitization" class="mx-auto h-20 mb-4 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">Document Digitization</h3>
+                    <p class="text-gray-700 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">Convert your paper documents to digital format with high accuracy.</p>
                 </div>
-                <div class="text-center p-6 bg-white rounded-md shadow-md">
-                    <img src="images/ocr.svg" alt="OCR" class="mx-auto h-20 mb-4">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Advanced OCR</h3>
-                    <p class="text-gray-700">Extract text from images and scanned documents with advanced Optical Character Recognition.</p>
+
+                <div class="card frosted-glass">
+                   <div class="icon-container">
+                       <img src="images/ocr.png" alt="OCR" class="mx-auto h-20 mb-4 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">
+                   </div>
+                   <h3 class="text-xl font-semibold text-gray-800 mb-2 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">Advanced OCR</h3>
+                   <p class="text-gray-700 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">Extract text from images and scanned documents with advanced Optical Character Recognition.</p>
                 </div>
-                <div class="text-center p-6 bg-white rounded-md shadow-md">
-                    <img src="images/ai-analysis.svg" alt="AI Analysis" class="mx-auto h-20 mb-4">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">AI-Powered Analysis</h3>
-                    <p class="text-gray-700">Gain insights from your documents using powerful AI models.</p>
-                </div>
+
+               <div class="card frosted-glass">
+                  <div class="icon-container">
+                     <img src="images/ai-analysis.png" alt="AI Analysis" class="mx-auto h-20 mb-4 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">
+                  </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">AI-Powered Analysis</h3>
+                    <p class="text-gray-700 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">Gain insights from your documents using powerful AI models.</p>
+               </div>
+
             </div>
         </div>
     </section>
-      <!-- Call to Action Section -->
+    <!-- Call to Action Section -->
     <section class="py-12 bg-gray-100">
         <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-semibold text-gray-800 mb-6">Ready to Get Started?</h2>
-            <p class="text-lg text-gray-700 mb-8">Sign up for a free trial and experience the power of Doc2AI today!</p>
-            <a href="#" class="bg-blue-600 text-white px-8 py-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Start Your Free Trial</a>
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">Ready to Get Started?</h2>
+            <p class="text-lg text-gray-700 mb-8 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">Sign up for a free trial and experience the power of Doc2AI today!</p>
+           <a href="#" class="bg-blue-600 text-white px-8 py-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transform translate-y-0 transition-transform duration-500 hover:translate-y-[-5px]">Start Your Free Trial</a>
         </div>
     </section>
-    <!-- Footer -->
+   <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
       <div class="container mx-auto text-center">
         <p class="text-sm">&copy; 2024 Doc2AI. All rights reserved.</p>
@@ -95,6 +103,6 @@
       </div>
     </footer>
 
- <script src="./js/main.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 </html>
