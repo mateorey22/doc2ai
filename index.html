@@ -7,15 +7,16 @@
     <meta name="description" content="Doc2AI provides professional document digitization services. Secure your documents for the future.">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
-<body class="font-mono text-gray-800">
-    
+<body class="font-mono text-gray-800" style="background-color: #c0dcdc;">
+
     <!-- Hero Section -->
     <header class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-gray-100 to-white">
-        
+
         <!-- Navigation (Top Left Logo and Top Right Buttons) -->
         <nav class="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-10">
             <div class="flex items-center">
@@ -26,7 +27,7 @@
                  <button class="nav-button">Contact</button>
            </div>
         </nav>
-       
+
         <div class="text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-6">
             <h1 class="text-9xl font-bold mb-6 text-black leading-tight hero-text opacity-0" style="font-family: 'Roboto Mono', monospace;">Doc2AI</h1>
             <div class="flex justify-center space-x-4 mt-6">
@@ -39,39 +40,41 @@
     <!-- Services Section -->
     <section class="bg-white py-16 relative service-section">
         <div class="container mx-auto px-6">
-            <div class="mt-16 card-container">
-                <!-- Service 1 -->
-                <div class="service-card">
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-800">Digitization Services</h2>
-                    <p class="text-gray-700 text-lg mb-4">
-                        We digitize all kinds of documents: class notes, business records, personal papers, and more. Enjoy the convenience of digital access, improved organization, and increased security.
-                    </p>
-                </div>
-                <!-- Service 2 -->
-                <div class="service-card">
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-800">Swiss Quality</h2>
-                    <div class="flex items-center justify-center mb-4">
-                         <img src="swiss-logo.png" alt="Swiss Quality" class="h-20 w-20 object-contain">
+            <div class="mt-16 card-container-wrapper">
+                <div class="card-container">
+                    <!-- Service 1 -->
+                    <div class="service-card" data-card-index="0">
+                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">Digitization Services</h2>
+                        <p class="text-gray-700 text-lg mb-4">
+                            We digitize all kinds of documents: class notes, business records, personal papers, and more. Enjoy the convenience of digital access, improved organization, and increased security.
+                        </p>
                     </div>
-                    <p class="text-gray-700 text-lg mb-4">
-                        We ensure the highest quality service with our dedication to Swiss reliability and precision. Your documents are processed with utmost care.
-                    </p>
+                    <!-- Service 2 -->
+                    <div class="service-card" data-card-index="1">
+                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">Swiss Quality</h2>
+                        <div class="flex items-center justify-center mb-4">
+                             <img src="swiss-logo.png" alt="Swiss Quality" class="h-20 w-20 object-contain">
+                        </div>
+                        <p class="text-gray-700 text-lg mb-4">
+                            We ensure the highest quality service with our dedication to Swiss reliability and precision. Your documents are processed with utmost care.
+                        </p>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="service-card" data-card-index="2">
+                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">Secure Process</h2>
+                        <p class="text-gray-700 text-lg mb-4">
+                           Your security is our priority. We maintain strict confidentiality and security protocols throughout the entire digitization process.
+                        </p>
+                    </div>
                 </div>
-                <!-- Service 3 -->
-                 <div class="service-card">
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-800">Secure Process</h2>
-                    <p class="text-gray-700 text-lg mb-4">
-                       Your security is our priority. We maintain strict confidentiality and security protocols throughout the entire digitization process.
-                    </p>
-                </div>
-           </div>
+            </div>
         </div>
          <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-white opacity-30 pointer-events-none"></div>
     </section>
 
     <!-- Form Modal -->
     <div id="formModal" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 hidden items-center justify-center z-50">
-         <div class="bg-white p-8 rounded-lg max-w-2xl w-full relative">
+         <div class="bg-white p-8 rounded-lg max-w-2xl w-full relative max-h-[80vh] overflow-y-auto">
             <button id="closeFormButton" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
