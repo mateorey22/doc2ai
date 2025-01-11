@@ -3,34 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doc2AI</title>
+    <title>Doc2AI - Multi-Page Demo</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Courier Prime', monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #f0f0f0;
+        }
+         .hero-background {
+             position: absolute;
+            top: 0;
+            left: 0;
+             width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+            pointer-events: none;
+            z-index: 0;
+        }
+        .services-background {
+            position: absolute;
+            top: 0;
+           left: 0;
+            width: 100%;
+           height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            pointer-events: none;
+             z-index: 0;
+        }
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+             padding: 20px;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+             margin-bottom: 20px;
+             transition: all 0.3s ease;
+         }
+         .service-card:hover {
+             transform: translateY(-5px) scale(1.05);
+           box-shadow: 0 12px 18px rgba(0, 0, 0, 0.2);
+         }
+         #formModal {
+            display: none;
+             position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+             background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #formModal .form-container{
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+           max-height: 90vh;
+           overflow-y: auto;
+           position: relative;
+         }
+        #closeFormButton{
+            position: absolute;
+            top: 10px;
+           right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #555;
+           background: none;
+            border: none;
+        }
+         #closeFormButton:hover{
+             color: #222;
+         }
+        .mouse-animation {
+             position: absolute;
+           bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+             display: flex;
+            flex-direction: column;
+             align-items: center;
+            opacity: 0;
+        }
+        .mouse {
+            width: 20px;
+           height: 30px;
+            border: 2px solid #333;
+             border-radius: 15px;
+            position: relative;
+        }
+         .wheel {
+            width: 4px;
+           height: 8px;
+           background-color: #333;
+             border-radius: 2px;
+             position: absolute;
+            top: 4px;
+           left: 50%;
+            transform: translateX(-50%);
+            animation: wheel-move 1.5s ease-in-out infinite;
+         }
+        .mouse-text {
+             margin-top: 10px;
+             font-size: 0.8em;
+           color: #555;
+         }
+         @keyframes wheel-move {
+           0% {
+               opacity: 0;
+                transform: translateX(-50%) translateY(-2px);
+           }
+             50% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(8px);
+           }
+            100% {
+               opacity: 0;
+               transform: translateX(-50%) translateY(10px);
+           }
+        }
+         .card-container-wrapper {
+             height: 100vh;
+            overflow-y: hidden;
+        }
+         .card-container {
+            height: fit-content;
+            overflow-y: auto;
+             scroll-snap-type: y mandatory;
+           display: flex;
+            flex-direction: column;
+              padding: 20px;
+             padding-bottom: 60px;
+         }
+         .card-container > div {
+             scroll-snap-align: start;
+             scroll-snap-stop: always;
+        }
+         #heroText {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+         }
+       .hero-background-animation {
+            animation: backgroundFadeIn 2s ease forwards;
+       }
+        @keyframes backgroundFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+       }
+        .page {
+            display: none; /* Initially hide all pages */
+        }
+        .active-page {
+            display: block; /* Show active page */
+        }
+        .contact-email {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .contact-email i {
+            font-size: 1.2em;
+        }
+        .container {
+            max-width: 800px;
+            margin-left: auto;
+           margin-right: auto;
+           padding-left: 20px;
+           padding-right: 20px;
+        }
+    </style>
 </head>
 <body class="relative">
-    <header class="relative h-screen flex flex-col justify-center items-center text-center">
+
+     <header class="relative h-screen flex flex-col justify-center items-center text-center" id="home-page">
         <div class="hero-background hero-background-animation"></div>
-        <nav class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
-             <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
+         <nav class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
+            <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
             <div class="space-x-4">
-               <a href="about.html" class="text-gray-700 hover:text-gray-900">A propos</a>
-               <a href="contact.html" class="text-gray-700 hover:text-gray-900">Contact</a>
+                 <button onclick="showPage('about-page')" class="text-gray-700 hover:text-gray-900">A propos</button>
+                <button onclick="showPage('contact-page')" class="text-gray-700 hover:text-gray-900">Contact</button>
             </div>
        </nav>
-         <h1 id="heroText" class="text-7xl md:text-9xl font-bold mb-8" style="font-family: 'Courier Prime', monospace;">Doc2AI</h1>
+        <h1 id="heroText" class="text-7xl md:text-9xl font-bold mb-8" style="font-family: 'Courier Prime', monospace;">Doc2AI</h1>
         <button id="openFormButton" class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900 transition-colors">Faire une demande</button>
-        <div class="mouse-animation">
+       <div class="mouse-animation">
             <div class="mouse">
                 <div class="wheel"></div>
             </div>
             <div class="mouse-text">Scroll down</div>
-         </div>
+        </div>
     </header>
 
-    <section class="relative h-full">
+
+    <section class="relative h-full page active-page" id="services-page">
         <div class="services-background"></div>
         <div class="card-container-wrapper">
             <div class="card-container">
@@ -52,7 +230,42 @@
     </section>
 
 
-    <div id="formModal" class="hidden">
+    <section class="page" id="about-page">
+      <header class="relative flex justify-between items-center p-4">
+        <button onclick="showPage('services-page')" class="text-gray-700 hover:text-gray-900">
+           <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
+         </button>
+      </header>
+        <div class="container mx-auto p-4 text-center">
+            <h2 class="text-4xl font-bold mb-4" style="font-family: 'Courier Prime', monospace;">A Propos de Doc2AI</h2>
+            <p class="text-gray-700">
+                Doc2AI est une entreprise spécialisée dans la numérisation et le traitement intelligent de documents. Nous utilisons les dernières technologies d'IA pour transformer vos documents physiques en fichiers numériques organisés et exploitables. Notre mission est de faciliter la gestion de l'information pour les entreprises de toutes tailles.
+            </p>
+        </div>
+    </section>
+
+    <section class="page" id="contact-page">
+      <header class="relative flex justify-between items-center p-4">
+        <button onclick="showPage('services-page')" class="text-gray-700 hover:text-gray-900">
+           <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
+          </button>
+      </header>
+         <div class="container mx-auto p-4 text-center">
+            <h2 class="text-4xl font-bold mb-4" style="font-family: 'Courier Prime', monospace;">Contactez-Nous</h2>
+            <p class="text-gray-700">
+                Pour toute question ou demande d'informations, n'hésitez pas à nous contacter par email ou par téléphone. Nous serons ravis de vous accompagner dans votre projet de numérisation.
+           </p>
+            <p class="text-gray-700 mt-4 contact-email">
+                <i class="fas fa-envelope"></i>
+               <a href="mailto:contact@doc2ai.ch" class="text-gray-900 hover:underline">contact@doc2ai.ch</a>
+            </p>
+           <p class="text-gray-700 mt-4">
+                Téléphone: +41 123 456 789
+           </p>
+        </div>
+    </section>
+
+   <div id="formModal" class="hidden">
         <div class="form-container">
             <button id="closeFormButton" class="absolute top-2 right-2 text-gray-600 hover:text-gray-800 focus:outline-none"><i class="fas fa-times"></i></button>
            <h2 class="text-2xl font-bold mb-4" style="font-family: 'Courier Prime', monospace;">Demande de Numérisation</h2>
@@ -110,7 +323,91 @@
            </form>
         </div>
     </div>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="script.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script>
+          document.addEventListener('DOMContentLoaded', function() {
+             // Hero text fade-in animation
+             const heroText = document.getElementById('heroText');
+             gsap.to(heroText, {
+                 opacity: 1,
+                 y: 0,
+                 duration: 1,
+                 delay:0.2
+             });
+           // Mouse animation fade-in
+           const mouseAnimation = document.querySelector('.mouse-animation');
+             gsap.to(mouseAnimation, {
+                 opacity: 1,
+                 duration: 1,
+                delay: 1
+            });
+            // Modal control
+            const openFormButton = document.getElementById('openFormButton');
+            const closeFormButton = document.getElementById('closeFormButton');
+            const formModal = document.getElementById('formModal');
+
+             openFormButton.addEventListener('click', () => {
+                formModal.style.display = 'flex';
+            });
+            closeFormButton.addEventListener('click', () => {
+                 formModal.style.display = 'none';
+             });
+            // Form price calculation
+            const documentType = document.getElementById('documentType');
+            const transmissionMode = document.getElementById('transmissionMode');
+             const outputFormat = document.getElementById('outputFormat');
+           const documentOrganization = document.getElementById('documentOrganization');
+            const ocr = document.getElementById('ocr');
+             const highResolution = document.getElementById('highResolution');
+             const priceDisplay = document.getElementById('priceDisplay');
+             function calculatePrice() {
+               let price = 0;
+                const documentTypeVal = documentType.value;
+                const transmissionModeVal = transmissionMode.value;
+                const outputFormatVal = outputFormat.value;
+                if (documentTypeVal === 'rapport') {
+                   price += 10;
+                 }
+                if (transmissionModeVal === 'physique') {
+                    price += 5;
+                }
+                 if (outputFormatVal === 'pdf') {
+                  price += 2;
+                }
+               if(documentOrganization.checked){
+                    price += 20;
+                }
+                if (ocr.checked) {
+                   price += 20;
+                }
+               if(highResolution.checked){
+                    price += 10
+                }
+                 priceDisplay.textContent = `Estimation du prix: ${price} CHF`;
+           }
+           documentType.addEventListener('change', calculatePrice);
+            transmissionMode.addEventListener('change', calculatePrice);
+             outputFormat.addEventListener('change', calculatePrice);
+            documentOrganization.addEventListener('change', calculatePrice);
+           ocr.addEventListener('change', calculatePrice);
+           highResolution.addEventListener('change', calculatePrice);
+
+           // Prevent form submit
+            const form = document.getElementById('digitizationForm');
+           form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                alert('Formulaire soumis (simulation)');
+                 formModal.style.display = 'none';
+           });
+        });
+       function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+               page.classList.remove('active-page');
+            });
+            document.getElementById(pageId).classList.add('active-page');
+           window.scrollTo(0,0)
+        }
+    </script>
 </body>
 </html>
