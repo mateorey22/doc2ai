@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc2AI - Document Digitization and AI Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-sans bg-gray-100">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+          <a href="index.html" class="text-xl font-bold text-gray-800"><img src="images/logo.png" alt="Doc2AI Logo" class="w-40"></a>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="index.html" class="hover:text-blue-600">Home</a></li>
+                <li><a href="services.html" class="hover:text-blue-600">Services</a></li>
+                <li><a href="pricing.html" class="hover:text-blue-600">Pricing</a></li>
+                 <li><a href="about.html" class="hover:text-blue-600">About Us</a></li>
+                <li><a href="faq.html" class="hover:text-blue-600">FAQ</a></li>
+                <li><a href="contact.html" class="hover:text-blue-600">Contact</a></li>
+                 <li><a href="blog.html" class="hover:text-blue-600">Blog</a></li>
+
+            </ul>
+            <button class="md:hidden text-gray-700 focus:outline-none">
+              <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                <path v-if="!isOpen" fill-rule="evenodd" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"></path>
+                <path v-if="isOpen" fill-rule="evenodd" d="M18.286 6.286a1 1 0 1 0-1.414 1.414L13.414 12l3.456 3.456a1 1 0 0 0 1.414-1.414L15.414 12l3.456-3.456zM5.714 6.286a1 1 0 0 0 0 1.414L10.586 12l-3.456 3.456a1 1 0 0 0 1.414 1.414L12.001 12 6.544 6.544z"></path>
+             </svg>
+            </button>
+        </div>
+       <div class="md:hidden">
+         <ul v-show="isOpen" class="text-center py-2">
+                <li><a href="index.html" class="block py-2 hover:bg-gray-200">Home</a></li>
+                <li><a href="services.html" class="block py-2 hover:bg-gray-200">Services</a></li>
+                <li><a href="pricing.html" class="block py-2 hover:bg-gray-200">Pricing</a></li>
+                 <li><a href="about.html" class="block py-2 hover:bg-gray-200">About Us</a></li>
+                <li><a href="faq.html" class="block py-2 hover:bg-gray-200">FAQ</a></li>
+                <li><a href="contact.html" class="block py-2 hover:bg-gray-200">Contact</a></li>
+                 <li><a href="blog.html" class="block py-2 hover:bg-gray-200">Blog</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-blue-200 to-blue-50 py-16 text-center">
+        <div class="container mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">Transform Your Documents with AI</h1>
+            <p class="text-lg md:text-xl text-gray-700 mb-8">Digitize, analyze, and extract insights from your documents with our AI-powered platform.</p>
+            <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Try for Free</a>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="py-12">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold text-gray-800 text-center mb-8">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 bg-white rounded-md shadow-md">
+                    <img src="images/digitization.svg" alt="Digitization" class="mx-auto h-20 mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Document Digitization</h3>
+                    <p class="text-gray-700">Convert your paper documents to digital format with high accuracy.</p>
+                </div>
+                <div class="text-center p-6 bg-white rounded-md shadow-md">
+                    <img src="images/ocr.svg" alt="OCR" class="mx-auto h-20 mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Advanced OCR</h3>
+                    <p class="text-gray-700">Extract text from images and scanned documents with advanced Optical Character Recognition.</p>
+                </div>
+                <div class="text-center p-6 bg-white rounded-md shadow-md">
+                    <img src="images/ai-analysis.svg" alt="AI Analysis" class="mx-auto h-20 mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">AI-Powered Analysis</h3>
+                    <p class="text-gray-700">Gain insights from your documents using powerful AI models.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+      <!-- Call to Action Section -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">Ready to Get Started?</h2>
+            <p class="text-lg text-gray-700 mb-8">Sign up for a free trial and experience the power of Doc2AI today!</p>
+            <a href="#" class="bg-blue-600 text-white px-8 py-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Start Your Free Trial</a>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto text-center">
+        <p class="text-sm">&copy; 2024 Doc2AI. All rights reserved.</p>
+        <div class="mt-4 space-x-4">
+          <a href="/privacy" class="hover:text-gray-300">Privacy Policy</a>
+          <a href="/terms" class="hover:text-gray-300">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+ <script src="./js/main.js"></script>
+</body>
+</html>
