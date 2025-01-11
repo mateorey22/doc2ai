@@ -1,89 +1,74 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // GSAP Animations
-    const heroText = document.getElementById('heroText');
-    gsap.to(heroText, { opacity: 1, y: 0, duration: 1, delay: 0.2 });
-
-    const mouseAnimation = document.querySelector('.mouse-animation');
-    gsap.to(mouseAnimation, { opacity: 1, duration: 1, delay: 1 });
-
-    // Modal Handling
-    const modalButtons = document.querySelectorAll('.modal-button');
-    const openFormButton = document.getElementById('openFormButton');
+    const heroTitle = document.getElementById('heroTitle');
+    const mouseAnim = document.getElementById('mouseAnim');
+    const aboutModal = document.getElementById('aboutModal');
+    const contactModal = document.getElementById('contactModal');
     const formModal = document.getElementById('formModal');
+    const aboutBtn = document.getElementById('aboutBtn');
+    const contactBtn = document.getElementById('contactBtn');
+    const requestBtn = document.getElementById('requestBtn');
+    const modalCloseButtons = document.querySelectorAll('.modal-close');
+    const digitizationForm = document.getElementById('digitizationForm');
+    const estimatedPriceDisplay = document.getElementById('estimatedPrice');
+    const documentTypeSelect = document.getElementById('documentType');
+    const transmissionModeSelect = document.getElementById('transmissionMode');
+    const ocrOptionCheckbox = document.getElementById('ocrOption');
+    const iaOptionCheckbox = document.getElementById('iaOption');
 
-    // Function to Open Modal
-    function openModal(modalId) {
-        const modal = document.getElementById(modalId);
-        modal.style.display = 'flex';
+    // Animation
+    gsap.to(heroTitle, {opacity: 1, duration: 1, delay: 0.5});
+    setTimeout(() => {
+        gsap.to(mouseAnim, {opacity: 1, y: 10, duration: 1});
+    }, 1000);
+
+
+    // Modal Functions
+    function openModal(modal) {
+        modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     }
 
-       // Function to Close Modal
-    function closeModal(modalElement) {
-        modalElement.style.display = 'none';
-        window.scrollTo(0, 0);
-        document.body.style.overflow = 'auto';
+    function closeModal(modal) {
+       modal.classList.add('hidden');
+       document.body.style.overflow = '';
+      window.scrollTo(0, 0);
     }
 
 
-    // Open modals by data-modal-target attribute
-    modalButtons.forEach(button => {
+    // Button Event Listeners
+    aboutBtn.addEventListener('click', () => openModal(aboutModal));
+    contactBtn.addEventListener('click', () => openModal(contactModal));
+    requestBtn.addEventListener('click', () => openModal(formModal));
+
+    modalCloseButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const modalId = button.getAttribute('data-modal-target');
-            openModal(modalId);
+            const modal = button.closest('.modal');
+             closeModal(modal);
         });
     });
 
-    openFormButton.addEventListener('click', () => openModal('formModal'));
+    function updatePrice() {
+        let price = 20;
 
-    // Close all modals when clicking close buttons
-    document.addEventListener('click', (event) => {
-         if (event.target.classList.contains('closeModalButton')) {
-            const modal = event.target.closest('.modal');
-               if(modal)
-              {
-                closeModal(modal);
-              }
+        if (documentTypeSelect.value === 'contrat') price += 10;
+         if (documentTypeSelect.value === 'rapport') price += 15;
 
-        }
-        if (event.target.id === 'closeFormButton')
-        {
-                closeModal(formModal);
 
-        }
-
-    });
-
-    // Form Price Calculation
-    const documentType = document.getElementById('documentType');
-    const transmissionMode = document.getElementById('transmissionMode');
-    const outputFormat = document.getElementById('outputFormat');
-    const documentOrganization = document.getElementById('documentOrganization');
-    const ocr = document.getElementById('ocr');
-    const highResolution = document.getElementById('highResolution');
-    const priceDisplay = document.getElementById('priceDisplay');
-
-    function calculatePrice() {
-        let price = 0;
-        if (documentType.value === 'rapport') price += 10;
-        if (transmissionMode.value === 'physique') price += 5;
-        if (outputFormat.value === 'pdf') price += 2;
-        if (documentOrganization.checked) price += 20;
-        if (ocr.checked) price += 20;
-        if (highResolution.checked) price += 10;
-
-        priceDisplay.textContent = `Estimation du prix: ${price} CHF`;
+        if (transmissionModeSelect.value === 'postal') price += 10;
+        if (ocrOptionCheckbox.checked) price += 5;
+         if (iaOptionCheckbox.checked) price += 10;
+        estimatedPriceDisplay.textContent = price + " CHF";
     }
 
-    [documentType, transmissionMode, outputFormat, documentOrganization, ocr, highResolution]
-        .forEach(el => el.addEventListener('change', calculatePrice));
+    documentTypeSelect.addEventListener('change', updatePrice);
+    transmissionModeSelect.addEventListener('change', updatePrice);
+    ocrOptionCheckbox.addEventListener('change', updatePrice);
+    iaOptionCheckbox.addEventListener('change', updatePrice);
 
-
-    // Form Submission
-    const form = document.getElementById('digitizationForm');
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        alert('Formulaire soumis (simulation)');
-        closeModal(formModal);
-    });
+     digitizationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Votre demande a bien été soumise!');
+           closeModal(formModal);
+        });
+     updatePrice();
 });
