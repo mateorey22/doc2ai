@@ -1,170 +1,177 @@
-/* Custom styles for smooth animations, overriding some Tailwind defaults */
-body {
-    overflow-x: hidden;
-    background-color: #c0dcdc;
-    background-image: url('rayunred-paper-texture.jpg');
-    background-size: cover;
-    background-repeat: repeat;
-}
-
-/* Enhanced Hero Text Animation */
-.hero-text {
-    transition: opacity 1s ease, transform 1s ease;
-    transform: translateY(50px);
-}
-.hero-text.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.hero-text.hidden {
-    opacity: 0;
-    transform: translateY(-50px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-/* Navigation Button Styling */
-.nav-button {
-    padding: 0.75rem 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 0.375rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.08);
-    color: #4a5568;
-}
-
-.nav-button:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: #2d3748;
-}
-
-/* Action Button Styling */
-.action-button {
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.375rem;
-    transition: background-color 0.3s ease;
-    background-color: #000;
-    color: #fff;
-    backdrop-filter: blur(10px);
-}
-
-.action-button:hover {
-    background-color: #333;
-}
-
-/* Service Card Styling */
-.service-card {
-    position: relative;
-    padding: 1.5rem;
-    border-radius: 1.25rem;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-     transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateY(50px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-
-}
-
-.service-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    border-radius: inherit;
-    backdrop-filter: blur(20px);
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.service-card.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.service-card.disappear {
-    opacity: 0;
-    transform: translateY(-50px);
-     transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.card-container-wrapper {
-  overflow-y: hidden; /* Hide the default scrollbar */
-    height: 100vh; /* Take up full viewport height */
-  position: relative; /* Required for absolute positioning of cards */
-}
-
-/* Card Container Styling */
-.card-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 800px;
-    margin: 0 auto;
-     overflow-y: auto;
-    height: 100%;
-  scroll-snap-type: y mandatory;
-    scroll-padding: 50vh 0;
-}
-
-/* Mouse Animation */
-
-.mouse-animation{
-    position: absolute;
-     bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.mouse-animation.visible{
-    opacity: 1;
-}
-.mouse {
-    border: 2px solid #4a5568;
-    width: 25px;
-    height: 45px;
-    border-radius: 20px;
-    position: relative;
-}
-
-.wheel {
-   position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #4a5568;
-    height: 5px;
-     width: 5px;
-    border-radius: 50%;
-    animation: mouse-wheel 2s linear infinite;
-}
-
-.mouse-text{
-    color: #4a5568;
-    font-size: 0.8rem;
-    margin-top: 5px;
-}
-
-@keyframes mouse-wheel {
-  0% {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-  }
-  70% {
-    transform: translateX(-50%) translateY(10px);
-     opacity: 1;
-  }
-  100% {
-      transform: translateX(-50%) translateY(10px);
-      opacity: 0;
-    }
-}
+ body {
+            font-family: 'Courier Prime', monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+             background-color: #f0f0f0;
+        }
+         .hero-background {
+             position: absolute;
+            top: 0;
+            left: 0;
+             width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+            pointer-events: none;
+            z-index: 0;
+        }
+        .services-background {
+            position: absolute;
+            top: 0;
+           left: 0;
+            width: 100%;
+           height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            pointer-events: none;
+             z-index: 0;
+        }
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+             padding: 20px;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+             margin-bottom: 20px;
+             transition: all 0.3s ease;
+         }
+         .service-card:hover {
+             transform: translateY(-5px) scale(1.05);
+           box-shadow: 0 12px 18px rgba(0, 0, 0, 0.2);
+         }
+        #formModal {
+            display: none;
+             position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+             background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+       }
+        #aboutModal, #contactModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #formModal .form-container, #aboutModal .modal-container, #contactModal .modal-container {
+          background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+           max-height: 90vh;
+           overflow-y: auto;
+           position: relative;
+         }
+       #closeFormButton, .closeModalButton {
+            position: absolute;
+            top: 10px;
+           right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #555;
+           background: none;
+            border: none;
+        }
+         #closeFormButton:hover, .closeModalButton:hover {
+             color: #222;
+         }
+         .mouse-animation {
+             position: absolute;
+           bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+             display: flex;
+            flex-direction: column;
+             align-items: center;
+            opacity: 0;
+        }
+        .mouse {
+            width: 20px;
+           height: 30px;
+            border: 2px solid #333;
+             border-radius: 15px;
+            position: relative;
+        }
+         .wheel {
+            width: 4px;
+           height: 8px;
+           background-color: #333;
+             border-radius: 2px;
+             position: absolute;
+            top: 4px;
+           left: 50%;
+            transform: translateX(-50%);
+            animation: wheel-move 1.5s ease-in-out infinite;
+         }
+        .mouse-text {
+             margin-top: 10px;
+             font-size: 0.8em;
+           color: #555;
+         }
+         @keyframes wheel-move {
+           0% {
+               opacity: 0;
+                transform: translateX(-50%) translateY(-2px);
+           }
+             50% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(8px);
+           }
+            100% {
+               opacity: 0;
+               transform: translateX(-50%) translateY(10px);
+           }
+        }
+         .card-container-wrapper {
+             height: 100vh;
+            overflow-y: hidden;
+        }
+         .card-container {
+            height: fit-content;
+            overflow-y: auto;
+             scroll-snap-type: y mandatory;
+           display: flex;
+            flex-direction: column;
+              padding: 20px;
+              padding-bottom: 60px;
+         }
+         .card-container > div {
+             scroll-snap-align: start;
+             scroll-snap-stop: always;
+        }
+         #heroText {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+         }
+       .hero-background-animation {
+            animation: backgroundFadeIn 2s ease forwards;
+       }
+        @keyframes backgroundFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+       }
+       .modal-container h2 {
+        font-family: 'Courier Prime', monospace;
+       }
+       .contact-email {
+           display: flex;
+           align-items: center;
+           gap: 5px;
+       }
+       .contact-email i {
+           font-size: 1.2em;
+       }
