@@ -1,39 +1,95 @@
- document.addEventListener('DOMContentLoaded', function() {
-        
+document.addEventListener('DOMContentLoaded', function() {
     // --- Hero Text Animation ---
     const heroText = document.querySelector('.hero-text');
+     const mouseAnimation = document.querySelector('.mouse-animation');
+     const serviceSection = document.querySelector('.service-section');
     setTimeout(() => {
-            heroText.classList.add('visible');
-     }, 100); // Slight delay for hero text
+        heroText.classList.add('visible');
+        mouseAnimation.classList.add('visible');
+    }, 100); // Slight delay for hero text
 
-     // ---- Scroll Animation ----
-      const serviceCards = document.querySelectorAll('.service-card');
-    let cardsShown = 0; // Track the number of cards already revealed
-     function checkScroll() {
-            serviceCards.forEach((card, index) => {
-                const cardPosition = card.getBoundingClientRect().top;
-                const screenHeight = window.innerHeight;
-                  if (cardPosition < screenHeight * 0.9 && index === cardsShown) {
-                      card.classList.add('visible');
-                      cardsShown++; // Reveal the next card only after scrolling
-                  }
-           });
-    }
-  
-    window.addEventListener('scroll', checkScroll);
-    checkScroll(); // Initial check for elements in view
+    // ---- Scroll Animation ----
+    const serviceCards = document.querySelectorAll('.service-card');
+    let currentCard = 0;
+    let cardInView = false;
+    let initialScroll = true; // Flag to track initial scroll
 
-    // --- Dark Gradient on Scroll ---
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-           document.body.classList.add('scrolled');
+    function showCard() {
+      serviceCards.forEach((card, index) => {
+        if (index === currentCard) {
+          card.classList.add('active');
+            card.classList.remove('disappear')
+
         } else {
-             document.body.classList.remove('scrolled');
+          card.classList.remove('active');
+            if(index < currentCard){
+                 card.classList.add('disappear');
+                }
+            else{
+               card.classList.remove('disappear');
+            }
+        }
+      });
+    }
+    function cardIsVisible(){
+           const cardPosition = serviceCards[currentCard].getBoundingClientRect().top;
+           const screenHeight = window.innerHeight;
+            if (cardPosition < screenHeight * 0.6 && cardPosition > screenHeight * 0.1) {
+            return true;
+           }
+        return false
+    }
+     function nextCard(){
+        if (currentCard < serviceCards.length - 1) {
+            currentCard++;
+            showCard()
+        }
+    }
+    function previousCard(){
+        if (currentCard > 0) {
+            currentCard--;
+            showCard()
+        }
+    }
+
+    window.addEventListener('scroll', () => {
+         const serviceSectionTop = serviceSection.getBoundingClientRect().top;
+
+        if(serviceSectionTop < window.innerHeight/2){
+            heroText.classList.add('hidden');
+            mouseAnimation.classList.remove('visible')
+        } else{
+            heroText.classList.remove('hidden');
+             mouseAnimation.classList.add('visible')
+        }
+
+          if (initialScroll) {
+            if (cardIsVisible()) {
+                cardInView = true;
+                initialScroll = false; // Disable initial scroll check after first successful card view
+             }
+        } else {
+             if (cardIsVisible()){
+                  cardInView = true
+            }
+          else{
+                if (cardInView === true) {
+                    if(serviceCards[currentCard].getBoundingClientRect().top < window.innerHeight * 0.1){
+                            nextCard();
+                        }
+                    else{
+                         previousCard()
+                        }
+                 cardInView = false;
+               }
+           }
        }
-  });
+    });
+
+    showCard(); // Initial check for elements in view
 
 
-     // --- Form Modal ---
+   // --- Form Modal ---
     const openFormButton = document.getElementById('openFormButton');
     const formModal = document.getElementById('formModal');
     const closeFormButton = document.getElementById('closeFormButton');
@@ -41,7 +97,7 @@
     openFormButton.addEventListener('click', () => {
         formModal.classList.remove('hidden');
         formModal.classList.add('flex');
-       document.body.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
     });
 
     closeFormButton.addEventListener('click', () => {
@@ -54,48 +110,48 @@
        window.addEventListener('click', (event) => {
            if (event.target === formModal) {
                formModal.classList.add('hidden');
-              formModal.classList.remove('flex');
-              document.body.style.overflow = 'auto';
-          }
-     });
+               formModal.classList.remove('flex');
+               document.body.style.overflow = 'auto';
+            }
+        });
 
      // ---- Price Calculation ----
-    const digitizationForm = document.getElementById('digitizationForm');
-    const priceDisplay = document.getElementById('priceDisplay');
-      digitizationForm.addEventListener('change', updatePrice);
+     const digitizationForm = document.getElementById('digitizationForm');
+     const priceDisplay = document.getElementById('priceDisplay');
+     digitizationForm.addEventListener('change', updatePrice);
 
-    function updatePrice() {
-           let basePrice = 20; 
-            let additionalPrice = 0;
+      function updatePrice() {
+          let basePrice = 20;
+          let additionalPrice = 0;
 
-            const hasOCR = document.getElementById('OCR').checked;
-            const organizeDocs = document.getElementById('organizeDocs').checked;
-            const highRes = document.getElementById('HighRes').checked;
+          const hasOCR = document.getElementById('OCR').checked;
+          const organizeDocs = document.getElementById('organizeDocs').checked;
+          const highRes = document.getElementById('HighRes').checked;
 
-             if (hasOCR) {
+          if (hasOCR) {
                additionalPrice += 10;
            }
 
           if (organizeDocs) {
-               additionalPrice += 5;
+              additionalPrice += 5;
           }
-            if (highRes) {
+           if (highRes) {
                additionalPrice += 8;
            }
-        
-         let totalPrice = basePrice + additionalPrice;
 
-         priceDisplay.textContent = `CHF ${totalPrice.toFixed(2)}`;
-    }
+           let totalPrice = basePrice + additionalPrice;
 
-  // Prevent default form submission
-    digitizationForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-         //Here you can add further logic to send the form data.
-       console.log("Form submitted!");
-       console.log(new FormData(digitizationForm));
-        formModal.classList.add('hidden');
-        formModal.classList.remove('flex');
-        document.body.style.overflow = 'auto';
-    });
+           priceDisplay.textContent = `CHF ${totalPrice.toFixed(2)}`;
+       }
+
+        // Prevent default form submission
+        digitizationForm.addEventListener('submit', (event) => {
+           event.preventDefault();
+            //Here you can add further logic to send the form data.
+           console.log("Form submitted!");
+           console.log(new FormData(digitizationForm));
+           formModal.classList.add('hidden');
+           formModal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        });
 });
