@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doc2file - Digital Document Solutions</title>
-    <meta name="description" content="Doc2file provides professional document digitization services. Secure your documents for the future.">
+    <title>Doc2AI - Digital Document Solutions</title>
+    <meta name="description" content="Doc2AI provides professional document digitization services. Secure your documents for the future.">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
      <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,42 +14,41 @@
 <body class="font-mono bg-gray-50 text-gray-800">
     
     <!-- Hero Section -->
-    <header class="min-h-screen flex items-center justify-center relative overflow-hidden" style="background-image: linear-gradient(to bottom, #f0f0f0, #ffffff);">
+    <header class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-gray-100 to-white">
         
-       <!-- Navigation (Top Left Logo and Top Right Buttons) -->
-       <nav class="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-10">
+        <!-- Navigation (Top Left Logo and Top Right Buttons) -->
+        <nav class="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-10">
             <div class="flex items-center">
-                <img src="logo.png" alt="Doc2file Logo" class="h-10 w-auto mr-4">
+                 <img src="logo.png" alt="Doc2AI Logo" class="h-10 w-auto mr-4">
             </div>
            <div class="flex space-x-4">
-                <button class="px-4 py-2 text-gray-700 hover:text-gray-900 border border-gray-300 rounded-md focus:outline-none transition duration-300">A propos</button>
-                 <button class="px-4 py-2 text-gray-700 hover:text-gray-900 border border-gray-300 rounded-md focus:outline-none transition duration-300">Contact</button>
+                <button class="nav-button">A propos</button>
+                 <button class="nav-button">Contact</button>
            </div>
         </nav>
        
-       
         <div class="text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-6">
-            <h1 class="text-6xl font-bold mb-6 text-black leading-tight hero-text opacity-0" style="font-family: 'Roboto Mono', monospace;">Doc2file</h1>
+            <h1 class="text-9xl font-bold mb-6 text-black leading-tight hero-text opacity-0" style="font-family: 'Roboto Mono', monospace;">Doc2AI</h1>
             <div class="flex justify-center space-x-4 mt-6">
-                <button id="openFormButton" class="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-700 transition duration-300 focus:outline-none">Faire une demande</button>
+                <button id="openFormButton" class="action-button">Faire une demande</button>
             </div>
         </div>
          <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-white opacity-30 pointer-events-none"></div>
     </header>
-    
+
     <!-- Services Section -->
-    <section class="bg-white py-16 relative">
+    <section class="bg-white py-16 relative service-section">
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+            <div class="mt-16 card-container">
                 <!-- Service 1 -->
-                <div class="bg-white bg-opacity-60 backdrop-blur-md p-6 rounded-2xl shadow-md transition-transform duration-500 transform scale-90 service-card opacity-0" style="font-family: 'Roboto Mono', monospace;">
+                <div class="service-card">
                     <h2 class="text-2xl font-semibold mb-4 text-gray-800">Digitization Services</h2>
                     <p class="text-gray-700 text-lg mb-4">
                         We digitize all kinds of documents: class notes, business records, personal papers, and more. Enjoy the convenience of digital access, improved organization, and increased security.
                     </p>
                 </div>
                 <!-- Service 2 -->
-                <div class="bg-white bg-opacity-60 backdrop-blur-md p-6 rounded-2xl shadow-md transition-transform duration-500 transform scale-90 service-card opacity-0" style="font-family: 'Roboto Mono', monospace;">
+                <div class="service-card">
                     <h2 class="text-2xl font-semibold mb-4 text-gray-800">Swiss Quality</h2>
                     <div class="flex items-center justify-center mb-4">
                          <img src="swiss-logo.png" alt="Swiss Quality" class="h-20 w-20 object-contain">
@@ -59,12 +58,12 @@
                     </p>
                 </div>
                 <!-- Service 3 -->
-               <div class="bg-white bg-opacity-60 backdrop-blur-md p-6 rounded-2xl shadow-md transition-transform duration-500 transform scale-90 service-card opacity-0" style="font-family: 'Roboto Mono', monospace;">
+                 <div class="service-card">
                     <h2 class="text-2xl font-semibold mb-4 text-gray-800">Secure Process</h2>
                     <p class="text-gray-700 text-lg mb-4">
                        Your security is our priority. We maintain strict confidentiality and security protocols throughout the entire digitization process.
                     </p>
-               </div>
+                </div>
            </div>
         </div>
          <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-white opacity-30 pointer-events-none"></div>
@@ -149,7 +148,12 @@
            </form>
         </div>
     </div>
-
+    <div class="mouse-animation">
+        <div class="mouse">
+          <div class="wheel"></div>
+        </div>
+       <div class="mouse-text">Scroll down</div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
