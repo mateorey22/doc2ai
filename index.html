@@ -4,121 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doc2AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="output.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="font-courier bg-gray-100 text-gray-900">
-
-    <!-- Header -->
-    <header class="relative bg-gradient-to-b from-gray-200 to-gray-100">
-        <nav class="container mx-auto p-4 flex justify-between items-center">
-            <img src="logo.png" alt="Doc2AI Logo" class="h-10">
-            <div class="flex space-x-6">
-                <button id="aboutBtn" class="text-gray-700 hover:text-gray-900">A propos</button>
-                <button id="contactBtn" class="text-gray-700 hover:text-gray-900">Contact</button>
+<body class="relative">
+    <header class="relative h-screen flex flex-col justify-center items-center text-center">
+        <div class="hero-background hero-background-animation"></div>
+        <nav class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
+             <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
+            <div class="space-x-4">
+               <a href="about.html" class="text-gray-700 hover:text-gray-900">A propos</a>
+               <a href="contact.html" class="text-gray-700 hover:text-gray-900">Contact</a>
             </div>
-        </nav>
-        <div class="container mx-auto text-center py-20">
-            <h1 id="heroTitle" class="text-5xl font-bold mb-6 opacity-0">Doc2AI</h1>
-            <button id="requestBtn" class="bg-gray-900 text-white py-3 px-8 rounded-md hover:bg-gray-700 transition duration-300">Faire une demande</button>
-            <div id="mouseAnim" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 opacity-0">
-                <div class="mouse"></div>
+       </nav>
+         <h1 id="heroText" class="text-7xl md:text-9xl font-bold mb-8" style="font-family: 'Courier Prime', monospace;">Doc2AI</h1>
+        <button id="openFormButton" class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900 transition-colors">Faire une demande</button>
+        <div class="mouse-animation">
+            <div class="mouse">
                 <div class="wheel"></div>
             </div>
-        </div>
+            <div class="mouse-text">Scroll down</div>
+         </div>
     </header>
 
-    <!-- Services Section -->
-    <section class="bg-gradient-to-b from-gray-200 to-gray-100 py-16">
-        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="service-card bg-white rounded-lg shadow-md p-6 hover:scale-105 transition duration-300 transform hover:shadow-lg">
-                <h2 class="text-2xl font-bold mb-3">Numérisation</h2>
-                <p class="text-gray-700">Transformation de vos documents physiques en format numérique pour un accès facile et une gestion simplifiée.</p>
-            </div>
-            <div class="service-card bg-white rounded-lg shadow-md p-6 hover:scale-105 transition duration-300 transform hover:shadow-lg">
-                 <h2 class="text-2xl font-bold mb-3">Qualité Suisse</h2>
-                <img src="swiss-logo.png" alt="Swiss Quality Logo" class="h-12 mb-3 mx-auto">
-                <p class="text-gray-700">Nous utilisons des techniques de pointe pour garantir la plus haute qualité de numérisation.</p>
-            </div>
-            <div class="service-card bg-white rounded-lg shadow-md p-6 hover:scale-105 transition duration-300 transform hover:shadow-lg">
-                <h2 class="text-2xl font-bold mb-3">Intégration IA</h2>
-                <p class="text-gray-700">Nos outils d'IA avancés extraient les informations clés de vos documents pour une analyse et une utilisation optimales.</p>
-            </div>
-        </div>
+    <section class="relative h-full">
+        <div class="services-background"></div>
+        <div class="card-container-wrapper">
+            <div class="card-container">
+                <div class="service-card transform hover:scale-105 transition-transform duration-300">
+                    <h2 class="text-2xl font-bold mb-4">Numérisation de Documents</h2>
+                   <p class="text-gray-700">Nous transformons vos documents papier en fichiers numériques de haute qualité.</p>
+                </div>
+                <div class="service-card transform hover:scale-105 transition-transform duration-300">
+                   <h2 class="text-2xl font-bold mb-4">Traitement Intelligent</h2>
+                   <p class="text-gray-700">L'intelligence artificielle pour l'organisation, la recherche et l'analyse de vos documents.</p>
+                  <img src="/swiss-logo.png" alt="Swiss Quality Logo" class="h-12 mt-4">
+                </div>
+                 <div class="service-card transform hover:scale-105 transition-transform duration-300">
+                   <h2 class="text-2xl font-bold mb-4">Solutions Sur Mesure</h2>
+                   <p class="text-gray-700">Des solutions adaptées à vos besoins spécifiques, de la petite entreprise aux grands groupes.</p>
+                 </div>
+           </div>
+       </div>
     </section>
 
-    <!-- Modals -->
-    <div id="aboutModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-60 z-50 hidden items-center justify-center">
-        <div class="modal-content bg-white rounded-lg p-8 relative max-w-md w-full">
-            <button class="modal-close absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-2xl">&times;</button>
-            <h2 class="text-2xl font-bold mb-4">A Propos</h2>
-            <p class="text-gray-700">
-              Doc2AI est une solution innovante qui simplifie la gestion documentaire en utilisant des technologies de numérisation avancées et d'intelligence artificielle. Notre mission est de transformer la façon dont les entreprises et les particuliers interagissent avec leurs documents, en rendant l'information plus accessible, plus efficace et plus facile à gérer.
-            </p>
-        </div>
-    </div>
 
-     <div id="contactModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-60 z-50 hidden items-center justify-center">
-         <div class="modal-content bg-white rounded-lg p-8 relative max-w-md w-full">
-             <button class="modal-close absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-2xl">&times;</button>
-             <h2 class="text-2xl font-bold mb-4">Contact</h2>
-             <div class="flex items-center mb-2">
-               <i class="fas fa-envelope mr-2"></i>
-               <p>contact@doc2ai.com</p>
-              </div>
-             <p class="text-gray-700">Pour toute question, n'hésitez pas à nous contacter. </p>
-         </div>
-     </div>
-
-    <div id="formModal" class="modal fixed inset-0 bg-gray-900 bg-opacity-60 z-50 hidden items-center justify-center">
-        <div class="modal-content bg-white rounded-lg p-8 relative max-w-lg w-full">
-             <button class="modal-close absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-2xl">&times;</button>
-             <h2 class="text-2xl font-bold mb-4">Demande de numérisation</h2>
+    <div id="formModal" class="hidden">
+        <div class="form-container">
+            <button id="closeFormButton" class="absolute top-2 right-2 text-gray-600 hover:text-gray-800 focus:outline-none"><i class="fas fa-times"></i></button>
+           <h2 class="text-2xl font-bold mb-4" style="font-family: 'Courier Prime', monospace;">Demande de Numérisation</h2>
             <form id="digitizationForm">
                 <div class="mb-4">
-                    <label for="documentTitle" class="block text-gray-700 mb-2">Titre du document:</label>
-                    <input type="text" id="documentTitle" class="border border-gray-300 rounded-md p-2 w-full" required>
-                </div>
-                 <div class="mb-4">
-                    <label for="documentType" class="block text-gray-700 mb-2">Type de document:</label>
-                    <select id="documentType" class="border border-gray-300 rounded-md p-2 w-full" required>
-                        <option value="facture">Facture</option>
+                    <label for="documentType" class="block text-gray-700 text-sm font-bold mb-2">Type de document:</label>
+                    <select id="documentType" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                         <option value="rapport">Rapport</option>
                         <option value="contrat">Contrat</option>
-                        <option value="rapport">Rapport</option>
+                       <option value="facture">Facture</option>
                         <option value="autre">Autre</option>
                     </select>
                 </div>
-                  <div class="mb-4">
-                    <label for="transmissionMode" class="block text-gray-700 mb-2">Mode de transmission:</label>
-                    <select id="transmissionMode" class="border border-gray-300 rounded-md p-2 w-full" required>
-                        <option value="upload">Téléchargement</option>
-                        <option value="postal">Postal</option>
-                    </select>
+               <div class="mb-4">
+                    <label for="documentTitle" class="block text-gray-700 text-sm font-bold mb-2">Titre du document:</label>
+                     <input type="text" id="documentTitle" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                  </div>
                 <div class="mb-4">
-                  <label class="block text-gray-700 mb-2">Options supplémentaires:</label>
-                    <div class="flex items-center mb-2">
-                      <input type="checkbox" id="ocrOption" class="mr-2">
-                      <label for="ocrOption" class="text-gray-700">OCR (Reconnaissance optique de caractères)</label>
-                    </div>
-                     <div class="flex items-center mb-2">
-                      <input type="checkbox" id="iaOption" class="mr-2">
-                      <label for="iaOption" class="text-gray-700">Analyse par IA</label>
+                   <label for="transmissionMode" class="block text-gray-700 text-sm font-bold mb-2">Mode de transmission:</label>
+                     <select id="transmissionMode" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="physique">Physique</option>
+                        <option value="numerique">Numérique</option>
+                     </select>
+                 </div>
+               <div class="mb-4">
+                    <label for="outputFormat" class="block text-gray-700 text-sm font-bold mb-2">Format de sortie:</label>
+                    <select id="outputFormat" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                         <option value="pdf">PDF</option>
+                        <option value="jpeg">JPEG</option>
+                        <option value="png">PNG</option>
+                        <option value="txt">TXT</option>
+                    </select>
+                </div>
+               <div class="mb-4">
+                   <label class="block text-gray-700 text-sm font-bold mb-2">Options:</label>
+                     <div class="flex items-center space-x-4">
+                        <input type="checkbox" id="documentOrganization" class="form-checkbox h-5 w-5 text-gray-800">
+                         <label for="documentOrganization" class="text-gray-700">Organisation des documents</label>
+                       <input type="checkbox" id="ocr" class="form-checkbox h-5 w-5 text-gray-800">
+                         <label for="ocr" class="text-gray-700">OCR (Reconnaissance de texte)</label>
+                        <input type="checkbox" id="highResolution" class="form-checkbox h-5 w-5 text-gray-800">
+                         <label for="highResolution" class="text-gray-700">Haute résolution</label>
                     </div>
                 </div>
-                <div class="mb-6">
-                    <label for="estimatedPrice" class="block text-gray-700 mb-2">Estimation du prix:</label>
-                    <p id="estimatedPrice" class="text-xl font-bold">0 CHF</p>
-                </div>
-                 <button type="submit" class="bg-gray-900 text-white py-3 px-6 rounded-md hover:bg-gray-700 transition duration-300">Soumettre</button>
-            </form>
-         </div>
+                <p id="priceDisplay" class="mb-4 font-bold">Estimation du prix: 0 CHF</p>
+                 <div class="mb-4">
+                     <p class="mb-1">Exemples de prix :</p>
+                    <ul class="list-disc pl-5">
+                        <li>10 pages : 20 CHF</li>
+                        <li>50 pages : 80 CHF</li>
+                        <li>100 pages : 150 CHF</li>
+                    </ul>
+                 </div>
+               <button type="submit" class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900 transition-colors">Envoyer la demande</button>
+           </form>
+        </div>
     </div>
-
-
-<script src="script.js"></script>
-
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
