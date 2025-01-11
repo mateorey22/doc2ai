@@ -36,19 +36,25 @@
             pointer-events: none;
              z-index: 0;
         }
-        .service-card {
-            background-color: rgba(255, 255, 255, 0.9);
+         .service-card {
+            background-color: rgba(255, 255, 255, 0.3); /* Reduced opacity */
+            backdrop-filter: blur(5px); /* Blur effect */
             border-radius: 20px;
-             padding: 20px;
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-             margin-bottom: 20px;
-             transition: all 0.3s ease;
+            padding: 30px; /* Increased padding */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* More shadow */
+            margin-bottom: 30px; /* Increased bottom margin */
+            transition: all 0.3s ease;
+            max-width: 600px;
+             margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        .service-card:hover {
+            transform: translateY(-5px) scale(1.03);
+           box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
          }
-         .service-card:hover {
-             transform: translateY(-5px) scale(1.05);
-           box-shadow: 0 12px 18px rgba(0, 0, 0, 0.2);
-         }
-         #formModal {
+        #formModal {
             display: none;
              position: fixed;
             top: 0;
@@ -141,7 +147,7 @@
            display: flex;
             flex-direction: column;
               padding: 20px;
-             padding-bottom: 60px;
+              padding-bottom: 60px;
          }
          .card-container > div {
              scroll-snap-align: start;
@@ -193,8 +199,8 @@
          <nav class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
             <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
             <div class="space-x-4">
-                 <button onclick="showPage('about-page')" class="text-gray-700 hover:text-gray-900">A propos</button>
-                <button onclick="showPage('contact-page')" class="text-gray-700 hover:text-gray-900">Contact</button>
+                 <button onclick="showPage('about-page', true)" class="text-gray-700 hover:text-gray-900">A propos</button>
+                <button onclick="showPage('contact-page', true)" class="text-gray-700 hover:text-gray-900">Contact</button>
             </div>
        </nav>
         <h1 id="heroText" class="text-7xl md:text-9xl font-bold mb-8" style="font-family: 'Courier Prime', monospace;">Doc2AI</h1>
@@ -323,7 +329,7 @@
            </form>
         </div>
     </div>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script>
           document.addEventListener('DOMContentLoaded', function() {
              // Hero text fade-in animation
@@ -400,14 +406,21 @@
                  formModal.style.display = 'none';
            });
         });
-       function showPage(pageId) {
+
+       function showPage(pageId, smoothScroll = false) {
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => {
                page.classList.remove('active-page');
             });
-            document.getElementById(pageId).classList.add('active-page');
-           window.scrollTo(0,0)
-        }
+           const targetPage = document.getElementById(pageId);
+            targetPage.classList.add('active-page');
+
+          if (smoothScroll) {
+           targetPage.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                 window.scrollTo(0, 0)
+           }
+      }
     </script>
 </body>
 </html>
