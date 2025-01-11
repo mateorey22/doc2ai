@@ -1,46 +1,187 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  body {
+body {
     font-family: 'Courier Prime', monospace;
-  }
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #f0f0f0;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+    pointer-events: none;
+    z-index: 0;
+}
+
+.services-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    pointer-events: none;
+    z-index: 0;
+}
+
+.card-container-wrapper {
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+.card-container {
+    height: fit-content;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    padding-bottom: 60px;
+}
+
+.card-container > div {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.service-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 18px rgba(0, 0, 0, 0.2);
+}
+
+
+#formModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+
+#formModal .form-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+#closeFormButton{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #555;
+    background: none;
+    border: none;
+}
+
+#closeFormButton:hover {
+    color: #222;
+}
+
+.mouse-animation {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
 }
 
 .mouse {
-  width: 24px;
-  height: 40px;
-  border: 2px solid #333;
-  border-radius: 12px;
-  position: relative;
+    width: 20px;
+    height: 30px;
+    border: 2px solid #333;
+    border-radius: 15px;
+    position: relative;
 }
 
 .wheel {
-    width: 5px;
-    height: 10px;
+    width: 4px;
+    height: 8px;
     background-color: #333;
+    border-radius: 2px;
     position: absolute;
-    top: 10px;
+    top: 4px;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 2.5px;
-  animation: moveWheel 1.5s ease-in-out infinite;
+    animation: wheel-move 1.5s ease-in-out infinite;
 }
 
-@keyframes moveWheel {
+.mouse-text {
+    margin-top: 10px;
+    font-size: 0.8em;
+    color: #555;
+}
+
+@keyframes wheel-move {
     0% {
-      top: 8px;
+        opacity: 0;
+        transform: translateX(-50%) translateY(-2px);
     }
     50% {
-      top: 16px;
+        opacity: 1;
+        transform: translateX(-50%) translateY(8px);
     }
     100% {
-      top: 8px;
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
     }
-  }
+}
 
-  .modal-content {
-    max-height: 90vh;
-    overflow-y: auto;
-  }
+
+#heroText {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.hero-background-animation {
+    animation: backgroundFadeIn 2s ease forwards;
+}
+
+@keyframes backgroundFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+.contact-email {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.contact-email i {
+    font-size: 1.2em;
+}
