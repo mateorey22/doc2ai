@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // --- Hero Text Animation ---
     const heroText = document.querySelector('.hero-text');
-     const mouseAnimation = document.querySelector('.mouse-animation');
-     const serviceSection = document.querySelector('.service-section');
+    const mouseAnimation = document.querySelector('.mouse-animation');
+    const serviceSection = document.querySelector('.service-section');
     setTimeout(() => {
         heroText.classList.add('visible');
         mouseAnimation.classList.add('visible');
@@ -13,64 +13,72 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentCard = 0;
     let cardInView = false;
     let initialScroll = true; // Flag to track initial scroll
+    let serviceSectionVisible = false; // Flag to track if the service section is visible
 
     function showCard() {
-      serviceCards.forEach((card, index) => {
-        if (index === currentCard) {
-          card.classList.add('active');
-            card.classList.remove('disappear')
-
-        } else {
-          card.classList.remove('active');
-            if(index < currentCard){
-                 card.classList.add('disappear');
+        serviceCards.forEach((card, index) => {
+            if (index === currentCard) {
+                card.classList.add('active');
+                card.classList.remove('disappear')
+            } else {
+                card.classList.remove('active');
+                if (index < currentCard) {
+                    card.classList.add('disappear');
+                } else {
+                    card.classList.remove('disappear');
                 }
-            else{
-               card.classList.remove('disappear');
             }
-        }
-      });
+        });
     }
-    function cardIsVisible(){
-           const cardPosition = serviceCards[currentCard].getBoundingClientRect().top;
-           const screenHeight = window.innerHeight;
-            if (cardPosition < screenHeight * 0.6 && cardPosition > screenHeight * 0.1) {
-            return true;
-           }
-        return false
+
+    function cardIsVisible() {
+        const cardPosition = serviceCards[currentCard].getBoundingClientRect().top;
+        const screenHeight = window.innerHeight;
+        return cardPosition < screenHeight * 0.7 && cardPosition > screenHeight * 0.1;
     }
-     function nextCard(){
+
+
+    function nextCard() {
         if (currentCard < serviceCards.length - 1) {
             currentCard++;
-            showCard()
+            showCard();
         }
     }
-    function previousCard(){
+
+    function previousCard() {
         if (currentCard > 0) {
             currentCard--;
-            showCard()
+            showCard();
         }
     }
 
-    window.addEventListener('scroll', () => {
-         const serviceSectionTop = serviceSection.getBoundingClientRect().top;
 
-        if(serviceSectionTop < window.innerHeight/2){
-            heroText.classList.add('hidden');
-            mouseAnimation.classList.remove('visible')
-        } else{
-            heroText.classList.remove('hidden');
-             mouseAnimation.classList.add('visible')
+    function handleScroll() {
+          const serviceSectionTop = serviceSection.getBoundingClientRect().top;
+
+          if (serviceSectionTop < window.innerHeight/2) {
+            if (!serviceSectionVisible) {
+                heroText.classList.add('hidden');
+                mouseAnimation.classList.remove('visible');
+                serviceSectionVisible = true;
+            }
+        } else {
+            if (serviceSectionVisible) {
+                heroText.classList.remove('hidden');
+                mouseAnimation.classList.add('visible');
+                serviceSectionVisible = false;
+            }
         }
-
-          if (initialScroll) {
+      
+         if (initialScroll) {
             if (cardIsVisible()) {
                 cardInView = true;
-                initialScroll = false; // Disable initial scroll check after first successful card view
-             }
+                initialScroll = false;
+
+            }
         } else {
              if (cardIsVisible()){
-                  cardInView = true
+                  cardInView = true;
             }
           else{
                 if (cardInView === true) {
@@ -78,15 +86,16 @@ document.addEventListener('DOMContentLoaded', function() {
                             nextCard();
                         }
                     else{
-                         previousCard()
+                         previousCard();
                         }
-                 cardInView = false;
+                   cardInView = false;
                }
            }
        }
-    });
+    }
 
-    showCard(); // Initial check for elements in view
+    window.addEventListener('scroll', handleScroll);
+     showCard(); // Initial check for elements in view
 
 
    // --- Form Modal ---
