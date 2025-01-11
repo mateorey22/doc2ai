@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc2file - Digital Document Solutions</title>
+    <meta name="description" content="Doc2file provides professional document digitization services. Secure your documents for the future.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-mono bg-gray-50 text-gray-800">
+    
+    <!-- Hero Section -->
+    <header class="min-h-screen flex items-center justify-center relative overflow-hidden" style="background-image: linear-gradient(to bottom, #f0f0f0, #ffffff);">
+        
+       <!-- Navigation (Top Left Logo and Top Right Buttons) -->
+       <nav class="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-10">
+            <div class="flex items-center">
+                <img src="logo.png" alt="Doc2file Logo" class="h-10 w-auto mr-4">
+            </div>
+           <div class="flex space-x-4">
+                <button class="px-4 py-2 text-gray-700 hover:text-gray-900 border border-gray-300 rounded-md focus:outline-none transition duration-300">A propos</button>
+                 <button class="px-4 py-2 text-gray-700 hover:text-gray-900 border border-gray-300 rounded-md focus:outline-none transition duration-300">Contact</button>
+           </div>
+        </nav>
+       
+       
+        <div class="text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-6">
+            <h1 class="text-6xl font-bold mb-6 text-black leading-tight hero-text opacity-0" style="font-family: 'Roboto Mono', monospace;">Doc2file</h1>
+            <div class="flex justify-center space-x-4 mt-6">
+                <button id="openFormButton" class="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-700 transition duration-300 focus:outline-none">Faire une demande</button>
+            </div>
+        </div>
+         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-white opacity-30 pointer-events-none"></div>
+    </header>
+    
+    <!-- Services Section -->
+    <section class="bg-white py-16 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+                <!-- Service 1 -->
+                <div class="bg-white bg-opacity-60 backdrop-blur-md p-6 rounded-2xl shadow-md transition-transform duration-500 transform scale-90 service-card opacity-0" style="font-family: 'Roboto Mono', monospace;">
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-800">Digitization Services</h2>
+                    <p class="text-gray-700 text-lg mb-4">
+                        We digitize all kinds of documents: class notes, business records, personal papers, and more. Enjoy the convenience of digital access, improved organization, and increased security.
+                    </p>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-white bg-opacity-60 backdrop-blur-md p-6 rounded-2xl shadow-md transition-transform duration-500 transform scale-90 service-card opacity-0" style="font-family: 'Roboto Mono', monospace;">
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-800">Swiss Quality</h2>
+                    <div class="flex items-center justify-center mb-4">
+                         <img src="swiss-logo.png" alt="Swiss Quality" class="h-20 w-20 object-contain">
+                    </div>
+                    <p class="text-gray-700 text-lg mb-4">
+                        We ensure the highest quality service with our dedication to Swiss reliability and precision. Your documents are processed with utmost care.
+                    </p>
+                </div>
+                <!-- Service 3 -->
+               <div class="bg-white bg-opacity-60 backdrop-blur-md p-6 rounded-2xl shadow-md transition-transform duration-500 transform scale-90 service-card opacity-0" style="font-family: 'Roboto Mono', monospace;">
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-800">Secure Process</h2>
+                    <p class="text-gray-700 text-lg mb-4">
+                       Your security is our priority. We maintain strict confidentiality and security protocols throughout the entire digitization process.
+                    </p>
+               </div>
+           </div>
+        </div>
+         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-white opacity-30 pointer-events-none"></div>
+    </section>
+
+    <!-- Form Modal -->
+    <div id="formModal" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 hidden items-center justify-center z-50">
+         <div class="bg-white p-8 rounded-lg max-w-2xl w-full relative">
+            <button id="closeFormButton" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h2 class="text-2xl font-semibold mb-6 text-gray-800" style="font-family: 'Roboto Mono', monospace;">Demande de Numérisation</h2>
+           <form id="digitizationForm" class="space-y-4">
+                 <div>
+                    <label for="documentType" class="block text-gray-700 text-sm font-bold mb-2">Type de document:</label>
+                    <select id="documentType" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <option value="" disabled selected>Sélectionnez un type de document</option>
+                        <option value="notes">Notes de cours</option>
+                        <option value="business">Documents d'entreprise</option>
+                        <option value="personal">Documents personnels</option>
+                        <option value="other">Autre</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="documentTitle" class="block text-gray-700 text-sm font-bold mb-2">Titre du document:</label>
+                    <input type="text" id="documentTitle" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                </div>
+                 <div>
+                    <label for="transmissionMode" class="block text-gray-700 text-sm font-bold mb-2">Mode de transmission:</label>
+                    <select id="transmissionMode" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <option value="" disabled selected>Sélectionnez un mode</option>
+                        <option value="mail">Courrier</option>
+                        <option value="place">Sur place</option>
+                        <option value="usb">Clé USB</option>
+                        <option value="email">Email</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="outputFormat" class="block text-gray-700 text-sm font-bold mb-2">Format de sortie:</label>
+                    <select id="outputFormat" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <option value="" disabled selected>Sélectionnez un format</option>
+                        <option value="pdf">PDF</option>
+                        <option value="jpeg">JPEG</option>
+                        <option value="png">PNG</option>
+                        <option value="txt">TXT</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="additionalOptions" class="block text-gray-700 text-sm font-bold mb-2">Options supplémentaires:</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" id="organizeDocs" class="form-checkbox h-5 w-5 text-gray-600 rounded focus:ring-0">
+                             <span class="ml-2 text-gray-700">Organisation des documents</span>
+                         </label>
+                          <label class="flex items-center">
+                            <input type="checkbox" id="OCR" class="form-checkbox h-5 w-5 text-gray-600 rounded focus:ring-0">
+                            <span class="ml-2 text-gray-700">Reconnaissance Optique de Caractères (OCR)</span>
+                         </label>
+                           <label class="flex items-center">
+                             <input type="checkbox" id="HighRes" class="form-checkbox h-5 w-5 text-gray-600 rounded focus:ring-0">
+                            <span class="ml-2 text-gray-700">Haute résolution (300 DPI)</span>
+                         </label>
+                    </div>
+                </div>
+                 <div class="mt-6">
+                    <p class="text-gray-700 font-bold">Estimation du prix:</p>
+                     <p class="text-gray-900 text-xl font-semibold" id="priceDisplay">CHF 0.00</p>
+                </div>
+                 <div class="mt-6">
+                    <p class="text-gray-700 text-sm">Exemples de prix:</p>
+                    <ul class="list-disc pl-5 mt-2 text-gray-700 text-sm">
+                       <li>Numérisation de base (1-100 pages): CHF 20.00</li>
+                       <li>Numérisation avec OCR (1-100 pages): CHF 30.00</li>
+                       <li>Organisation simple des documents (1-100 pages): CHF 25.00</li>
+                    </ul>
+                </div>
+               <div class="mt-8">
+                    <button type="submit" class="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-700 transition duration-300 focus:outline-none w-full">Envoyer la demande</button>
+               </div>
+           </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
