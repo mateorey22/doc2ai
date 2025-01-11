@@ -6,7 +6,6 @@ body {
     background-repeat: repeat;
 }
 
-
 /* Enhanced Hero Text Animation */
 .hero-text {
     transition: opacity 1s ease, transform 1s ease;
@@ -39,7 +38,6 @@ body {
     color: #2d3748;
 }
 
-
 /* Action Button Styling */
 .action-button {
     padding: 0.75rem 1.5rem;
@@ -54,19 +52,19 @@ body {
     background-color: #333;
 }
 
-
 /* Service Card Styling */
 .service-card {
     position: relative;
     padding: 1.5rem;
-    border-radius: 0.75rem;
+    border-radius: 1.25rem;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transition: all 0.5s ease;
     opacity: 0;
     transform: translateY(50px);
      margin-bottom: 20px;
-  
+     border: 1px solid rgba(255, 255, 255, 0.3);
 }
+
 .service-card::before {
     content: '';
     position: absolute;
@@ -75,12 +73,14 @@ body {
     bottom: 0;
     left: 0;
     z-index: -1;
-     backdrop-filter: blur(12px);
-    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: inherit;
+    backdrop-filter: blur(20px);
+    background-color: rgba(255, 255, 255, 0.2);
 }
+
 .service-card.active {
     opacity: 1;
-    transform: translateY(0); /* Move into view */
+    transform: translateY(0);
 }
 
 .service-card.disappear {
@@ -88,8 +88,6 @@ body {
     transform: translateY(-50px);
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
-
 
 /* Card Container Styling */
 .card-container {
@@ -100,12 +98,6 @@ body {
     margin: 0 auto;
 }
 
-
-
-/* Style for the shadow on the backround */
-.bg-white {
-     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
 
 /* Mouse Animation */
 
