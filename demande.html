@@ -16,11 +16,11 @@
             overflow-x: hidden;
             background-color: #f0f0f0;
         }
-         .hero-background {
-             position: absolute;
+        .hero-background {
+            position: absolute;
             top: 0;
             left: 0;
-             width: 100%;
+            width: 100%;
             height: 100%;
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
             pointer-events: none;
@@ -29,103 +29,103 @@
         .services-background {
             position: absolute;
             top: 0;
-           left: 0;
+            left: 0;
             width: 100%;
-           height: 100%;
+            height: 100%;
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
             pointer-events: none;
-             z-index: 0;
+            z-index: 0;
         }
-         .service-card {
-            background-color: rgba(255, 255, 255, 0.3); /* Reduced opacity */
-            backdrop-filter: blur(5px); /* Blur effect */
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
             border-radius: 20px;
-            padding: 30px; /* Increased padding */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* More shadow */
-            margin-bottom: 30px; /* Increased bottom margin */
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
             transition: all 0.3s ease;
             max-width: 600px;
-             margin-left: auto;
+            margin-left: auto;
             margin-right: auto;
         }
 
         .service-card:hover {
             transform: translateY(-5px) scale(1.03);
-           box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
-         }
-        
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+        }
+
         .mouse-animation {
-             position: absolute;
-           bottom: 20px;
+            position: absolute;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-             display: flex;
+            display: flex;
             flex-direction: column;
-             align-items: center;
+            align-items: center;
             opacity: 0;
         }
         .mouse {
             width: 20px;
-           height: 30px;
+            height: 30px;
             border: 2px solid #333;
-             border-radius: 15px;
+            border-radius: 15px;
             position: relative;
         }
-         .wheel {
+        .wheel {
             width: 4px;
-           height: 8px;
-           background-color: #333;
-             border-radius: 2px;
-             position: absolute;
+            height: 8px;
+            background-color: #333;
+            border-radius: 2px;
+            position: absolute;
             top: 4px;
-           left: 50%;
+            left: 50%;
             transform: translateX(-50%);
             animation: wheel-move 1.5s ease-in-out infinite;
-         }
+        }
         .mouse-text {
-             margin-top: 10px;
-             font-size: 0.8em;
-           color: #555;
-         }
-         @keyframes wheel-move {
-           0% {
-               opacity: 0;
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #555;
+        }
+        @keyframes wheel-move {
+            0% {
+                opacity: 0;
                 transform: translateX(-50%) translateY(-2px);
-           }
-             50% {
+            }
+            50% {
                 opacity: 1;
                 transform: translateX(-50%) translateY(8px);
-           }
+            }
             100% {
-               opacity: 0;
-               transform: translateX(-50%) translateY(10px);
-           }
+                opacity: 0;
+                transform: translateX(-50%) translateY(10px);
+            }
         }
-         .card-container-wrapper {
-             height: 100vh;
+        .card-container-wrapper {
+            height: 100vh;
             overflow-y: hidden;
         }
-         .card-container {
+        .card-container {
             height: fit-content;
             overflow-y: auto;
-             scroll-snap-type: y mandatory;
-           display: flex;
+            scroll-snap-type: y mandatory;
+            display: flex;
             flex-direction: column;
-              padding: 20px;
-              padding-bottom: 60px;
-         }
-         .card-container > div {
-             scroll-snap-align: start;
-             scroll-snap-stop: always;
+            padding: 20px;
+            padding-bottom: 60px;
         }
-         #heroText {
+        .card-container > div {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+        #heroText {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 1s ease, transform 1s ease;
-         }
-       .hero-background-animation {
+        }
+        .hero-background-animation {
             animation: backgroundFadeIn 2s ease forwards;
-       }
+        }
         @keyframes backgroundFadeIn {
             from {
                 opacity: 0;
@@ -133,12 +133,12 @@
             to {
                 opacity: 1;
             }
-       }
+        }
         .page {
-            display: none; /* Initially hide all pages */
+            display: none;
         }
         .active-page {
-            display: block; /* Show active page */
+            display: block;
         }
         .contact-email {
             display: flex;
@@ -151,9 +151,9 @@
         .container {
             max-width: 800px;
             margin-left: auto;
-           margin-right: auto;
-           padding-left: 20px;
-           padding-right: 20px;
+            margin-right: auto;
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
         .form-container {
@@ -167,10 +167,10 @@
             transition: all 0.3s ease;
         }
         .form-container:hover{
-             transform: translateY(-3px) scale(1.01);
+            transform: translateY(-3px) scale(1.01);
             box-shadow: 0 12px 22px rgba(0, 0, 0, 0.25);
         }
-         .form-group {
+        .form-group {
             margin-bottom: 20px;
         }
 
@@ -203,8 +203,8 @@
             color: #fff;
             border-radius: 5px;
             cursor: pointer;
-             transition: background-color 0.3s ease;
-             margin-right: 10px;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
         }
         .form-group input[type="file"]::file-selector-button:hover{
             background-color: #333;
@@ -222,29 +222,29 @@
             cursor: pointer;
         }
         .form-group select::-ms-expand {
-            display: none; /* For IE and Edge */
+            display: none;
         }
 
 
         .form-group textarea {
-            resize: vertical; /* Allow vertical resizing */
+            resize: vertical;
             min-height: 100px;
         }
-         .button-container {
-             display: flex;
-             justify-content: center;
-           margin-top: 20px;
-         }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
         .form-button {
             background-color: #555;
             color: white;
-           padding: 12px 20px;
-             border: none;
+            padding: 12px 20px;
+            border: none;
             border-radius: 5px;
-             cursor: pointer;
-           font-family: 'Courier Prime', monospace;
-             transition: background-color 0.3s ease;
-             margin-left: 5px;
+            cursor: pointer;
+            font-family: 'Courier Prime', monospace;
+            transition: background-color 0.3s ease;
+            margin-left: 5px;
             margin-right: 5px;
         }
 
@@ -254,204 +254,201 @@
         .checkbox-group{
             display: flex;
             flex-direction: column;
-           margin-bottom: 20px;
+            margin-bottom: 20px;
 
         }
         .checkbox-group label {
             display: flex;
             align-items: center;
-           margin-bottom: 5px;
-          color: #333;
+            margin-bottom: 5px;
+            color: #333;
         }
-         .checkbox-group label input[type="checkbox"]{
+        .checkbox-group label input[type="checkbox"]{
             margin-right: 10px;
-             appearance: none;
-             -webkit-appearance: none;
+            appearance: none;
+            -webkit-appearance: none;
             -moz-appearance: none;
-             width: 15px;
-             height: 15px;
-             border: 2px solid #555;
-             border-radius: 3px;
-           cursor: pointer;
-             position: relative;
+            width: 15px;
+            height: 15px;
+            border: 2px solid #555;
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
             outline: none;
         }
         .checkbox-group label input[type="checkbox"]:checked{
             background-color: #555;
             border-color: #555;
         }
-       .checkbox-group label input[type="checkbox"]:checked::before{
+        .checkbox-group label input[type="checkbox"]:checked::before{
             content: '\2713';
-             position: absolute;
-             font-size: 12px;
-             color: white;
-             top: 50%;
-             left: 50%;
+            position: absolute;
+            font-size: 12px;
+            color: white;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%,-50%);
-       }
-       .back-button{
-           position: absolute;
+        }
+        .back-button{
+            position: absolute;
             top: 20px;
             left: 20px;
             background-color: rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(5px);
             border-radius: 50%;
             width: 40px;
-           height: 40px;
-           display: flex;
+            height: 40px;
+            display: flex;
             justify-content: center;
-           align-items: center;
+            align-items: center;
             cursor: pointer;
             z-index: 10;
-             transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease;
 
-       }
-       .back-button:hover {
+        }
+        .back-button:hover {
             background-color: rgba(255, 255, 255, 0.5);
 
-       }
+        }
 
-       .back-button i{
+        .back-button i{
             font-size: 1.3em;
             color: #333;
-       }
-
-       .form-container {
+        }
+        .form-container {
             animation: formFadeIn 0.5s ease forwards;
-       }
-       @keyframes formFadeIn {
+        }
+        @keyframes formFadeIn {
             from {
                 opacity: 0;
-               transform: translateY(20px)
+                transform: translateY(20px)
             }
             to {
                 opacity: 1;
-               transform: translateY(0)
+                transform: translateY(0)
             }
-       }
-         .form-card{
-             margin-bottom: 20px;
-              background-color: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(5px); /* Blur effect */
+        }
+        .form-card{
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
             border-radius: 20px;
-            padding: 30px; /* Increased padding */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* More shadow */
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
-
-         }
+        }
          .form-card:hover{
             transform: translateY(-2px) scale(1.01);
            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.25);
-         }
-         .form-card h2{
+        }
+        .form-card h2{
             font-size: 1.5em;
             font-weight: bold;
             color: #333;
             margin-bottom: 15px;
-         }
-         .form-card p{
-           color: #555;
+        }
+        .form-card p{
+            color: #555;
             margin-bottom: 15px;
-         }
+        }
     </style>
 </head>
 <body class="relative">
-    <div class="hero-background"></div>
-    <button onclick="goBack()" class="back-button"><i class="fas fa-arrow-left"></i></button>
-     <div class="container">
-      <div class="form-container">
+<div class="hero-background"></div>
+<button onclick="goBack()" class="back-button"><i class="fas fa-arrow-left"></i></button>
+<div class="container">
+    <div class="form-container">
         <div class="form-card">
-             <h2>Document Upload</h2>
-            <p>Choose the document you would like to process.Supported formats: PDF, DOC, DOCX, JPG, PNG</p>
+            <h2>Document Upload</h2>
+            <p>Choose the document you would like to process. Supported formats: PDF, DOC, DOCX, JPG, PNG</p>
             <div class="form-group">
                 <label for="documentUpload">Upload Documents</label>
                 <input type="file" id="documentUpload" multiple>
             </div>
         </div>
-           <div class="form-card">
-               <h2>Document Type</h2>
+        <div class="form-card">
+            <h2>Document Type</h2>
             <p>Select the type of the document you are processing for better and faster result.</p>
-              <div class="form-group">
+            <div class="form-group">
                 <label for="documentType">Document Type</label>
                 <select id="documentType">
                     <option value="invoice">Invoice</option>
-                   <option value="contract">Contract</option>
-                   <option value="report">Report</option>
+                    <option value="contract">Contract</option>
+                    <option value="report">Report</option>
                     <option value="other">Other</option>
-               </select>
-              </div>
+                </select>
             </div>
+        </div>
 
         <div class="form-card">
-             <h2>Processing Options</h2>
+            <h2>Processing Options</h2>
             <p>Select the options you want for your document processing.</p>
             <div class="checkbox-group">
-                 <label>
-                   <input type="checkbox" value="ocr">
+                <label>
+                    <input type="checkbox" value="ocr">
                     OCR (Optical Character Recognition)
                 </label>
-               <label>
-                  <input type="checkbox" value="summary">
-                  Summary Generation
-              </label>
-               <label>
-                   <input type="checkbox" value="extraction">
+                <label>
+                    <input type="checkbox" value="summary">
+                    Summary Generation
+                </label>
+                <label>
+                    <input type="checkbox" value="extraction">
                     Key Data Extraction
-               </label>
+                </label>
                 <label>
                     <input type="checkbox" value="translation">
-                  Translation
+                    Translation
                 </label>
-               <label>
+                <label>
                     <input type="checkbox" value="digitalize">
                     Digitalisation
-               </label>
-
-             </div>
+                </label>
+            </div>
         </div>
         <div class="form-card">
-              <h2>Additional Instructions</h2>
+            <h2>Additional Instructions</h2>
             <p>Give us specific informations for a perfect processing of your document.</p>
-             <div class="form-group">
+            <div class="form-group">
                 <label for="additionalInstructions">Additional Instructions</label>
-                 <textarea id="additionalInstructions"></textarea>
-              </div>
+                <textarea id="additionalInstructions"></textarea>
+            </div>
         </div>
 
         <div class="button-container">
-           <button class="form-button" onclick="processDocument()">Process Document</button>
-             <button class="form-button" onclick="clearForm()">Clear Form</button>
+            <button class="form-button" onclick="processDocument()">Process Document</button>
+            <button class="form-button" onclick="clearForm()">Clear Form</button>
         </div>
     </div>
-    </div>
+</div>
 
-     <script>
-       function goBack(){
-            window.history.back();
-        }
-       function processDocument() {
-           const files = document.getElementById('documentUpload').files;
-           const docType = document.getElementById('documentType').value;
-           const instructions = document.getElementById('additionalInstructions').value;
-           const options = Array.from(document.querySelectorAll('.checkbox-group input[type="checkbox"]:checked')).map(cb => cb.value);
+<script>
+    function goBack() {
+        window.location.href = 'index.html';
+    }
+    function processDocument() {
+        const files = document.getElementById('documentUpload').files;
+        const docType = document.getElementById('documentType').value;
+        const instructions = document.getElementById('additionalInstructions').value;
+        const options = Array.from(document.querySelectorAll('.checkbox-group input[type="checkbox"]:checked')).map(cb => cb.value);
 
-           // Log the data for now, you would send this to your server
-           console.log('Files:', files);
-           console.log('Document Type:', docType);
-            console.log('Instructions:', instructions);
-           console.log('Options:', options);
+        // Log the data for now, you would send this to your server
+        console.log('Files:', files);
+        console.log('Document Type:', docType);
+        console.log('Instructions:', instructions);
+        console.log('Options:', options);
 
-           // Placeholder for actual processing logic
-          alert('Document processed! (Data logged in console)');
-       }
+        // Placeholder for actual processing logic
+        alert('Document processed! (Data logged in console)');
+    }
 
-        function clearForm() {
-           document.getElementById('documentUpload').value = '';
-           document.getElementById('documentType').value = 'invoice';
-           document.getElementById('additionalInstructions').value = '';
-           const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]');
-           checkboxes.forEach(cb => cb.checked = false);
-       }
-     </script>
+    function clearForm() {
+        document.getElementById('documentUpload').value = '';
+        document.getElementById('documentType').value = 'invoice';
+        document.getElementById('additionalInstructions').value = '';
+        const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]');
+        checkboxes.forEach(cb => cb.checked = false);
+    }
+</script>
 </body>
 </html>
