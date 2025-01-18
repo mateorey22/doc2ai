@@ -140,7 +140,7 @@
         .active-page {
             display: block; /* Show active page */
         }
-       .contact-email {
+        .contact-email {
             display: flex;
             align-items: center;
             gap: 5px;
@@ -155,22 +155,75 @@
            padding-left: 20px;
            padding-right: 20px;
         }
-       .form-container{
-            background-color: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-            margin-bottom: 30px;
-             margin-left: auto;
-           margin-right: auto;
-           max-width: 700px;
+        .form-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .form-content {
+           background-color: #fff;
+            padding: 20px;
+           border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+         .form-content h2 {
+             margin-bottom: 20px;
+        }
+         .form-content label {
+            display: block;
+            margin-bottom: 5px;
+           font-weight: bold;
+        }
+        .form-content input[type="text"],
+        .form-content textarea,
+        .form-content input[type="email"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+         .form-content button[type="submit"] {
+            background-color: #333;
+           color: white;
+            padding: 10px 20px;
+            border: none;
+           border-radius: 5px;
+            cursor: pointer;
+             transition: background-color 0.3s ease;
+        }
+        .form-content button[type="submit"]:hover {
+             background-color: #555;
+        }
+        .close-form-button {
+            position: absolute;
+           top: 10px;
+            right: 10px;
+             background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #777;
+            transition: color 0.3s ease;
+        }
+        .close-form-button:hover {
+            color: #333;
         }
     </style>
 </head>
 <body class="relative">
 
-     <header class="relative h-screen flex flex-col justify-center items-center text-center page active-page" id="home-page">
+     <header class="relative h-screen flex flex-col justify-center items-center text-center" id="home-page">
         <div class="hero-background hero-background-animation"></div>
          <nav class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
             <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
@@ -189,7 +242,7 @@
         </div>
     </header>
 
-    <section class="relative h-full page" id="services-page">
+    <section class="relative h-full page active-page" id="services-page">
         <div class="services-background"></div>
         <div class="card-container-wrapper">
             <div class="card-container">
@@ -209,124 +262,73 @@
            </div>
        </div>
     </section>
-     <section class="container page" id="apropos-page">
-        <div class="form-container">
-             <h2 class="text-3xl font-bold mb-6 text-center">À Propos de Doc2AI</h2>
-            <p class="text-gray-700 mb-4">
-                Doc2AI est une initiative innovante visant à simplifier la gestion de documents grâce à l'intelligence artificielle.
-                 Notre mission est de fournir des solutions de numérisation et de traitement de documents efficaces et intuitives pour les entreprises de toutes tailles.
-            </p>
-             <p class="text-gray-700 mb-4">
-                 Nous utilisons les technologies les plus avancées pour assurer la qualité de nos services,
-                de la conversion numérique à l'analyse intelligente de données.
-                Notre objectif est de vous aider à gagner du temps, à optimiser vos processus et à améliorer votre productivité.
-            </p>
-             <p class="text-gray-700 mb-4">
-               Que vous soyez une petite entreprise ou un grand groupe, Doc2AI s'engage à offrir des solutions sur mesure qui répondent parfaitement à vos besoins spécifiques.
-               Nous croyons en la puissance de la technologie pour transformer la façon dont vous gérez vos documents.
-            </p>
-           <p class="text-gray-700 mb-4">
-             Nous accordons une grande importance à la qualité, à l'innovation et à la satisfaction de nos clients, ce qui fait de nous un partenaire fiable dans la gestion de vos documents.
-           </p>
-            <div class="text-center mt-8">
-                <button onclick="showPage('home-page')" class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900 transition-colors">Retour à l'accueil</button>
-           </div>
-        </div>
-    </section>
-    <section class="container page" id="contact-page">
-        <div class="form-container">
-            <h2 class="text-3xl font-bold mb-6 text-center">Contactez-nous</h2>
-            <p class="text-gray-700 mb-6 text-center">
-                Si vous avez des questions ou si vous souhaitez discuter de vos besoins en matière de gestion de documents, n'hésitez pas à nous contacter.
-            </p>
-           <div class="flex flex-col gap-4 text-center">
-                <div class="contact-email">
-                  <i class="fas fa-envelope"></i>
-                  <a href="mailto:contact@doc2ai.com" class="text-gray-700 hover:text-gray-900">contact@doc2ai.com</a>
-               </div>
-                <div class="contact-phone">
-                  <i class="fas fa-phone"></i>
-                  <a href="tel:+1234567890" class="text-gray-700 hover:text-gray-900">+1 (234) 567-890</a>
-                </div>
-            </div>
-             <div class="text-center mt-8">
-                <button onclick="showPage('home-page')" class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900 transition-colors">Retour à l'accueil</button>
-           </div>
+       
+    <div id="form-container" class="form-container">
+        <div class="form-content">
+            <button class="close-form-button">&times;</button>
+            <h2 class="text-2xl font-bold mb-6 text-center">Formulaire de Demande</h2>
+            <form id="demande-form" onsubmit="handleFormSubmit(event)">
+               <label for="name">Nom:</label>
+                 <input type="text" id="name" name="name" required>
+                 <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                 <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <button type="submit" class="block w-full mx-auto">Envoyer</button>
+             </form>
        </div>
-    </section>
- <section class="container page" id="demande-page">
-    <div class="form-container">
-       <h2 class="text-3xl font-bold mb-6 text-center">Faire une Demande</h2>
-        <form id="demandeForm" class="space-y-4">
-             <div>
-                <label for="nom" class="block text-gray-700 text-sm font-bold mb-2">Nom</label>
-                <input type="text" id="nom" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            </div>
-            <div>
-                 <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                 <input type="email" id="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-           </div>
-           <div>
-               <label for="document" class="block text-gray-700 text-sm font-bold mb-2">Document</label>
-                <input type="file" id="document" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-             <div>
-                 <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message</label>
-                <textarea id="message" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
-            </div>
-            <div class="text-center">
-                <button type="submit" class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900 transition-colors">Envoyer</button>
-           </div>
-            <div class="text-center mt-4">
-                <button onclick="showPage('home-page')" class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900 transition-colors">Retour à l'accueil</button>
-           </div>
-       </form>
-   </div>
- </section>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hero text fade-in animation
-            const heroText = document.getElementById('heroText');
-            gsap.to(heroText, {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                delay:0.2
+          document.addEventListener('DOMContentLoaded', function() {
+             // Hero text fade-in animation
+             const heroText = document.getElementById('heroText');
+             gsap.to(heroText, {
+                 opacity: 1,
+                 y: 0,
+                 duration: 1,
+                 delay:0.2
+             });
+           // Mouse animation fade-in
+           const mouseAnimation = document.querySelector('.mouse-animation');
+             gsap.to(mouseAnimation, {
+                 opacity: 1,
+                 duration: 1,
+                delay: 1
             });
-          // Mouse animation fade-in
-            const mouseAnimation = document.querySelector('.mouse-animation');
-            gsap.to(mouseAnimation, {
-               opacity: 1,
-                duration: 1,
-               delay: 1
+            const openFormButton = document.getElementById('openFormButton');
+           openFormButton.addEventListener('click', () => {
+             window.location.href = 'demande.html';
            });
-           const openFormButton = document.getElementById('openFormButton');
-            openFormButton.addEventListener('click', () => {
-                showPage('demande-page');
-            });
 
-           const form = document.getElementById('demandeForm');
-           if (form){
-             form.addEventListener('submit', function(event) {
-               event.preventDefault();
-               alert("Votre demande a été soumise avec succès!");
-               showPage('home-page');
-           });
-          }
-       });
-      function showPage(pageId) {
-           const pages = document.querySelectorAll('.page');
-            pages.forEach(page => {
-                page.classList.remove('active-page');
-            });
-           const targetPage = document.getElementById(pageId);
-          if (targetPage){
-               targetPage.classList.add('active-page');
-                window.scrollTo(0,0);
-           }
-           
-     }
+           const closeFormButton = document.querySelector('.close-form-button');
+             closeFormButton.addEventListener('click', () => {
+               document.getElementById('form-container').style.display = 'none';
+          });
+        });
+
+        function handleFormSubmit(event) {
+           event.preventDefault(); // Prevent the default form submission
+          // Get form data
+           const formData = new FormData(event.target);
+           const name = formData.get('name');
+           const email = formData.get('email');
+            const message = formData.get('message');
+
+            // Here you would typically send the data to a server using fetch
+           // For this example, let's just log it
+            console.log('Form data submitted:');
+            console.log('Name:', name);
+            console.log('Email:', email);
+            console.log('Message:', message);
+            //Close the form
+           document.getElementById('form-container').style.display = 'none';
+            alert('Thank you for your request, we will contact you shortly.');
+        }
+       function showPage(pageUrl) {
+            window.open(pageUrl, '_self');
+      }
     </script>
 </body>
 </html>
