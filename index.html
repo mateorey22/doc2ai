@@ -49,46 +49,11 @@
             margin-right: auto;
         }
 
-
         .service-card:hover {
             transform: translateY(-5px) scale(1.03);
            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
          }
-        #formModal {
-            display: none;
-             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-             background-color: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        #formModal .form-container{
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            max-width: 600px;
-            width: 90%;
-           max-height: 90vh;
-           overflow-y: auto;
-           position: relative;
-         }
-        #closeFormButton{
-            position: absolute;
-            top: 10px;
-           right: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #555;
-           background: none;
-            border: none;
-        }
-         #closeFormButton:hover{
-             color: #222;
-         }
+        
         .mouse-animation {
              position: absolute;
            bottom: 20px;
@@ -199,8 +164,8 @@
          <nav class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
             <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
             <div class="space-x-4">
-                 <button onclick="showPage('about-page', true)" class="text-gray-700 hover:text-gray-900">A propos</button>
-                <button onclick="showPage('contact-page', true)" class="text-gray-700 hover:text-gray-900">Contact</button>
+                 <button onclick="showPage('apropos.html')" class="text-gray-700 hover:text-gray-900">A propos</button>
+                <button onclick="showPage('contact.html')" class="text-gray-700 hover:text-gray-900">Contact</button>
             </div>
        </nav>
         <h1 id="heroText" class="text-7xl md:text-9xl font-bold mb-8" style="font-family: 'Courier Prime', monospace;">Doc2AI</h1>
@@ -212,7 +177,6 @@
             <div class="mouse-text">Scroll down</div>
         </div>
     </header>
-
 
     <section class="relative h-full page active-page" id="services-page">
         <div class="services-background"></div>
@@ -235,100 +199,6 @@
        </div>
     </section>
 
-
-    <section class="page" id="about-page">
-      <header class="relative flex justify-between items-center p-4">
-        <button onclick="showPage('services-page')" class="text-gray-700 hover:text-gray-900">
-           <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
-         </button>
-      </header>
-        <div class="container mx-auto p-4 text-center">
-            <h2 class="text-4xl font-bold mb-4" style="font-family: 'Courier Prime', monospace;">A Propos de Doc2AI</h2>
-            <p class="text-gray-700">
-                Doc2AI est une entreprise spécialisée dans la numérisation et le traitement intelligent de documents. Nous utilisons les dernières technologies d'IA pour transformer vos documents physiques en fichiers numériques organisés et exploitables. Notre mission est de faciliter la gestion de l'information pour les entreprises de toutes tailles.
-            </p>
-        </div>
-    </section>
-
-    <section class="page" id="contact-page">
-      <header class="relative flex justify-between items-center p-4">
-        <button onclick="showPage('services-page')" class="text-gray-700 hover:text-gray-900">
-           <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
-          </button>
-      </header>
-         <div class="container mx-auto p-4 text-center">
-            <h2 class="text-4xl font-bold mb-4" style="font-family: 'Courier Prime', monospace;">Contactez-Nous</h2>
-            <p class="text-gray-700">
-                Pour toute question ou demande d'informations, n'hésitez pas à nous contacter par email ou par téléphone. Nous serons ravis de vous accompagner dans votre projet de numérisation.
-           </p>
-            <p class="text-gray-700 mt-4 contact-email">
-                <i class="fas fa-envelope"></i>
-               <a href="mailto:contact@doc2ai.ch" class="text-gray-900 hover:underline">contact@doc2ai.ch</a>
-            </p>
-           <p class="text-gray-700 mt-4">
-                Téléphone: +41 123 456 789
-           </p>
-        </div>
-    </section>
-
-   <div id="formModal" class="hidden">
-        <div class="form-container">
-            <button id="closeFormButton" class="absolute top-2 right-2 text-gray-600 hover:text-gray-800 focus:outline-none"><i class="fas fa-times"></i></button>
-           <h2 class="text-2xl font-bold mb-4" style="font-family: 'Courier Prime', monospace;">Demande de Numérisation</h2>
-            <form id="digitizationForm">
-                <div class="mb-4">
-                    <label for="documentType" class="block text-gray-700 text-sm font-bold mb-2">Type de document:</label>
-                    <select id="documentType" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                         <option value="rapport">Rapport</option>
-                        <option value="contrat">Contrat</option>
-                       <option value="facture">Facture</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                </div>
-               <div class="mb-4">
-                    <label for="documentTitle" class="block text-gray-700 text-sm font-bold mb-2">Titre du document:</label>
-                     <input type="text" id="documentTitle" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                 </div>
-                <div class="mb-4">
-                   <label for="transmissionMode" class="block text-gray-700 text-sm font-bold mb-2">Mode de transmission:</label>
-                     <select id="transmissionMode" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="physique">Physique</option>
-                        <option value="numerique">Numérique</option>
-                     </select>
-                 </div>
-               <div class="mb-4">
-                    <label for="outputFormat" class="block text-gray-700 text-sm font-bold mb-2">Format de sortie:</label>
-                    <select id="outputFormat" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                         <option value="pdf">PDF</option>
-                        <option value="jpeg">JPEG</option>
-                        <option value="png">PNG</option>
-                        <option value="txt">TXT</option>
-                    </select>
-                </div>
-               <div class="mb-4">
-                   <label class="block text-gray-700 text-sm font-bold mb-2">Options:</label>
-                     <div class="flex items-center space-x-4">
-                        <input type="checkbox" id="documentOrganization" class="form-checkbox h-5 w-5 text-gray-800">
-                         <label for="documentOrganization" class="text-gray-700">Organisation des documents</label>
-                       <input type="checkbox" id="ocr" class="form-checkbox h-5 w-5 text-gray-800">
-                         <label for="ocr" class="text-gray-700">OCR (Reconnaissance de texte)</label>
-                        <input type="checkbox" id="highResolution" class="form-checkbox h-5 w-5 text-gray-800">
-                         <label for="highResolution" class="text-gray-700">Haute résolution</label>
-                    </div>
-                </div>
-                <p id="priceDisplay" class="mb-4 font-bold">Estimation du prix: 0 CHF</p>
-                 <div class="mb-4">
-                     <p class="mb-1">Exemples de prix :</p>
-                    <ul class="list-disc pl-5">
-                        <li>10 pages : 20 CHF</li>
-                        <li>50 pages : 80 CHF</li>
-                        <li>100 pages : 150 CHF</li>
-                    </ul>
-                 </div>
-               <button type="submit" class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900 transition-colors">Envoyer la demande</button>
-           </form>
-        </div>
-    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script>
           document.addEventListener('DOMContentLoaded', function() {
@@ -347,79 +217,14 @@
                  duration: 1,
                 delay: 1
             });
-            // Modal control
             const openFormButton = document.getElementById('openFormButton');
-            const closeFormButton = document.getElementById('closeFormButton');
-            const formModal = document.getElementById('formModal');
-
-             openFormButton.addEventListener('click', () => {
-                formModal.style.display = 'flex';
-            });
-            closeFormButton.addEventListener('click', () => {
-                 formModal.style.display = 'none';
-             });
-            // Form price calculation
-            const documentType = document.getElementById('documentType');
-            const transmissionMode = document.getElementById('transmissionMode');
-             const outputFormat = document.getElementById('outputFormat');
-           const documentOrganization = document.getElementById('documentOrganization');
-            const ocr = document.getElementById('ocr');
-             const highResolution = document.getElementById('highResolution');
-             const priceDisplay = document.getElementById('priceDisplay');
-             function calculatePrice() {
-               let price = 0;
-                const documentTypeVal = documentType.value;
-                const transmissionModeVal = transmissionMode.value;
-                const outputFormatVal = outputFormat.value;
-                if (documentTypeVal === 'rapport') {
-                   price += 10;
-                 }
-                if (transmissionModeVal === 'physique') {
-                    price += 5;
-                }
-                 if (outputFormatVal === 'pdf') {
-                  price += 2;
-                }
-               if(documentOrganization.checked){
-                    price += 20;
-                }
-                if (ocr.checked) {
-                   price += 20;
-                }
-               if(highResolution.checked){
-                    price += 10
-                }
-                 priceDisplay.textContent = `Estimation du prix: ${price} CHF`;
-           }
-           documentType.addEventListener('change', calculatePrice);
-            transmissionMode.addEventListener('change', calculatePrice);
-             outputFormat.addEventListener('change', calculatePrice);
-            documentOrganization.addEventListener('change', calculatePrice);
-           ocr.addEventListener('change', calculatePrice);
-           highResolution.addEventListener('change', calculatePrice);
-
-           // Prevent form submit
-            const form = document.getElementById('digitizationForm');
-           form.addEventListener('submit', (event) => {
-                event.preventDefault();
-                alert('Formulaire soumis (simulation)');
-                 formModal.style.display = 'none';
+           openFormButton.addEventListener('click', () => {
+               showPage('demande.html');
            });
         });
 
-       function showPage(pageId, smoothScroll = false) {
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => {
-               page.classList.remove('active-page');
-            });
-           const targetPage = document.getElementById(pageId);
-            targetPage.classList.add('active-page');
-
-          if (smoothScroll) {
-           targetPage.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                 window.scrollTo(0, 0)
-           }
+       function showPage(pageUrl) {
+            window.open(pageUrl, '_blank');
       }
     </script>
 </body>
