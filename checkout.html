@@ -89,17 +89,41 @@
             margin-top: 20px;
         }
 
-        /* Google Pay Button Styles */
-        #google-pay-container {
-            text-align: center;
+        /* Stripe card styles */
+        #card-element {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        #card-errors {
+            color: #e74c3c;
+            margin-top: 5px;
+        }
+        #payment-form button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+         }
+        #payment-form button:hover{
+            background-color: #0056b3;
+         }
+        #payment-form {
+            display: block;
             margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
-
-        #google-pay-button {
-            display: inline-block;
-            border-radius: 4px;
+        #payment-form label{
+             display: block;
+            margin-bottom: 5px;
         }
-
         /* Optimized mobile view */
         @media (max-width: 768px) {
             .container {
@@ -116,12 +140,22 @@
         <h1>Récapitulatif de la Commande</h1>
         <div id="order-summary"></div>
         <div class="total-amount" id="total-amount"></div>
-        <div id="google-pay-container"></div>
+
+        <div id="payment-form">
+            <label for="card-element">Credit or debit card</label>
+              <div id="card-element">
+                </div>
+                <div id="card-errors" role="alert">
+             </div>
+              <button id="card-payment-button">Submit Payment</button>
+        </div>
+
     </div>
 
+    <script src="https://js.stripe.com/v3/"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Dark mode toggle logic
+         document.addEventListener('DOMContentLoaded', function () {
+             // Dark mode toggle logic
             const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             let darkMode = localStorage.getItem('darkMode') === 'enabled';
             if (prefersDark && localStorage.getItem('darkMode') === null) {
@@ -130,16 +164,15 @@
             }
             updateDarkMode(darkMode);
 
-            function updateDarkMode(isDarkMode) {
+             function updateDarkMode(isDarkMode) {
                 const body = document.body;
                 if (isDarkMode) {
                     body.classList.add('dark-mode');
                 } else {
-                    body.classList.remove('dark-mode');
+                   body.classList.remove('dark-mode');
                 }
             }
-
-            const orderSummaryDiv = document.getElementById('order-summary');
+           const orderSummaryDiv = document.getElementById('order-summary');
             const totalAmountDiv = document.getElementById('total-amount');
             const formData = sessionStorage.getItem('formData');
             if (formData) {
@@ -148,142 +181,44 @@
                 for (const key in data) {
                     if (key !== 'totalPrice' && key !== 'file-upload') {
                         summaryHTML += `<div class="order-details"><p><strong>${key}:</strong> ${data[key]}</p></div>`;
-                    }
+                   }
                 }
                 orderSummaryDiv.innerHTML = summaryHTML;
                 totalAmountDiv.textContent = `Total à payer: ${data.totalPrice} CHF`;
             } else {
                 orderSummaryDiv.innerHTML = '<p>Aucune donnée de commande trouvée.</p>';
-                totalAmountDiv.textContent = 'Total à payer: 0 CHF';
+               totalAmountDiv.textContent = 'Total à payer: 0 CHF';
             }
-            // Wait for the Google Pay API to load before initialization
-            waitForGooglePayApi(() => {
-                initializeGooglePay();
+             // Stripe initialization
+             const stripe = Stripe('pk_test_51OgzI7H9U597u6yY2D1J6jI0U0qf5X8g7o8mJ7V9x2uXp7a7u6x1x7u9U2d3hJ9f0S2v2Z0v1mJ3r7v6w0f6H0b0n0j0K0l'); // Replace with your actual publishable key
+            const elements = stripe.elements();
+             const cardElement = elements.create('card');
+             cardElement.mount('#card-element');
+              const cardErrors = document.getElementById('card-errors');
+              cardElement.on('change', function(event) {
+                cardErrors.textContent = event.error ? event.error.message : '';
             });
-        });
+               const form = document.getElementById('payment-form');
+             form.addEventListener('submit', function(event) {
+              event.preventDefault();
+                stripe.createToken(cardElement).then(function(result) {
+                    if (result.error) {
+                      cardErrors.textContent = result.error.message;
+                    } else {
+                       // Send token to server for processing (This is where you would send the token to your server)
+                       alert("Payment successful! (token is: " + result.token.id + ")");
+                      // Clear the form
+                     cardElement.clear();
+                   }
+                });
+            });
+         });
 
         function goBack() {
             window.location.href = 'demande.html';
         }
 
-
-        // Google Pay logic
-        function waitForGooglePayApi(callback) {
-            if (window.google && window.google.payments) {
-                callback();
-            } else {
-                setTimeout(() => waitForGooglePayApi(callback), 100); // Check again after a short delay
-            }
-        }
-
-        function initializeGooglePay() {
-            try {
-              const paymentsClient = new google.payments.api.PaymentsClient({
-                environment: 'TEST', // Use 'PRODUCTION' for real transactions
-                paymentDataCallbacks: {
-                    onPaymentAuthorized: onPaymentAuthorized,
-                     onPaymentDataChanged: onPaymentDataChanged,
-                    }
-                });
-
-            const paymentDataRequest = getGooglePaymentDataRequest();
-            const isReadyToPayRequest = getGoogleIsReadyToPayRequest();
-
-            paymentsClient.isReadyToPay(isReadyToPayRequest)
-                .then(function (response) {
-                    if (response.result) {
-                        addGooglePayButton(paymentsClient, paymentDataRequest);
-                    } else {
-                         console.log('Google Pay is not available on this device.');
-                         console.log("response", response);
-                    }
-                })
-                .catch(function (err) {
-                    console.error('Error checking Google Pay availability:', err);
-                });
-            } catch (error) {
-                console.error("Error during google pay initialization", error);
-            }
-        }
-
-         function getGoogleIsReadyToPayRequest() {
-            return {
-                apiVersion: 2,
-                apiVersionMinor: 0,
-                allowedPaymentMethods: [{
-                    type: 'CARD',
-                    parameters: {
-                        allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
-                        allowedCardNetworks: ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"]
-                    }
-                }]
-            };
-        }
-
-        function getGooglePaymentDataRequest() {
-            const formData = sessionStorage.getItem('formData');
-            const data = formData ? JSON.parse(formData) : {
-                totalPrice: '0.00'
-            };
-
-            const price = parseFloat(data.totalPrice);
-            const totalPrice = price.toFixed(2);
-            return {
-                apiVersion: 2,
-                apiVersionMinor: 0,
-                merchantInfo: {
-                    merchantId: '12345678901234567890', // Replace with your merchant ID, this one is just an exemple
-                    merchantName: 'Doctofiles',
-                },
-                allowedPaymentMethods: [{
-                    type: 'CARD',
-                    parameters: {
-                         allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
-                         allowedCardNetworks: ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"]
-                    },
-                }],
-                transactionInfo: {
-                    totalPriceStatus: 'FINAL',
-                    totalPrice: totalPrice,
-                    currencyCode: 'CHF',
-                },
-                callbackIntents: ["PAYMENT_AUTHORIZATION", "PAYMENT_DATA_CHANGED"]
-            };
-        }
-
-
-        function addGooglePayButton(paymentsClient, paymentDataRequest) {
-            const googlePayButton = paymentsClient.createButton({
-                onClick: () => {
-                    paymentsClient.loadPaymentData(paymentDataRequest)
-                        .catch(error => {
-                            console.error("Error loading payment data:", error);
-                           });
-                }
-            });
-            document.getElementById('google-pay-container').appendChild(googlePayButton);
-        }
-
-        function onPaymentAuthorized(paymentData) {
-            return new Promise(function (resolve, reject) {
-                 console.log('Payment authorized:', paymentData);
-                // Simulate success
-                setTimeout(function () {
-                    resolve({
-                        transactionState: 'SUCCESS'
-                    });
-                    alert("Payment successful!");
-                }, 1000);
-                 // In real implementations, send paymentData to your server for processing
-            });
-        }
-        function onPaymentDataChanged(intermediatePaymentData) {
-            console.log("Payment data changed", intermediatePaymentData);
-                return {};
-         }
     </script>
-    <script async
-        src="https://pay.google.com/gp/p/js/pay.js"></script>
 </body>
 
 </html>
