@@ -177,12 +177,14 @@
         }
 
         function initializeGooglePay() {
-            const paymentsClient = new google.payments.api.PaymentsClient({
-                environment: 'TEST', // Set to 'PRODUCTION' for real transactions
+            try {
+              const paymentsClient = new google.payments.api.PaymentsClient({
+                environment: 'TEST', // Use 'PRODUCTION' for real transactions
                 paymentDataCallbacks: {
-                    onPaymentAuthorized: onPaymentAuthorized
-                }
-            });
+                    onPaymentAuthorized: onPaymentAuthorized,
+                     onPaymentDataChanged: onPaymentDataChanged,
+                    }
+                });
 
             const paymentDataRequest = getGooglePaymentDataRequest();
             const isReadyToPayRequest = getGoogleIsReadyToPayRequest();
@@ -192,15 +194,19 @@
                     if (response.result) {
                         addGooglePayButton(paymentsClient, paymentDataRequest);
                     } else {
-                        console.log('Google Pay is not available on this device.');
+                         console.log('Google Pay is not available on this device.');
+                         console.log("response", response);
                     }
                 })
                 .catch(function (err) {
                     console.error('Error checking Google Pay availability:', err);
                 });
+            } catch (error) {
+                console.error("Error during google pay initialization", error);
+            }
         }
 
-        function getGoogleIsReadyToPayRequest() {
+         function getGoogleIsReadyToPayRequest() {
             return {
                 apiVersion: 2,
                 apiVersionMinor: 0,
@@ -226,7 +232,7 @@
                 apiVersion: 2,
                 apiVersionMinor: 0,
                 merchantInfo: {
-                    merchantId: '12345678901234567890', // Replace with your merchant ID
+                    merchantId: '12345678901234567890', // Replace with your merchant ID, this one is just an exemple
                     merchantName: 'Doctofiles',
                 },
                 allowedPaymentMethods: [{
@@ -234,29 +240,33 @@
                     parameters: {
                          allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
                          allowedCardNetworks: ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"]
-                     }
-                 }],
+                    },
+                }],
                 transactionInfo: {
                     totalPriceStatus: 'FINAL',
                     totalPrice: totalPrice,
                     currencyCode: 'CHF',
                 },
-                callbackIntents: ["PAYMENT_AUTHORIZATION"]
+                callbackIntents: ["PAYMENT_AUTHORIZATION", "PAYMENT_DATA_CHANGED"]
             };
         }
 
 
         function addGooglePayButton(paymentsClient, paymentDataRequest) {
             const googlePayButton = paymentsClient.createButton({
-                onClick: () => paymentsClient.loadPaymentData(paymentDataRequest),
+                onClick: () => {
+                    paymentsClient.loadPaymentData(paymentDataRequest)
+                        .catch(error => {
+                            console.error("Error loading payment data:", error);
+                           });
+                }
             });
             document.getElementById('google-pay-container').appendChild(googlePayButton);
         }
 
         function onPaymentAuthorized(paymentData) {
             return new Promise(function (resolve, reject) {
-                // Handle the payment data received from Google Pay here
-                console.log('Payment authorized:', paymentData);
+                 console.log('Payment authorized:', paymentData);
                 // Simulate success
                 setTimeout(function () {
                     resolve({
@@ -264,9 +274,13 @@
                     });
                     alert("Payment successful!");
                 }, 1000);
-                // You'll need to send this paymentData to your server for processing
+                 // In real implementations, send paymentData to your server for processing
             });
         }
+        function onPaymentDataChanged(intermediatePaymentData) {
+            console.log("Payment data changed", intermediatePaymentData);
+                return {};
+         }
     </script>
     <script async
         src="https://pay.google.com/gp/p/js/pay.js"></script>
