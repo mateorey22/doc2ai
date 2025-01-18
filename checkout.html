@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,68 +13,93 @@
             background-color: #f0f0f0;
             color: #333;
             margin: 0;
-             padding: 0;
-             overflow-x: hidden;
-             transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 0;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
+
         .dark-mode {
             background-color: #1a202c;
             color: #cbd5e0;
         }
+
         .dark-mode .container {
             background-color: #2d3748;
-           box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
         }
-         .dark-mode .back-button {
-               color: white;
-            }
-         .dark-mode .back-button:hover {
-                 color: #cbd5e0;
+
+        .dark-mode .back-button {
+            color: white;
         }
+
+        .dark-mode .back-button:hover {
+            color: #cbd5e0;
+        }
+
         .container {
             max-width: 800px;
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-             position: relative; /* Needed for the absolute positioning of the back button */
-             padding-bottom: 80px; /* Add padding at the bottom to make sure the last card is visible */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            /* Needed for the absolute positioning of the back button */
+            padding-bottom: 80px;
+            /* Add padding at the bottom to make sure the last card is visible */
         }
+
         h1 {
             text-align: center;
             margin-bottom: 20px;
         }
-         .back-button {
-             position: absolute;
-              top: 10px; /* Position the back button at the top right corner */
-              left: 10px;
-              background: none;
-              border: none;
-              font-size: 20px;
-              cursor: pointer;
-             color: #777;
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            /* Position the back button at the top left corner */
+            left: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #777;
             transition: color 0.3s ease;
-         }
-          .back-button:hover {
-             color: #333;
-         }
-         .order-details {
+        }
+
+        .back-button:hover {
+            color: #333;
+        }
+
+        .order-details {
             margin-bottom: 20px;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
-         }
+        }
+
         .order-details p {
             margin-bottom: 5px;
         }
+
         .total-amount {
             text-align: right;
-             font-size: 1.2em;
-             font-weight: bold;
+            font-size: 1.2em;
+            font-weight: bold;
             margin-top: 20px;
-         }
-        /* Optimized mobile view */
+        }
+
+        /* Google Pay Button Styles */
+        #google-pay-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #google-pay-button {
+            display: inline-block;
+            border-radius: 4px;
+        }
+         /* Optimized mobile view */
         @media (max-width: 768px) {
            .container {
              margin: 10px;
@@ -82,24 +108,27 @@
         }
     </style>
 </head>
+
 <body class="relative">
     <div class="container">
         <button class="back-button" onclick="goBack()">&lt; Back</button>
         <h1>Récapitulatif de la Commande</h1>
         <div id="order-summary"></div>
         <div class="total-amount" id="total-amount"></div>
+        <div id="google-pay-container"></div>
     </div>
 
     <script>
-       document.addEventListener('DOMContentLoaded', function() {
-             // Dark mode toggle logic
+        document.addEventListener('DOMContentLoaded', function () {
+            // Dark mode toggle logic
             const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             let darkMode = localStorage.getItem('darkMode') === 'enabled';
             if (prefersDark && localStorage.getItem('darkMode') === null) {
                 darkMode = true;
                 localStorage.setItem('darkMode', 'enabled'); // Set it in localStorage for next visit
             }
-             updateDarkMode(darkMode);
+            updateDarkMode(darkMode);
+
             function updateDarkMode(isDarkMode) {
                 const body = document.body;
                 if (isDarkMode) {
@@ -108,27 +137,131 @@
                     body.classList.remove('dark-mode');
                 }
             }
-           const orderSummaryDiv = document.getElementById('order-summary');
+
+            const orderSummaryDiv = document.getElementById('order-summary');
             const totalAmountDiv = document.getElementById('total-amount');
-           const formData = sessionStorage.getItem('formData');
-           if (formData) {
+            const formData = sessionStorage.getItem('formData');
+            if (formData) {
                 const data = JSON.parse(formData);
                 let summaryHTML = '';
                 for (const key in data) {
                     if (key !== 'totalPrice' && key !== 'file-upload') {
-                       summaryHTML += `<div class="order-details"><p><strong>${key}:</strong> ${data[key]}</p></div>`;
-                     }
-               }
-              orderSummaryDiv.innerHTML = summaryHTML;
-              totalAmountDiv.textContent = `Total à payer: ${data.totalPrice} CHF`;
-           } else {
-               orderSummaryDiv.innerHTML = '<p>Aucune donnée de commande trouvée.</p>';
-               totalAmountDiv.textContent = 'Total à payer: 0 CHF';
+                        summaryHTML += `<div class="order-details"><p><strong>${key}:</strong> ${data[key]}</p></div>`;
+                    }
+                }
+                orderSummaryDiv.innerHTML = summaryHTML;
+                totalAmountDiv.textContent = `Total à payer: ${data.totalPrice} CHF`;
+            } else {
+                orderSummaryDiv.innerHTML = '<p>Aucune donnée de commande trouvée.</p>';
+                totalAmountDiv.textContent = 'Total à payer: 0 CHF';
             }
-       });
-      function goBack() {
-          window.location.href = 'demande.html';
-      }
+            // Google Pay initialization
+            initializeGooglePay();
+        });
+
+         function goBack() {
+            window.location.href = 'demande.html';
+        }
+
+
+        // Google Pay logic
+        function initializeGooglePay() {
+            const paymentsClient = new google.payments.api.PaymentsClient({
+                environment: 'TEST', // Set to 'PRODUCTION' for real transactions
+                paymentDataCallbacks: {
+                    onPaymentAuthorized: onPaymentAuthorized
+                }
+            });
+
+            const paymentDataRequest = getGooglePaymentDataRequest();
+            const isReadyToPayRequest = getGoogleIsReadyToPayRequest();
+
+            paymentsClient.isReadyToPay(isReadyToPayRequest)
+                .then(function (response) {
+                    if (response.result) {
+                        addGooglePayButton(paymentsClient, paymentDataRequest);
+                    } else {
+                         console.log('Google Pay is not available on this device.');
+                    }
+                })
+                .catch(function (err) {
+                     console.error('Error checking Google Pay availability:', err);
+                });
+        }
+
+        function getGoogleIsReadyToPayRequest() {
+            return {
+                apiVersion: 2,
+                apiVersionMinor: 0,
+                allowedPaymentMethods: [{
+                    type: 'CARD',
+                    parameters: {
+                        allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                        allowedCardNetworks: ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"]
+                    }
+                }]
+            };
+        }
+
+         function getGooglePaymentDataRequest() {
+            const formData = sessionStorage.getItem('formData');
+            const data = formData ? JSON.parse(formData) : { totalPrice: '0.00' };
+
+             const price = parseFloat(data.totalPrice);
+            const totalPrice = price.toFixed(2);
+            return {
+                apiVersion: 2,
+                apiVersionMinor: 0,
+                merchantInfo: {
+                    merchantId: '12345678901234567890', // Replace with your merchant ID
+                     merchantName: 'Doctofiles',
+                },
+                allowedPaymentMethods: [{
+                    type: 'CARD',
+                    parameters: {
+                         allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                         allowedCardNetworks: ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"]
+                    },
+                    tokenizationSpecification: {
+                       type: 'PAYMENT_GATEWAY',
+                       parameters: {
+                         gateway: 'example', // Replace with your payment gateway
+                        gatewayMerchantId: 'exampleGatewayMerchantId' // Replace with your gateway merchant ID
+                        }
+                    }
+                }],
+                transactionInfo: {
+                   totalPriceStatus: 'FINAL',
+                    totalPrice: totalPrice,
+                    currencyCode: 'CHF',
+                 },
+                callbackIntents: ["PAYMENT_AUTHORIZATION"]
+            };
+        }
+
+
+        function addGooglePayButton(paymentsClient, paymentDataRequest) {
+             const googlePayButton = paymentsClient.createButton({
+               onClick: () => paymentsClient.loadPaymentData(paymentDataRequest),
+             });
+             document.getElementById('google-pay-container').appendChild(googlePayButton);
+        }
+
+        function onPaymentAuthorized(paymentData) {
+            return new Promise(function (resolve, reject) {
+                // Handle the payment data received from Google Pay here
+                 console.log('Payment authorized:', paymentData);
+                // Simulate success
+                  setTimeout(function () {
+                   resolve({ transactionState: 'SUCCESS' });
+                    alert("Payment successful!");
+                }, 1000);
+               // You'll need to send this paymentData to your server for processing
+            });
+        }
     </script>
+    <script async
+        src="https://pay.google.com/gp/p/js/pay.js"></script>
 </body>
+
 </html>
