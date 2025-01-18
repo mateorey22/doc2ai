@@ -156,10 +156,10 @@
                 orderSummaryDiv.innerHTML = '<p>Aucune donnée de commande trouvée.</p>';
                 totalAmountDiv.textContent = 'Total à payer: 0 CHF';
             }
-             // Wait for the Google Pay API to load before initialization
-             waitForGooglePayApi(() => {
-                    initializeGooglePay();
-                });
+            // Wait for the Google Pay API to load before initialization
+            waitForGooglePayApi(() => {
+                initializeGooglePay();
+            });
         });
 
         function goBack() {
@@ -168,15 +168,15 @@
 
 
         // Google Pay logic
-       function waitForGooglePayApi(callback) {
-        if (window.google && window.google.payments) {
-            callback();
-        } else {
-            setTimeout(() => waitForGooglePayApi(callback), 100); // Check again after a short delay
+        function waitForGooglePayApi(callback) {
+            if (window.google && window.google.payments) {
+                callback();
+            } else {
+                setTimeout(() => waitForGooglePayApi(callback), 100); // Check again after a short delay
+            }
         }
-    }
 
-       function initializeGooglePay() {
+        function initializeGooglePay() {
             const paymentsClient = new google.payments.api.PaymentsClient({
                 environment: 'TEST', // Set to 'PRODUCTION' for real transactions
                 paymentDataCallbacks: {
@@ -192,11 +192,11 @@
                     if (response.result) {
                         addGooglePayButton(paymentsClient, paymentDataRequest);
                     } else {
-                         console.log('Google Pay is not available on this device.');
+                        console.log('Google Pay is not available on this device.');
                     }
                 })
                 .catch(function (err) {
-                     console.error('Error checking Google Pay availability:', err);
+                    console.error('Error checking Google Pay availability:', err);
                 });
         }
 
@@ -214,60 +214,57 @@
             };
         }
 
-         function getGooglePaymentDataRequest() {
+        function getGooglePaymentDataRequest() {
             const formData = sessionStorage.getItem('formData');
-            const data = formData ? JSON.parse(formData) : { totalPrice: '0.00' };
+            const data = formData ? JSON.parse(formData) : {
+                totalPrice: '0.00'
+            };
 
-             const price = parseFloat(data.totalPrice);
+            const price = parseFloat(data.totalPrice);
             const totalPrice = price.toFixed(2);
             return {
                 apiVersion: 2,
                 apiVersionMinor: 0,
                 merchantInfo: {
                     merchantId: '12345678901234567890', // Replace with your merchant ID
-                     merchantName: 'Doctofiles',
+                    merchantName: 'Doctofiles',
                 },
                 allowedPaymentMethods: [{
                     type: 'CARD',
                     parameters: {
                          allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
                          allowedCardNetworks: ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"]
-                    },
-                    tokenizationSpecification: {
-                       type: 'PAYMENT_GATEWAY',
-                       parameters: {
-                         gateway: 'example', // Replace with your payment gateway
-                        gatewayMerchantId: 'exampleGatewayMerchantId' // Replace with your gateway merchant ID
-                        }
-                    }
-                }],
+                     }
+                 }],
                 transactionInfo: {
-                   totalPriceStatus: 'FINAL',
+                    totalPriceStatus: 'FINAL',
                     totalPrice: totalPrice,
                     currencyCode: 'CHF',
-                 },
+                },
                 callbackIntents: ["PAYMENT_AUTHORIZATION"]
             };
         }
 
 
         function addGooglePayButton(paymentsClient, paymentDataRequest) {
-             const googlePayButton = paymentsClient.createButton({
-               onClick: () => paymentsClient.loadPaymentData(paymentDataRequest),
-             });
-             document.getElementById('google-pay-container').appendChild(googlePayButton);
+            const googlePayButton = paymentsClient.createButton({
+                onClick: () => paymentsClient.loadPaymentData(paymentDataRequest),
+            });
+            document.getElementById('google-pay-container').appendChild(googlePayButton);
         }
 
         function onPaymentAuthorized(paymentData) {
             return new Promise(function (resolve, reject) {
                 // Handle the payment data received from Google Pay here
-                 console.log('Payment authorized:', paymentData);
+                console.log('Payment authorized:', paymentData);
                 // Simulate success
-                  setTimeout(function () {
-                   resolve({ transactionState: 'SUCCESS' });
+                setTimeout(function () {
+                    resolve({
+                        transactionState: 'SUCCESS'
+                    });
                     alert("Payment successful!");
                 }, 1000);
-               // You'll need to send this paymentData to your server for processing
+                // You'll need to send this paymentData to your server for processing
             });
         }
     </script>
