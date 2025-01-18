@@ -280,6 +280,64 @@
             height: auto;
             margin-right: 10px;
           }
+           .trustpilot-card {
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+             max-width: 700px; /* Increased max-width */
+            margin-left: auto;
+            margin-right: auto;
+             font-size: 1.1em;
+             position:relative;
+        }
+           .trustpilot-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+         }
+      .trustpilot-rating {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #3490dc;
+          display: flex;
+          align-items: center;
+            gap: 8px;
+        }
+         .trustpilot-comments-container {
+          position: relative;
+          height: 100px; /* Fixed height for the container */
+          overflow: hidden;
+        }
+        .trustpilot-comments-wrapper {
+          display: flex;
+          transition: transform 0.8s ease-in-out; /* Smooth transition */
+        }
+          .trustpilot-comments {
+            flex: 0 0 100%; /* Each comment takes full width */
+            padding-left: 20px;
+            padding-right: 20px; /* Added right padding */
+            line-height: 1.6;
+            box-sizing: border-box; /* Make sure padding doesn't increase width */
+          }
+           .trustpilot-logo {
+            width: 100px;
+             height: auto;
+             position: absolute;
+              top: 20px;
+            right: 20px;
+          }
+          .dark-mode .trustpilot-card {
+           background-color: rgba(26, 32, 44, 0.5);
+            color: white;
+          }
+            .dark-mode .trustpilot-rating {
+                color: #63b3ed;
+            }
+
       /* Optimized mobile view */
         @media (max-width: 768px) {
             .service-card {
@@ -299,6 +357,11 @@
             .card-container {
               padding-bottom: 80px;
             }
+             .trustpilot-card {
+               margin-left: 10px;
+               margin-right: 10px;
+                max-width: 100%;
+             }
 
         }
 
@@ -348,6 +411,45 @@
                 <h2 class="text-2xl font-bold mb-4">Solutions Sur Mesure</h2>
                 <p class="text-gray-700">Des solutions adaptées à vos besoins spécifiques, de la petite entreprise aux grands groupes.</p>
             </div>
+             <div class="trustpilot-card transform hover:scale-105 transition-transform duration-300">
+                 <img src="/trustpilot-logo.png" alt="Trustpilot Logo" class="trustpilot-logo">
+                <div class="trustpilot-rating">
+                     <i class="fas fa-star text-yellow-400"></i>
+                     <i class="fas fa-star text-yellow-400"></i>
+                     <i class="fas fa-star text-yellow-400"></i>
+                     <i class="fas fa-star text-yellow-400"></i>
+                     <i class="fas fa-star-half-alt text-yellow-400"></i>
+                    <span>4.6/5</span>
+                </div>
+                <div class="trustpilot-comments-container">
+                  <div class="trustpilot-comments-wrapper">
+                      <div class="trustpilot-comments">
+                         <p>"Service excellent ! Doc2AI a transformé notre gestion documentaire. Hautement recommandé."</p>
+                     </div>
+                     <div class="trustpilot-comments">
+                       <p>"Le traitement par IA est incroyablement précis et nous fait gagner beaucoup de temps. Équipe de support également au top !"</p>
+                    </div>
+                      <div class="trustpilot-comments">
+                         <p>"Une solution sur mesure qui répond parfaitement à nos besoins spécifiques. Un gain de productivité incroyable !"</p>
+                    </div>
+                     <div class="trustpilot-comments">
+                       <p>"Interface simple et intuitive. L'intégration de Doc2AI dans notre flux de travail a été très facile."</p>
+                     </div>
+                    <div class="trustpilot-comments">
+                       <p>"Absolument ravi des performances de Doc2AI. Nos processus sont maintenant plus rapides et efficaces."</p>
+                    </div>
+                    <div class="trustpilot-comments">
+                        <p>"Le support technique est exceptionnel. Ils ont toujours été là pour répondre à nos questions et nous aider."</p>
+                    </div>
+                       <div class="trustpilot-comments">
+                        <p>"Je suis très impressionné par la rapidité et la précision du traitement des documents. Un must pour toute entreprise moderne."</p>
+                    </div>
+                    <div class="trustpilot-comments">
+                        <p>"Les solutions proposées par Doc2AI sont parfaitement adaptées à nos besoins. On a vu une réelle amélioration de notre workflow."</p>
+                     </div>
+                  </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -370,7 +472,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Hero text fade-in animation
+             // Hero text fade-in animation
             const heroText = document.getElementById('heroText');
             gsap.to(heroText, {
                 opacity: 1,
@@ -411,6 +513,26 @@
                     body.classList.remove('dark-mode');
                 }
             }
+                // Automatic comment slider
+            const commentsContainer = document.querySelector('.trustpilot-comments-container');
+            const commentsWrapper = document.querySelector('.trustpilot-comments-wrapper');
+             const comments = document.querySelectorAll('.trustpilot-comments');
+            let currentComment = 0;
+            let commentWidth = commentsContainer.offsetWidth; // Use container width
+
+
+            function slideComments() {
+               currentComment = (currentComment + 1) % comments.length;
+                commentsWrapper.style.transform = `translateX(-${currentComment * commentWidth}px)`;
+
+                }
+            setInterval(slideComments, 5000);
+
+             window.addEventListener('resize', () => {
+                commentWidth = commentsContainer.offsetWidth; // Update on window resize
+                commentsWrapper.style.transform = `translateX(-${currentComment * commentWidth}px)`; // Reset the current transform
+            });
+
        });
 
         function handleFormSubmit(event) {
