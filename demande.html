@@ -6,9 +6,13 @@
     <title>Demande de Numérisation - Doctofiles</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPvE1HxjVJMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
+
     <style>
-        body {
+          body {
             font-family: 'Courier Prime', monospace;
             background-color: #f0f0f0;
             color: #333;
@@ -90,6 +94,17 @@
             border: 1px solid #ddd;
             border-radius: 5px;
          }
+         .form-content input[type="file"] {
+           padding: 5px;
+         }
+         .form-content input[type="file"]::file-selector-button {
+           background-color: #ddd;
+           border: none;
+           padding: 8px 12px;
+          border-radius: 4px;
+          margin-right: 10px;
+          cursor: pointer;
+          }
         .form-content button[type="submit"] {
            background-color: #333;
            color: white;
@@ -126,7 +141,7 @@
           .back-button:hover {
              color: #333;
          }
-          /* Optimized mobile view */
+            /* Optimized mobile view */
         @media (max-width: 768px) {
           .form-content {
                padding: 20px;
@@ -139,6 +154,14 @@
           }
 
         }
+
+           #mapContainer {
+               height: 300px; /* Adjust the height as needed */
+                width: 100%;
+               margin-bottom: 15px;
+               border-radius: 5px;
+               display: none;
+           }
     </style>
 </head>
 <body class="relative">
@@ -154,7 +177,7 @@
                 <option value="digital">Document digital</option>
             </select>
 
-            <div id="manuscritOptions" class="hidden">
+             <div id="manuscritOptions" class="hidden">
                 <label for="manuscritNature">Nature du document manuscrit:</label>
                 <select id="manuscritNature" name="manuscritNature">
                     <option value="">Sélectionnez une option</option>
@@ -171,23 +194,31 @@
                    <label for="manuscritAutreText">Préciser:</label>
                    <input type="text" id="manuscritAutreText" name="manuscritAutreText" />
                 </div>
-            </div>
+                 <label for="adresse">Adresse postale:</label>
+                <input type="text" id="adresse" name="adresse">
+               <div id="mapContainer"></div>
+           </div>
+
 
             <div id="digitalOptions" class="hidden">
                 <label for="digitalNature">Nature du document digital:</label>
                 <select id="digitalNature" name="digitalNature">
                     <option value="">Sélectionnez une option</option>
-                     <option value="pdf">PDF</option>
+                    <option value="pdf">PDF</option>
                     <option value="notes_cours_digital">Note de cours digital</option>
-                   <option value="livre_digital">Livre</option>
+                     <option value="livre_digital">Livre</option>
                     <option value="scripts_cour_digital">Scripts de cour</option>
-                   <option value="email">Email</option>
+                    <option value="email">Email</option>
                     <option value="autre_digital">Autre</option>
                 </select>
                 <div id="digitalAutre" class="hidden">
                   <label for="digitalAutreText">Préciser:</label>
                  <input type="text" id="digitalAutreText" name="digitalAutreText" />
-             </div>
+                </div>
+               <label for="digitalDocument">Upload document:</label>
+              <input type="file" id="digitalDocument" name="digitalDocument" accept=".pdf, .doc, .docx, .txt, .jpg, .jpeg, .png"/>
+              <label for="emailAdresse">Adresse email:</label>
+             <input type="email" id="emailAdresse" name="emailAdresse" required/>
           </div>
             <label for="pageCount">Nombre de pages approximatif:</label>
             <input type="number" id="pageCount" name="pageCount" min="1" required>
@@ -199,26 +230,18 @@
                 <option value="base_de_donnees">Base de données</option>
                 <option value="modele_pre_entraine">Modèle pré-entraîné</option>
             </select>
-           <div id="envoiOptions" class="hidden">
-              <label for="envoiMethode">Méthode d'envoi des documents:</label>
-                <select id="envoiMethode" name="envoiMethode">
-                    <option value="">Sélectionnez une option</option>
-                    <option value="envoi_postal">Envoi postal</option>
-                 </select>
-                 <div id="adressePostale" class="hidden">
-                    <label for="adresse">Adresse postale:</label>
-                  <input type="text" id="adresse" name="adresse">
-                 </div>
-             </div>
            <div class="total-price" id="totalPrice">Prix total estimé: 0 CHF</div>
             <button type="submit">Passer commande</button>
         </form>
     </div>
    </div>
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYM8mOz2lXeGe80PF/uJUiiVY9ir+oUt3e9f1+jTTVYUjq/JmEQGIvgdwy5nN1t35mY1dzOjwWTPJ5YkiYGg=="
+        crossorigin=""></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-           // Dark mode toggle logic
-            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+             // Dark mode toggle logic
+             const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             let darkMode = localStorage.getItem('darkMode') === 'enabled';
             if (prefersDark && localStorage.getItem('darkMode') === null) {
                 darkMode = true;
@@ -233,97 +256,117 @@
                     body.classList.remove('dark-mode');
                 }
             }
-
-          const documentTypeSelect = document.getElementById('documentType');
+            const documentTypeSelect = document.getElementById('documentType');
             const manuscritOptionsDiv = document.getElementById('manuscritOptions');
             const digitalOptionsDiv = document.getElementById('digitalOptions');
             const manuscritNatureSelect = document.getElementById('manuscritNature');
             const manuscritAutreDiv = document.getElementById('manuscritAutre');
-            const digitalNatureSelect = document.getElementById('digitalNature');
+             const digitalNatureSelect = document.getElementById('digitalNature');
             const digitalAutreDiv = document.getElementById('digitalAutre');
-            const envoiOptionsDiv = document.getElementById('envoiOptions');
-            const envoiMethodeSelect = document.getElementById('envoiMethode');
-             const adressePostaleDiv = document.getElementById('adressePostale');
+            const adresseInput = document.getElementById('adresse');
+            const mapContainer = document.getElementById('mapContainer');
+
+            let map;
+             function initMap(latitude, longitude) {
+                if (map) {
+                     map.remove();
+                 }
+               map = L.map('mapContainer').setView([latitude, longitude], 14); // Zoom level 14
+               L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                  L.marker([latitude, longitude]).addTo(map);
+            }
+           function geocodeAddress(address) {
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+                .then(response => response.json())
+               .then(data => {
+                    if (data && data.length > 0) {
+                       const latitude = parseFloat(data[0].lat);
+                       const longitude = parseFloat(data[0].lon);
+                        mapContainer.style.display = 'block';
+                       initMap(latitude, longitude);
+                  } else {
+                     console.error('No results found for address');
+                      mapContainer.style.display = 'none';
+                   }
+                })
+                .catch(error => {
+                  console.error('Error geocoding address:', error);
+                    mapContainer.style.display = 'none';
+               });
+           }
+
 
             documentTypeSelect.addEventListener('change', function() {
-                manuscritOptionsDiv.classList.add('hidden');
+               manuscritOptionsDiv.classList.add('hidden');
                 digitalOptionsDiv.classList.add('hidden');
-                envoiOptionsDiv.classList.add('hidden');
-                adressePostaleDiv.classList.add('hidden');
-               if (this.value === 'manuscrit') {
+               mapContainer.style.display = 'none'; // hide the map
+              if (this.value === 'manuscrit') {
                    manuscritOptionsDiv.classList.remove('hidden');
-                   envoiOptionsDiv.classList.remove('hidden');
-               } else if (this.value === 'digital') {
-                   digitalOptionsDiv.classList.remove('hidden');
-               }
-                updatePrice();
-            });
-
+              } else if (this.value === 'digital') {
+                 digitalOptionsDiv.classList.remove('hidden');
+              }
+               updatePrice();
+           });
             manuscritNatureSelect.addEventListener('change', function() {
-               manuscritAutreDiv.classList.add('hidden');
+                manuscritAutreDiv.classList.add('hidden');
                if (this.value === 'autre_manuscrit') {
-                   manuscritAutreDiv.classList.remove('hidden');
-               }
+                    manuscritAutreDiv.classList.remove('hidden');
+                }
                 updatePrice();
             });
-
-             digitalNatureSelect.addEventListener('change', function() {
+           digitalNatureSelect.addEventListener('change', function() {
                digitalAutreDiv.classList.add('hidden');
-               if (this.value === 'autre_digital') {
+                if (this.value === 'autre_digital') {
                    digitalAutreDiv.classList.remove('hidden');
                }
-                updatePrice();
+               updatePrice();
+           });
+             adresseInput.addEventListener('input', function() {
+                const address = this.value;
+               if (address.trim() !== "") {
+                    geocodeAddress(address);
+                } else {
+                     mapContainer.style.display = 'none';
+                 }
             });
 
-           envoiMethodeSelect.addEventListener('change', function() {
-              adressePostaleDiv.classList.add('hidden');
-               if (this.value === 'envoi_postal') {
-                   adressePostaleDiv.classList.remove('hidden');
-                }
-               updatePrice();
-             });
-
              const pageCountInput = document.getElementById('pageCount');
-             const outputFormatSelect = document.getElementById('outputFormat');
+            const outputFormatSelect = document.getElementById('outputFormat');
             pageCountInput.addEventListener('input', updatePrice);
             outputFormatSelect.addEventListener('change', updatePrice);
              function updatePrice() {
                  let basePrice = 10;
                  let pagePrice = 0.1;
-                 let formatPriceModifier = 1;
-                let envoiPrice = 0;
-                const pageCount = parseInt(document.getElementById('pageCount').value, 10) || 0;
-                 const outputFormat = document.getElementById('outputFormat').value;
-                 const envoiMethode = document.getElementById('envoiMethode')?.value;
-                if (envoiMethode === 'envoi_postal') {
-                    envoiPrice = 5;
-                  }
-                if (outputFormat === 'optimiser_ia') {
-                   formatPriceModifier = 1.5;
-                 }else if (outputFormat === 'base_de_donnees') {
-                   formatPriceModifier = 2;
-               }else if (outputFormat === 'modele_pre_entraine') {
-                    formatPriceModifier = 2.5;
-                 }
-                 const totalPrice = basePrice + (pageCount * pagePrice) * formatPriceModifier + envoiPrice;
-                document.getElementById('totalPrice').textContent = `Prix total estimé: ${totalPrice.toFixed(2)} CHF`;
-             }
-             const form = document.getElementById('demande-form');
-             form.addEventListener('submit', function(event) {
+                let formatPriceModifier = 1;
+               const pageCount = parseInt(document.getElementById('pageCount').value, 10) || 0;
+                const outputFormat = document.getElementById('outputFormat').value;
+               if (outputFormat === 'optimiser_ia') {
+                    formatPriceModifier = 1.5;
+               }else if (outputFormat === 'base_de_donnees') {
+                    formatPriceModifier = 2;
+                 }else if (outputFormat === 'modele_pre_entraine') {
+                  formatPriceModifier = 2.5;
+                }
+                 const totalPrice = basePrice + (pageCount * pagePrice) * formatPriceModifier;
+               document.getElementById('totalPrice').textContent = `Prix total estimé: ${totalPrice.toFixed(2)} CHF`;
+            }
+              const form = document.getElementById('demande-form');
+              form.addEventListener('submit', function(event) {
                 event.preventDefault();
-                 const formData = new FormData(form);
-                const data = {};
-                formData.forEach((value, key) => {
-                  data[key] = value;
+                  const formData = new FormData(form);
+                  const data = {};
+               formData.forEach((value, key) => {
+                     data[key] = value;
                 });
-                  const totalPrice = parseFloat(document.getElementById('totalPrice').textContent.split(': ')[1].replace(' CHF',''));
+                const totalPrice = parseFloat(document.getElementById('totalPrice').textContent.split(': ')[1].replace(' CHF',''));
                 data.totalPrice = totalPrice;
-               console.log('Form Data:',data); //Debug line
-                sessionStorage.setItem('formData', JSON.stringify(data));
-                window.location.href = 'checkout.html';
+              console.log('Form Data:', data);
+                 sessionStorage.setItem('formData', JSON.stringify(data));
+                  window.location.href = 'checkout.html';
              });
-           });
-
+            });
         function goBack() {
           window.location.href = 'index.html';
       }
