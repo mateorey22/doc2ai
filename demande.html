@@ -7,8 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
     <style>
-        body {
+       body {
             font-family: 'Courier Prime', monospace;
             background-color: #f0f0f0;
             color: #333;
@@ -194,6 +195,49 @@
              }
 
         }
+        #progress-bar-container {
+              width: 100%;
+             background-color: #f0f0f0;
+             border-radius: 5px;
+             margin-bottom: 15px;
+             height: 20px;
+             display: none;
+         }
+           #progress-bar {
+               height: 100%;
+                background-color: #333;
+               border-radius: 5px;
+                width: 0;
+                transition: width 0.3s ease;
+             }
+             .dark-mode #progress-bar {
+              background-color: #cbd5e0;
+              }
+          #progress-percent {
+                text-align: center;
+                margin-bottom: 10px;
+                font-weight: bold;
+                display: none;
+            }
+             .dark-mode #progress-percent {
+               color: #cbd5e0;
+            }
+          .loading-icon {
+            display: none;
+            text-align: center;
+            font-size: 24px; /* Larger size for loading icon */
+            margin-bottom: 10px; /* Spacing */
+          }
+          .dark-mode .loading-icon{
+               color: #cbd5e0;
+           }
+           .loading-icon i {
+               animation: spin 2s linear infinite; /* Apply spinning animation */
+           }
+          @keyframes spin {
+            from {transform: rotate(0deg);}
+            to {transform: rotate(360deg);}
+          }
     </style>
 </head>
 <body class="relative">
@@ -202,7 +246,9 @@
         <button class="back-button" onclick="goBack()">&lt; Back</button>
          <h2 class="text-2xl font-bold mb-6">Demande de Numérisation</h2>
         <form id="demande-form">
-            <label for="documentType">Type de document source:</label>
+             <label for="email">Adresse Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Votre adresse email" autocomplete="email"/>
+             <label for="documentType">Type de document source:</label>
             <select id="documentType" name="documentType" required>
                 <option value="">Sélectionnez une option</option>
                 <option value="manuscrit">Document manuscrit</option>
@@ -268,16 +314,49 @@
                  </select>
                   <div id="adressePostale" class="hidden">
                         <label for="adresse">Adresse postale: <span style="font-size: 0.8em; color: #777; display: block;">Nous vous enverrons une boîte à cette adresse pour y déposer vos documents.</span></label>
-                        <input type="text" id="adresse" name="adresse" placeholder="Votre adresse"/>
+                        <input type="text" id="adresse" name="adresse" placeholder="Votre adresse" autocomplete="address-line1"/>
                      </div>
              </div>
            <div class="total-price" id="totalPrice">Prix total estimé: 0 CHF</div>
+           <div id="progress-percent">0%</div>
+           <div id="progress-bar-container">
+              <div id="progress-bar"></div>
+           </div>
+           <div class="loading-icon"><i class="fas fa-spinner"></i></div>
             <button type="submit">Passer commande</button>
         </form>
     </div>
    </div>
-    <script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+   <script>
+
+      const CLIENT_ID = 'YOUR_GOOGLE_DRIVE_CLIENT_ID';
+      const API_KEY = 'YOUR_GOOGLE_DRIVE_API_KEY';
+      const FOLDER_ID = 'YOUR_GOOGLE_DRIVE_FOLDER_ID';
+
+
+       const SCOPES = 'https://www.googleapis.com/auth/drive.file';
+
+       let googleApiClientReady = false;
+       function handleClientLoad() {
+          gapi.load('client:auth2', initClient);
+        }
+       function initClient() {
+           gapi.client.init({
+               apiKey: API_KEY,
+             clientId: CLIENT_ID,
+             scope: SCOPES,
+               discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest']
+          }).then(() => {
+              googleApiClientReady = true;
+          },
+            function(error){
+              console.log('Error initializing google client', error)
+          });
+       }
+
         document.addEventListener('DOMContentLoaded', function() {
+           handleClientLoad();
            // Dark mode toggle logic
             const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             let darkMode = localStorage.getItem('darkMode') === 'enabled';
@@ -306,6 +385,11 @@
             const envoiMethodeSelect = document.getElementById('envoiMethode');
              const adressePostaleDiv = document.getElementById('adressePostale');
              const loadDocumentSection = document.getElementById('load-document-section');
+             const fileUpload = document.getElementById('file-upload');
+             const progressBarContainer = document.getElementById('progress-bar-container');
+             const progressBar = document.getElementById('progress-bar');
+             const progressPercent = document.getElementById('progress-percent');
+             const loadingIcon = document.querySelector('.loading-icon');
 
              // Function for fade-in animation
           function fadeIn(element, duration = 300) {
@@ -422,19 +506,110 @@
             }
 
              const form = document.getElementById('demande-form');
-             form.addEventListener('submit', function(event) {
+             form.addEventListener('submit', async function(event) {
                 event.preventDefault();
+                 const files = fileUpload.files;
                  const formData = new FormData(form);
-                const data = {};
+
+                 const data = {};
                 formData.forEach((value, key) => {
                   data[key] = value;
                 });
                   const totalPrice = parseFloat(document.getElementById('totalPrice').textContent.split(': ')[1].replace(' CHF',''));
                 data.totalPrice = totalPrice;
-               console.log('Form Data:',data); //Debug line
-                sessionStorage.setItem('formData', JSON.stringify(data));
-                window.location.href = 'checkout.html';
+                //console.log('Form Data:',data); //Debug line
+                 if (files.length > 0) {
+                   await uploadFiles(files, data);
+                   } else {
+                       sessionStorage.setItem('formData', JSON.stringify(data));
+                    window.location.href = 'checkout.html';
+                   }
              });
+
+
+        async function uploadFiles(files, formData) {
+            if(!googleApiClientReady){
+              console.log("Google client not ready. Please wait");
+                return;
+              }
+          NProgress.start();
+          progressBarContainer.style.display = 'block';
+          progressPercent.style.display = 'block';
+          loadingIcon.style.display = 'block';
+            try {
+                let fileId = null;
+             const authResult = await gapi.auth2.getAuthInstance().signIn();
+                if(authResult){
+                    console.log('Google user signin success', authResult);
+                  }else{
+                       console.log('Google user signin failed');
+                    return;
+                  }
+
+
+                for (let i = 0; i < files.length; i++) {
+                 const file = files[i];
+
+                  const fileMetadata = {
+                     name: file.name,
+                      parents: [FOLDER_ID]
+                  };
+                     const media = {
+                         mimeType: file.type,
+                        body: file
+                   };
+
+                    const uploadFileRequest = gapi.client.drive.files.create({
+                        resource: fileMetadata,
+                         media: media,
+                   });
+                      uploadFileRequest.then(function(response) {
+                       fileId = response.result.id;
+                       console.log("Uploaded file with ID:", fileId);
+                   },
+                       function(error){
+                           console.log('Error upload file:',error);
+                          return;
+                       });
+
+                      // Upload progress
+                   uploadFileRequest.then(function(response) {
+
+                           }).catch(function(error){
+                               console.log("Error creating file", error)
+                             });
+
+                      uploadFileRequest.then(function (response){
+                            if(response && response.result) {
+                               const progress = Math.min((i + 1) / files.length, 1) * 100;
+                               progressBar.style.width = `${progress}%`;
+                               progressPercent.textContent = `${progress.toFixed(0)}%`;
+                            }else{
+                               console.log("error with upload request")
+                            }
+
+                      })
+                     await uploadFileRequest
+
+              }
+
+                // Store file ID and data to session storage
+              formData.fileId = fileId;
+               sessionStorage.setItem('formData', JSON.stringify(formData));
+                 NProgress.done();
+                progressBarContainer.style.display = 'none';
+                  progressPercent.style.display = 'none';
+                   loadingIcon.style.display = 'none';
+                 window.location.href = 'checkout.html';
+            } catch (error) {
+                console.error('Upload failed:', error);
+               progressBarContainer.style.display = 'none';
+                progressPercent.style.display = 'none';
+                  loadingIcon.style.display = 'none';
+                   NProgress.done();
+            }
+         }
+
            });
 
         function goBack() {
