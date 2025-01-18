@@ -81,51 +81,57 @@
             height: 100%;
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
             pointer-events: none;
-           z-index: 0;
-             transition: background 0.3s ease;
+            z-index: 0;
+            transition: background 0.3s ease;
         }
 
         .dark-mode .hero-background {
-             background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
-       }
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+        }
 
         .services-background {
             position: absolute;
             top: 0;
             left: 0;
-           width: 100%;
+            width: 100%;
             height: 100%;
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
             pointer-events: none;
             z-index: 0;
             transition: background 0.3s ease;
-       }
-        .dark-mode .services-background {
-             background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
         }
+
+        .dark-mode .services-background {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+        }
+
         .service-card {
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-           margin-bottom: 30px;
-           transition: transform 0.3s ease, box-shadow 0.3s ease;
-             max-width: 600px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 600px;
             margin-left: auto;
-             margin-right: auto;
-       }
+            margin-right: auto;
+        }
+
         .dark-mode .service-card {
             background-color: rgba(26, 32, 44, 0.5);
-           color: white;
+            color: white;
             box-shadow: 0 10px 20px rgba(255, 255, 255, 0.15);
-       }
-       .service-card:hover {
+        }
+
+        .service-card:hover {
             transform: translateY(-5px) scale(1.03);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
-       }
-        .dark-mode .service-card:hover {
-             box-shadow: 0 15px 25px rgba(255, 255, 255, 0.25);
         }
+
+        .dark-mode .service-card:hover {
+            box-shadow: 0 15px 25px rgba(255, 255, 255, 0.25);
+        }
+
         .mouse-animation {
             position: absolute;
             bottom: 20px;
@@ -133,154 +139,182 @@
             transform: translateX(-50%);
             display: flex;
             flex-direction: column;
-           align-items: center;
+            align-items: center;
             opacity: 0;
         }
-       .mouse {
+
+        .mouse {
             width: 20px;
             height: 30px;
             border: 2px solid #333;
-           border-radius: 15px;
-           position: relative;
+            border-radius: 15px;
+            position: relative;
         }
+
         .dark-mode .mouse {
-           border-color: white;
+            border-color: white;
         }
+
         .wheel {
-           width: 4px;
+            width: 4px;
             height: 8px;
-           background-color: #333;
+            background-color: #333;
             border-radius: 2px;
             position: absolute;
-           top: 4px;
-           left: 50%;
+            top: 4px;
+            left: 50%;
             transform: translateX(-50%);
             animation: wheel-move 1.5s ease-in-out infinite;
         }
-       .dark-mode .wheel {
+
+        .dark-mode .wheel {
             background-color: white;
         }
+
         .mouse-text {
             margin-top: 10px;
-           font-size: 0.8em;
-           color: #555;
+            font-size: 0.8em;
+            color: #555;
         }
-       .dark-mode .mouse-text {
+
+        .dark-mode .mouse-text {
             color: #cbd5e0;
         }
+
         @keyframes wheel-move {
             0% {
-               opacity: 0;
+                opacity: 0;
                 transform: translateX(-50%) translateY(-2px);
             }
-           50% {
-               opacity: 1;
-               transform: translateX(-50%) translateY(8px);
+
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(8px);
             }
+
             100% {
                 opacity: 0;
                 transform: translateX(-50%) translateY(10px);
             }
         }
+
         .card-container {
-           padding: 20px;
-           display: flex;
-           flex-direction: column;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-             position: relative;
+            position: relative;
             padding-bottom: 80px;
         }
-       .card-container > div {
-           width: 100%;
+
+        .card-container>div {
+            width: 100%;
         }
+
         #heroText {
             opacity: 0;
             transform: translateY(20px);
-           transition: opacity 1s ease, transform 1s ease;
+            transition: opacity 1s ease, transform 1s ease;
         }
-       .hero-background-animation {
+
+        .hero-background-animation {
             animation: backgroundFadeIn 2s ease forwards;
         }
+
         @keyframes backgroundFadeIn {
             from {
                 opacity: 0;
-           }
+            }
+
             to {
-               opacity: 1;
+                opacity: 1;
             }
         }
-       .page {
+
+        .page {
             display: none;
-       }
+        }
+
         .active-page {
             display: block;
-       }
+        }
+
         .contact-email {
-           display: flex;
-           align-items: center;
+            display: flex;
+            align-items: center;
             gap: 5px;
         }
+
         .contact-email i {
             font-size: 1.2em;
         }
+
         .container {
             max-width: 800px;
             margin-left: auto;
-           margin-right: auto;
+            margin-right: auto;
             padding-left: 20px;
             padding-right: 20px;
         }
+
         .form-container {
-           position: fixed;
-           top: 0;
-           left: 0;
-           width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             display: none;
-           justify-content: center;
+            justify-content: center;
             align-items: center;
-           z-index: 1000;
+            z-index: 1000;
         }
-       .form-content {
+
+        .form-content {
             background-color: #fff;
-           padding: 20px;
+            padding: 20px;
             border-radius: 10px;
-           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             max-width: 500px;
             width: 90%;
-           position: relative;
+            position: relative;
         }
-       .form-content h2 {
-           margin-bottom: 20px;
+
+        .form-content h2 {
+            margin-bottom: 20px;
         }
+
         .form-content label {
             display: block;
-           margin-bottom: 5px;
-           font-weight: bold;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
+
         .form-content input[type="text"],
         .form-content textarea,
         .form-content input[type="email"] {
             width: calc(100% - 20px);
-           padding: 10px;
-           margin-bottom: 15px;
+            padding: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
-       }
+        }
+
         .form-content button[type="submit"] {
-           background-color: #333;
+            background-color: #333;
             color: white;
             padding: 10px 20px;
             border: none;
-           border-radius: 5px;
+            border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .form-content button[type="submit"]:hover {
             background-color: #555;
         }
-       .close-form-button {
+
+        .close-form-button {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -289,221 +323,237 @@
             font-size: 20px;
             cursor: pointer;
             color: #777;
-           transition: color 0.3s ease;
+            transition: color 0.3s ease;
         }
+
         .close-form-button:hover {
-           color: #333;
+            color: #333;
         }
+
         .dark-mode .navbar-toggle-icon {
-           filter: invert(1);
+            filter: invert(1);
         }
-       #map-container {
+
+        #map-container {
             width: 100%;
             height: 300px;
-           border-radius: 10px;
+            border-radius: 10px;
             margin-bottom: 20px;
-           overflow: hidden;
+            overflow: hidden;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
+
         .form-control {
-           width: 100%;
+            width: 100%;
             padding: 10px;
-           margin-bottom: 15px;
+            margin-bottom: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+
         .form-control.number {
             width: 80px;
-           display: inline-block;
-           vertical-align: middle;
+            display: inline-block;
+            vertical-align: middle;
         }
-       .form-group {
-           margin-bottom: 15px;
-       }
-        .checkbox-label {
-           display: flex;
-            align-items: center;
-            gap: 5px;
-           cursor: pointer;
+
+        .form-group {
             margin-bottom: 15px;
         }
-        .checkbox-label input[type="checkbox"]{
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-label input[type="checkbox"] {
             appearance: none;
             -webkit-appearance: none;
-           -moz-appearance: none;
+            -moz-appearance: none;
             width: 18px;
             height: 18px;
-           border: 1px solid #ddd;
-           border-radius: 3px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
             position: relative;
             cursor: pointer;
         }
+
         .checkbox-label input[type="checkbox"]:checked::before {
-           content: "\2713";
+            content: "\2713";
             position: absolute;
-           top: 50%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 14px;
-           color: #007bff; /* Checkmark color */
+            color: #007bff;
+            /* Checkmark color */
         }
+
         .checkbox-label input[type="checkbox"]:focus {
-           outline: none; /* Remove focus outline for cleaner look */
-           border-color: #007bff;
+            outline: none;
+            /* Remove focus outline for cleaner look */
+            border-color: #007bff;
         }
-       .cloud-link-input {
-           width: 100%;
-           padding: 10px;
-           border: 1px solid #ddd;
+
+        .cloud-link-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
             border-radius: 5px;
-           margin-bottom: 15px;
-           display: none;
+            margin-bottom: 15px;
+            display: none;
         }
-        .checkbox-label input[type="checkbox"]:checked + .cloud-link-input {
-           display: block;
+
+        .checkbox-label input[type="checkbox"]:checked+.cloud-link-input {
+            display: block;
         }
+
         /* Paper stack animation */
-       .paper-stack-container {
+        .paper-stack-container {
             position: relative;
-           width: 100px;
+            width: 100px;
             height: 60px;
-           margin-left: 20px;
-           display: inline-block;
+            margin-left: 20px;
+            display: inline-block;
             vertical-align: middle;
             pointer-events: none;
+            transition: height 0.3s ease;
         }
+
         .paper {
-           position: absolute;
-            top: 0;
+            position: absolute;
+            top: 50%;
             left: 0;
             width: 40px;
-           height: 1px;
-           background: #fff;
+            height: 1px;
+            background: #fff;
             border: 1px solid #ddd;
-           transform-origin: top left;
-            transition: transform 0.5s ease, opacity 0.4s ease, height 0.3s ease;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transform-origin: top center;
+           transition: transform 0.4s ease, opacity 0.3s ease;
+             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            opacity: 0;
         }
+
+
          .dark-mode .paper {
-             background-color: #4a5568;
-           border-color: #2d3748;
-       }
-       .paper:nth-child(1) { transform: translateX(0) rotate(-10deg); z-index: 5; }
-        .paper:nth-child(2) { transform: translateX(5px) rotate(-5deg);  z-index: 4; }
-        .paper:nth-child(3) { transform: translateX(10px) rotate(0deg); z-index: 3; }
-        .paper:nth-child(4) { transform: translateX(15px) rotate(5deg);  z-index: 2; }
-        .paper:nth-child(5) { transform: translateX(20px) rotate(10deg); z-index: 1; }
-        .paper.fly-in {
-            transform: translateY(40px) rotate(0deg);
-            opacity: 1;
+            background-color: #4a5568;
+            border-color: #2d3748;
         }
-       #document-count-value{
-           font-size: 2em;
+
+
+       .paper.fly-in {
+            opacity: 1;
+             transform: translateX(0px) translateY(-50%)  rotate(0deg) !important;
+        }
+          #document-count-value {
+            font-size: 2em;
             font-weight: bold;
             margin-left: 10px;
             display: inline-block;
             vertical-align: middle;
         }
-         /* Optimized mobile view */
+        /* Optimized mobile view */
         @media (max-width: 768px) {
             .service-card {
                 margin-left: 10px;
                 margin-right: 10px;
-               padding: 20px;
-               margin-bottom: 20px;
+                padding: 20px;
+                margin-bottom: 20px;
                 max-width: 100%;
             }
+
             .mouse-animation {
                 bottom: 10px;
-           }
-           #heroText {
+            }
+
+            #heroText {
                 font-size: 5xl;
             }
+
             .card-container {
                 padding-bottom: 80px;
-           }
-       }
+            }
+        }
     </style>
 </head>
 
 <body class="relative">
 
     <header class="relative flex flex-col justify-center items-center text-center" style="height: 30vh;">
-       <div class="hero-background hero-background-animation"></div>
+        <div class="hero-background hero-background-animation"></div>
         <nav class="absolute top-0 left-0 right-0 p-4 flex justify-end items-center">
             <div class="space-x-4">
-               <button onclick="showPage('index.html')" class="text-gray-700 hover:text-gray-900">Accueil</button>
+                <button onclick="showPage('index.html')" class="text-gray-700 hover:text-gray-900">Accueil</button>
             </div>
         </nav>
-       <h1 id="heroText" class="text-5xl md:text-7xl font-bold mb-8" style="font-family: 'Courier Prime', monospace;">Demande
+        <h1 id="heroText" class="text-5xl md:text-7xl font-bold mb-8" style="font-family: 'Courier Prime', monospace;">Demande
             de service</h1>
     </header>
     <section class="relative  page active-page" id="demande-page">
         <div class="services-background"></div>
-       <div class="card-container">
+        <div class="card-container">
             <div class="service-card transform  transition-transform duration-300">
                 <h2 class="text-2xl font-bold mb-4">Formulaire de Demande</h2>
-               <form id="demande-form" onsubmit="handleFormSubmit(event)">
+                <form id="demande-form" onsubmit="handleFormSubmit(event)">
                     <div class="form-group">
-                       <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" class="form-control" required autocomplete="email">
-                   </div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required
+                            autocomplete="email">
+                    </div>
                     <div class="form-group">
-                       <label for="address">Adresse:</label>
+                        <label for="address">Adresse:</label>
                         <input type="text" id="address" name="address" class="form-control" required
                             onblur="updateMap()" autocomplete="address-line1">
-                   </div>
+                    </div>
                     <div id="map-container">
                         <iframe width="100%" height="100%" frameborder="0" style="border:0; border-radius: 10px;"
-                           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.1116311085963!2d7.342130111965687!3d46.228657340218616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e6e06b452d48f%3A0x946f7460083a513e!2sChemin%20Saint-Hubert%202%2C%201950%20Sion%2C%20Switzerland!5e0!3m2!1sen!2s!4v1718636748158!5m2!1sen!2s"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.1116311085963!2d7.342130111965687!3d46.228657340218616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e6e06b452d48f%3A0x946f7460083a513e!2sChemin%20Saint-Hubert%202%2C%201950%20Sion%2C%20Switzerland!5e0!3m2!1sen!2s!4v1718636748158!5m2!1sen!2s"
                             allowfullscreen></iframe>
                     </div>
-                   <div class="form-group">
+                    <div class="form-group">
                         <label class="checkbox-label">
                             <input type="checkbox" id="document-upload-checkbox" name="documentUpload"
                                 onclick="toggleCloudLinkInput()">
-                           <span>J'ai des documents à scanner dans un dossier cloud</span>
-                           <input type="text" id="cloud-link" name="cloudLink" class="cloud-link-input"
+                            <span>J'ai des documents à scanner dans un dossier cloud</span>
+                            <input type="text" id="cloud-link" name="cloudLink" class="cloud-link-input"
                                 placeholder="Coller le lien du dossier">
                         </label>
-                   </div>
+                    </div>
                     <div class="form-group">
                         <label for="document-count">Nombre de documents :</label>
-                        <input type="number" id="document-count" name="documentCount" class="form-control number" value="1"
-                            min="1" oninput="updatePaperStack()">
+                        <input type="number" id="document-count" name="documentCount" class="form-control number"
+                            value="1" min="1" oninput="updatePaperStack()">
                         <div id="document-count-value">1</div>
-                       <div id="paper-stack" class="paper-stack-container">
-                            <div class="paper"></div>
-                           <div class="paper"></div>
-                            <div class="paper"></div>
-                            <div class="paper"></div>
-                           <div class="paper"></div>
-                       </div>
+                        <div id="paper-stack" class="paper-stack-container">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="output-format">Format de sortie:</label>
-                       <select id="output-format" name="outputFormat" class="form-control" required>
+                        <select id="output-format" name="outputFormat" class="form-control" required>
                             <option value="pdf">PDF</option>
                             <option value="database">Database</option>
                             <option value="txt">TXT</option>
                             <option value="image">Image</option>
-                           <option value="json">JSON</option>
+                            <option value="json">JSON</option>
                             <option value="csv">CSV</option>
                         </select>
                     </div>
                     <div class="text-right">
-                       <button type="submit"
+                        <button type="submit"
                             class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900 transition-colors">
                             Calculer le prix et Payer
                         </button>
                     </div>
                 </form>
-           </div>
-       </div>
-   </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+            </div>
+        </div>
+    </section>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+         document.addEventListener('DOMContentLoaded', function () {
             // Hero text fade-in animation
             const heroText = document.getElementById('heroText');
             gsap.to(heroText, {
@@ -514,118 +564,164 @@
             });
             // Mouse animation fade-in
             const mouseAnimation = document.querySelector('.mouse-animation');
-           gsap.to(mouseAnimation, {
+            gsap.to(mouseAnimation, {
                 opacity: 1,
                 duration: 1,
                 delay: 1
             });
-           // Dark mode toggle logic
+            // Dark mode toggle logic
             const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-           let darkMode = localStorage.getItem('darkMode') === 'enabled';
-           if (prefersDark && localStorage.getItem('darkMode') === null) {
+            let darkMode = localStorage.getItem('darkMode') === 'enabled';
+            if (prefersDark && localStorage.getItem('darkMode') === null) {
                 darkMode = true;
                 localStorage.setItem('darkMode', 'enabled'); // Set it in localStorage for next visit
             }
             updateDarkMode(darkMode);
             //Function to update dark mode
             function updateDarkMode(isDarkMode) {
-               const body = document.body;
+                const body = document.body;
                 if (isDarkMode) {
                     body.classList.add('dark-mode');
                 } else {
                     body.classList.remove('dark-mode');
                 }
             }
-       });
+            updatePaperStack();
+        });
 
-       function handleFormSubmit(event) {
+
+        function handleFormSubmit(event) {
             event.preventDefault();
             const formData = new FormData(event.target);
-           const hasDocuments = formData.get('documentUpload') === 'on';
-           const cloudLink = formData.get('cloudLink');
+            const hasDocuments = formData.get('documentUpload') === 'on';
+            const cloudLink = formData.get('cloudLink');
             const outputFormat = formData.get('outputFormat');
-           const email = formData.get('email');
+            const email = formData.get('email');
             const address = formData.get('address');
             const documentCount = parseInt(formData.get('documentCount'), 10);
             let basePrice = 10;
             let documentPrice = 0;
             let formatPrice = 0;
-           if (hasDocuments) {
+            if (hasDocuments) {
                 documentPrice = 20;
             }
             switch (outputFormat) {
                 case 'pdf':
                     formatPrice = 0;
-                   break;
-               case 'database':
+                    break;
+                case 'database':
                     formatPrice = 10;
                     break;
-               case 'txt':
+                case 'txt':
                     formatPrice = 0;
                     break;
-               case 'image':
-                   formatPrice = 5;
+                case 'image':
+                    formatPrice = 5;
                     break;
                 case 'json':
-                   formatPrice = 5;
-                   break;
-               case 'csv':
+                    formatPrice = 5;
+                    break;
+                case 'csv':
                     formatPrice = 5;
                     break;
                 default:
-                   formatPrice = 0;
+                    formatPrice = 0;
             }
 
             const totalPrice = basePrice + documentPrice + (documentCount * 1) + formatPrice;
             const data = {
-               email: email,
+                email: email,
                 address: address,
-               hasDocuments: hasDocuments,
-               cloudLink: cloudLink,
+                hasDocuments: hasDocuments,
+                cloudLink: cloudLink,
                 outputFormat: outputFormat,
                 totalPrice: totalPrice,
-               documentCount : documentCount
-           };
+                documentCount: documentCount
+            };
             sessionStorage.setItem('formData', JSON.stringify(data));
-           window.location.href = 'checkout.html';
-       }
+            window.location.href = 'checkout.html';
+        }
         function showPage(pageUrl) {
             window.open(pageUrl, '_self');
         }
         function updateMap() {
-           const address = document.getElementById('address').value;
+            const address = document.getElementById('address').value;
             if (address) {
-               const iframe = document.querySelector('#map-container iframe');
+                const iframe = document.querySelector('#map-container iframe');
                 iframe.src = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.1116311085963!2d7.342130111965687!3d46.228657340218616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e6e06b452d48f%3A0x946f7460083a513e!2s${encodeURIComponent(address)}!5e0!3m2!1sen!2s!4v1718636748158!5m2!1sen!2s`
             }
         }
         function toggleCloudLinkInput() {
-           const checkbox = document.getElementById('document-upload-checkbox');
+            const checkbox = document.getElementById('document-upload-checkbox');
             const cloudLinkInput = document.getElementById('cloud-link');
             if (checkbox.checked) {
-               cloudLinkInput.style.display = 'block';
+                cloudLinkInput.style.display = 'block';
                 cloudLinkInput.placeholder = "Coller le lien du dossier";
             } else {
                 cloudLinkInput.style.display = 'none';
                 cloudLinkInput.placeholder = "";
             }
-       }
-
-       function updatePaperStack() {
-           const documentCount = document.getElementById('document-count').value;
+        }
+        function updatePaperStack() {
+            const documentCountInput = document.getElementById('document-count');
+            let documentCount = parseInt(documentCountInput.value, 10) || 1;
             const paperStackContainer = document.getElementById('paper-stack');
-            const paperElements = paperStackContainer.querySelectorAll('.paper');
             const documentCountValue = document.getElementById('document-count-value');
-            documentCountValue.textContent = documentCount;
-            paperElements.forEach((paper, index) => {
-                paper.classList.remove('fly-in');
-                if (index < documentCount) {
-                    setTimeout(() => {
-                        paper.classList.add('fly-in');
-                   }, 20 * (documentCount - 1 - index));
-                }
+           documentCountValue.textContent = documentCount;
+
+            const baseHeight = 60;
+            const logHeight = Math.log(documentCount + 1) * 20;
+           paperStackContainer.style.height = `${baseHeight + logHeight}px`;
+
+             const papers = paperStackContainer.querySelectorAll('.paper');
+             const prevPaperPositions = [];
+            papers.forEach(paper => {
+                 prevPaperPositions.push({
+                    transform: paper.style.transform,
+                      zIndex : paper.style.zIndex,
+                    top : paper.style.top
+               });
             });
-       }
+
+            // Clear existing papers for next update
+           paperStackContainer.innerHTML = '';
+
+             function createAndAnimatePaper(index) {
+                  if (index >= documentCount) return;
+
+                    const paper = document.createElement('div');
+                    paper.classList.add('paper');
+
+                   const maxTranslateX = 20;
+                    const translateX = Math.min(index * 5, maxTranslateX);
+                    const rotate = Math.min((index * 2) - 10, 10);
+
+                     if(index < prevPaperPositions.length)
+                      {
+                        paper.style.transform = prevPaperPositions[index].transform;
+                       paper.style.zIndex = prevPaperPositions[index].zIndex;
+                          paper.style.top = prevPaperPositions[index].top;
+
+                    }else {
+                          paper.style.transform = `translateX(${translateX}px) rotate(${rotate}deg)`;
+                          if (index < 5) {
+                            paper.style.zIndex = 5 - index;
+                        } else {
+                              paper.style.zIndex = 1;
+                       }
+                  }
+                       paper.style.transform += ` translateX(${paperStackContainer.offsetWidth}px)`; // Start from right
+                     paperStackContainer.appendChild(paper);
+
+                     setTimeout(() => {
+                          paper.classList.add('fly-in');
+                          createAndAnimatePaper(index+1)
+                     }, 30);
+
+
+             }
+                createAndAnimatePaper(0)
+         }
     </script>
 </body>
 
