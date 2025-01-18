@@ -100,7 +100,7 @@
             transform: translateY(-5px) scale(1.03);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
         }
-      .mouse-animation {
+        .mouse-animation {
             position: absolute;
             bottom: 20px;
             left: 50%;
@@ -108,8 +108,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-           opacity: 0; /* Initially hidden */
-             transition: opacity 0.3s ease;
+            opacity: 0;
         }
         .mouse {
             width: 20px;
@@ -135,7 +134,7 @@
         .dark-mode .wheel {
             background-color: white;
         }
-         .mouse-text {
+        .mouse-text {
             margin-top: 10px;
             font-size: 0.8em;
             color: #555;
@@ -157,6 +156,7 @@
                 transform: translateX(-50%) translateY(10px);
             }
         }
+
         .card-container {
            padding: 20px;
             display: flex;
@@ -169,6 +169,7 @@
        .card-container > div {
          width: 100%; /* Ensure card takes full width of container */
        }
+
 
         #heroText {
             opacity: 0;
@@ -271,11 +272,11 @@
         .close-form-button:hover {
             color: #333;
         }
-         .dark-mode .navbar-toggle-icon {
+        .dark-mode .navbar-toggle-icon {
             filter: invert(1);
         }
 
-        /* Optimized mobile view */
+      /* Optimized mobile view */
         @media (max-width: 768px) {
             .service-card {
                 margin-left: 10px;
@@ -284,27 +285,18 @@
                 margin-bottom: 20px;
                 max-width: 100%;
             }
-             .mouse-animation {
+              .mouse-animation {
                bottom: 10px;
             }
-
-             #heroText {
+            #heroText {
                 font-size: 5xl;
             }
-              .card-container {
+
+            .card-container {
               padding-bottom: 80px;
             }
 
-            .desktop-logo {
-              display: none;
-            }
         }
-        @media (min-width: 769px) {
-          .mobile-logo{
-            display: none;
-          }
-         }
-
 
     </style>
 </head>
@@ -312,21 +304,21 @@
 
     <header class="relative h-screen flex flex-col justify-center items-center text-center" id="home-page">
         <div class="hero-background hero-background-animation"></div>
-         <nav class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
-            <img src="/logo.png" alt="Doc2AI Logo" class="h-10 desktop-logo">
-             <img src="/logo-mobile.png" alt="Doc2AI Logo" class="h-8 mobile-logo">
+        <nav class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
+            <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
             <div class="space-x-4">
+                <button onclick="showPage('apropos.html')" class="text-gray-700 hover:text-gray-900">A propos</button>
                 <button onclick="showPage('contact.html')" class="text-gray-700 hover:text-gray-900">Contact</button>
             </div>
         </nav>
         <h1 id="heroText" class="text-7xl md:text-9xl font-bold mb-8" style="font-family: 'Courier Prime', monospace;">Doc2AI</h1>
         <button id="openFormButton" class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900 transition-colors">Faire une demande</button>
-         <div class="mouse-animation">
-             <div class="mouse">
-                 <div class="wheel"></div>
-             </div>
-             <div class="mouse-text">Scroll down</div>
-         </div>
+        <div class="mouse-animation">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div class="mouse-text">Scroll down</div>
+        </div>
     </header>
 
     <section class="relative  page active-page" id="services-page">
@@ -339,7 +331,7 @@
             <div class="service-card transform hover:scale-105 transition-transform duration-300">
                 <h2 class="text-2xl font-bold mb-4">Traitement Intelligent</h2>
                 <p class="text-gray-700">L'intelligence artificielle pour l'organisation, la recherche et l'analyse de vos documents.</p>
-                 <img src="/swiss-logo.png" alt="Swiss Quality Logo" class="h-12 mt-4">
+                <img src="/swiss-logo.png" alt="Swiss Quality Logo" class="h-12 mt-4">
             </div>
             <div class="service-card transform hover:scale-105 transition-transform duration-300">
                 <h2 class="text-2xl font-bold mb-4">Solutions Sur Mesure</h2>
@@ -348,7 +340,7 @@
         </div>
     </section>
 
-     <div id="form-container" class="form-container">
+    <div id="form-container" class="form-container">
         <div class="form-content">
             <button class="close-form-button">&times;</button>
             <h2 class="text-2xl font-bold mb-6 text-center">Formulaire de Demande</h2>
@@ -367,7 +359,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-              // Hero text fade-in animation
+            // Hero text fade-in animation
             const heroText = document.getElementById('heroText');
             gsap.to(heroText, {
                 opacity: 1,
@@ -375,31 +367,16 @@
                 duration: 1,
                 delay:0.2
             });
-           // Mouse animation fade-in
+            // Mouse animation fade-in
             const mouseAnimation = document.querySelector('.mouse-animation');
-             gsap.to(mouseAnimation, {
+            gsap.to(mouseAnimation, {
                 opacity: 1,
                 duration: 1,
                 delay: 1
             });
-
-           // Show or hide mouse animation based on screen size
-            const mouseAnimationElement = document.querySelector('.mouse-animation');
-            if (window.innerWidth <= 768) {
-                mouseAnimationElement.style.display = 'none';
-            } else {
-                 mouseAnimationElement.style.display = 'flex';
-            }
-          window.addEventListener('resize', function() {
-             if (window.innerWidth <= 768) {
-                 mouseAnimationElement.style.display = 'none';
-              } else {
-                 mouseAnimationElement.style.display = 'flex';
-               }
-          });
-           const openFormButton = document.getElementById('openFormButton');
+            const openFormButton = document.getElementById('openFormButton');
             openFormButton.addEventListener('click', () => {
-              document.getElementById('form-container').style.display = 'flex';
+              window.location.href = 'demande.html';
            });
            const closeFormButton = document.querySelector('.close-form-button');
            closeFormButton.addEventListener('click', () => {
