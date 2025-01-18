@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Récapitulatif de la commande - Doctofiles</title>
+    <title>Récapitulatif de la commande - Doc2AI</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -25,9 +25,8 @@
 
         .dark-mode .container {
             background-color: #2d3748;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+           box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
         }
-
         .dark-mode .back-button {
             color: white;
         }
@@ -35,94 +34,94 @@
         .dark-mode .back-button:hover {
             color: #cbd5e0;
         }
-
         .container {
-            max-width: 800px;
+           max-width: 800px;
             margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
+             background-color: #fff;
+             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            position: relative;
-            /* Needed for the absolute positioning of the back button */
+             position: relative; /* Needed for the absolute positioning of the back button */
             padding-bottom: 80px;
-            /* Add padding at the bottom to make sure the last card is visible */
         }
 
         h1 {
-            text-align: center;
+           text-align: center;
             margin-bottom: 20px;
         }
-
         .back-button {
             position: absolute;
             top: 10px;
-            /* Position the back button at the top left corner */
             left: 10px;
             background: none;
             border: none;
             font-size: 20px;
-            cursor: pointer;
-            color: #777;
+           cursor: pointer;
+           color: #777;
             transition: color 0.3s ease;
         }
-
         .back-button:hover {
             color: #333;
         }
 
         .order-details {
-            margin-bottom: 20px;
-            padding: 10px;
+             margin-bottom: 20px;
+           padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+           border-radius: 5px;
         }
 
         .order-details p {
-            margin-bottom: 5px;
+             margin-bottom: 5px;
         }
-
-        .total-amount {
-            text-align: right;
-            font-size: 1.2em;
+         #map-container {
+            width: 100%;
+            height: 200px;
+           border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+       .total-amount {
+           text-align: right;
+           font-size: 1.2em;
             font-weight: bold;
             margin-top: 20px;
-        }
-
-        /* Stripe card styles */
+       }
+      /* Stripe card styles */
         #card-element {
             border: 1px solid #ddd;
-            padding: 10px;
+           padding: 10px;
             border-radius: 5px;
             margin-bottom: 10px;
-        }
-        #card-errors {
-            color: #e74c3c;
+       }
+       #card-errors {
+           color: #e74c3c;
             margin-top: 5px;
-        }
-        #payment-form button {
+       }
+       #payment-form button {
             padding: 10px 15px;
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 5px;
+           border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
             margin-top: 10px;
-         }
+       }
         #payment-form button:hover{
-            background-color: #0056b3;
-         }
+           background-color: #0056b3;
+       }
         #payment-form {
-            display: block;
+           display: block;
             margin-top: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
+           padding: 15px;
+           border: 1px solid #ddd;
             border-radius: 5px;
         }
         #payment-form label{
-             display: block;
-            margin-bottom: 5px;
+           display: block;
+           margin-bottom: 5px;
         }
         /* Optimized mobile view */
         @media (max-width: 768px) {
@@ -130,57 +129,73 @@
                 margin: 10px;
                 padding: 15px;
             }
+         #map-container {
+           height: 150px;
         }
+       }
+
     </style>
 </head>
 
 <body class="relative">
     <div class="container">
         <button class="back-button" onclick="goBack()">&lt; Back</button>
-        <h1>Récapitulatif de la Commande</h1>
+       <h1>Récapitulatif de la Commande</h1>
         <div id="order-summary"></div>
-        <div class="total-amount" id="total-amount"></div>
+       <div class="total-amount" id="total-amount"></div>
 
         <div id="payment-form">
-            <label for="card-element">Credit or debit card</label>
-              <div id="card-element">
-                </div>
-                <div id="card-errors" role="alert">
-             </div>
-              <button id="card-payment-button">Submit Payment</button>
+           <label for="card-element">Credit or debit card</label>
+            <div id="card-element">
+            </div>
+             <div id="card-errors" role="alert">
+            </div>
+            <button id="card-payment-button">Submit Payment</button>
         </div>
-
     </div>
 
-    <script src="https://js.stripe.com/v3/"></script>
+   <script src="https://js.stripe.com/v3/"></script>
     <script>
-         document.addEventListener('DOMContentLoaded', function () {
-             // Dark mode toggle logic
-            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.addEventListener('DOMContentLoaded', function () {
+            // Dark mode toggle logic
+           const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             let darkMode = localStorage.getItem('darkMode') === 'enabled';
             if (prefersDark && localStorage.getItem('darkMode') === null) {
-                darkMode = true;
+               darkMode = true;
                 localStorage.setItem('darkMode', 'enabled'); // Set it in localStorage for next visit
             }
             updateDarkMode(darkMode);
 
-             function updateDarkMode(isDarkMode) {
+            function updateDarkMode(isDarkMode) {
                 const body = document.body;
                 if (isDarkMode) {
-                    body.classList.add('dark-mode');
+                   body.classList.add('dark-mode');
                 } else {
-                   body.classList.remove('dark-mode');
+                    body.classList.remove('dark-mode');
                 }
             }
-           const orderSummaryDiv = document.getElementById('order-summary');
+            const orderSummaryDiv = document.getElementById('order-summary');
             const totalAmountDiv = document.getElementById('total-amount');
-            const formData = sessionStorage.getItem('formData');
+           const formData = sessionStorage.getItem('formData');
             if (formData) {
                 const data = JSON.parse(formData);
                 let summaryHTML = '';
                 for (const key in data) {
-                    if (key !== 'totalPrice' && key !== 'file-upload') {
-                        summaryHTML += `<div class="order-details"><p><strong>${key}:</strong> ${data[key]}</p></div>`;
+                    if (key !== 'totalPrice') {
+                        if (key === 'address') {
+                            summaryHTML += `<div class="order-details">
+                            <p><strong>${key}:</strong> ${data[key]}</p>
+                            <div id="map-container">
+                            <iframe width="100%" height="100%" frameborder="0" style="border:0; border-radius: 10px;"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.1116311085963!2d7.342130111965687!3d46.228657340218616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e6e06b452d48f%3A0x946f7460083a513e!2s${encodeURIComponent(data[key])}!5e0!3m2!1sen!2s!4v1718636748158!5m2!1sen!2s"
+                            allowfullscreen></iframe>
+                            </div>
+                            </div>`;
+                       } else if (key === 'hasDocuments'){
+                         summaryHTML += `<div class="order-details"><p><strong>${key}:</strong> ${data[key] ? 'Oui' : 'Non'}</p></div>`;
+                        }else{
+                          summaryHTML += `<div class="order-details"><p><strong>${key}:</strong> ${data[key]}</p></div>`;
+                         }
                    }
                 }
                 orderSummaryDiv.innerHTML = summaryHTML;
@@ -189,30 +204,33 @@
                 orderSummaryDiv.innerHTML = '<p>Aucune donnée de commande trouvée.</p>';
                totalAmountDiv.textContent = 'Total à payer: 0 CHF';
             }
-             // Stripe initialization
-             const stripe = Stripe('pk_test_51OgzI7H9U597u6yY2D1J6jI0U0qf5X8g7o8mJ7V9x2uXp7a7u6x1x7u9U2d3hJ9f0S2v2Z0v1mJ3r7v6w0f6H0b0n0j0K0l'); // Replace with your actual publishable key
+
+            // Stripe initialization
+            const stripe = Stripe('pk_test_51OgzI7H9U597u6yY2D1J6jI0U0qf5X8g7o8mJ7V9x2uXp7a7u6x1x7u9U2d3hJ9f0S2v2Z0v1mJ3r7v6w0f6H0b0n0j0K0l'); // Replace with your actual publishable key
             const elements = stripe.elements();
-             const cardElement = elements.create('card');
-             cardElement.mount('#card-element');
-              const cardErrors = document.getElementById('card-errors');
-              cardElement.on('change', function(event) {
+            const cardElement = elements.create('card');
+            cardElement.mount('#card-element');
+            const cardErrors = document.getElementById('card-errors');
+             cardElement.on('change', function(event) {
                 cardErrors.textContent = event.error ? event.error.message : '';
-            });
-               const form = document.getElementById('payment-form');
-             form.addEventListener('submit', function(event) {
-              event.preventDefault();
-                stripe.createToken(cardElement).then(function(result) {
+           });
+
+            const form = document.getElementById('payment-form');
+           form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                 stripe.createToken(cardElement).then(function(result) {
                     if (result.error) {
-                      cardErrors.textContent = result.error.message;
+                        cardErrors.textContent = result.error.message;
                     } else {
-                       // Send token to server for processing (This is where you would send the token to your server)
+                      // Send token to server for processing (This is where you would send the token to your server)
                        alert("Payment successful! (token is: " + result.token.id + ")");
                       // Clear the form
                      cardElement.clear();
-                   }
+                    }
                 });
-            });
-         });
+           });
+
+        });
 
         function goBack() {
             window.location.href = 'demande.html';
