@@ -99,12 +99,13 @@
             display: inline-block;
             border-radius: 4px;
         }
-         /* Optimized mobile view */
+
+        /* Optimized mobile view */
         @media (max-width: 768px) {
-           .container {
-             margin: 10px;
-            padding: 15px;
-           }
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -155,17 +156,27 @@
                 orderSummaryDiv.innerHTML = '<p>Aucune donnée de commande trouvée.</p>';
                 totalAmountDiv.textContent = 'Total à payer: 0 CHF';
             }
-            // Google Pay initialization
-            initializeGooglePay();
+             // Wait for the Google Pay API to load before initialization
+             waitForGooglePayApi(() => {
+                    initializeGooglePay();
+                });
         });
 
-         function goBack() {
+        function goBack() {
             window.location.href = 'demande.html';
         }
 
 
         // Google Pay logic
-        function initializeGooglePay() {
+       function waitForGooglePayApi(callback) {
+        if (window.google && window.google.payments) {
+            callback();
+        } else {
+            setTimeout(() => waitForGooglePayApi(callback), 100); // Check again after a short delay
+        }
+    }
+
+       function initializeGooglePay() {
             const paymentsClient = new google.payments.api.PaymentsClient({
                 environment: 'TEST', // Set to 'PRODUCTION' for real transactions
                 paymentDataCallbacks: {
