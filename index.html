@@ -15,28 +15,24 @@
             padding: 0;
             overflow-x: hidden;
             background-color: #f0f0f0;
-             transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease;
         }
-         body.dark-mode {
+        body.dark-mode {
             background-color: #1a202c;
             color: white;
         }
-
-         .dark-mode .text-gray-700 {
-             color: #cbd5e0;
+        .dark-mode .text-gray-700 {
+            color: #cbd5e0;
         }
-
-         .dark-mode .hover\:text-gray-900:hover {
-              color: white;
-         }
-
-         .dark-mode .service-card {
-             background-color: rgba(26, 32, 44, 0.5);
-             color: white;
+        .dark-mode .hover\:text-gray-900:hover {
+            color: white;
         }
-
+        .dark-mode .service-card {
+            background-color: rgba(26, 32, 44, 0.5);
+            color: white;
+        }
         .dark-mode .service-card .text-gray-700 {
-           color: #cbd5e0;
+            color: #cbd5e0;
         }
         .dark-mode .form-content {
             background-color: #2d3748;
@@ -45,28 +41,28 @@
         .dark-mode .form-content input[type="text"],
         .dark-mode .form-content textarea,
         .dark-mode .form-content input[type="email"] {
-             border: 1px solid #4a5568;
+            border: 1px solid #4a5568;
             background-color: #4a5568;
-             color: white;
+            color: white;
         }
-         .dark-mode .form-content button[type="submit"] {
+        .dark-mode .form-content button[type="submit"] {
             background-color: #cbd5e0;
-             color: #2d3748;
+            color: #2d3748;
         }
         .dark-mode .form-content button[type="submit"]:hover {
             background-color: #edf2f7;
         }
-         .dark-mode .close-form-button {
+        .dark-mode .close-form-button {
             color: #cbd5e0;
         }
-         .dark-mode .close-form-button:hover {
-             color: white;
-         }
-         .hero-background {
-             position: absolute;
+        .dark-mode .close-form-button:hover {
+            color: white;
+        }
+        .hero-background {
+            position: absolute;
             top: 0;
             left: 0;
-             width: 100%;
+            width: 100%;
             height: 100%;
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
             pointer-events: none;
@@ -78,116 +74,111 @@
         .services-background {
             position: absolute;
             top: 0;
-           left: 0;
+            left: 0;
             width: 100%;
-           height: 100%;
+            height: 100%;
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
             pointer-events: none;
-             z-index: 0;
+            z-index: 0;
         }
         .dark-mode .services-background {
-             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
         }
-         .service-card {
-            background-color: rgba(255, 255, 255, 0.3); /* Reduced opacity */
-            backdrop-filter: blur(5px); /* Blur effect */
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
             border-radius: 20px;
-            padding: 30px; /* Increased padding */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* More shadow */
-            margin-bottom: 30px; /* Increased bottom margin */
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
             transition: all 0.3s ease;
             max-width: 600px;
-             margin-left: auto;
+            margin-left: auto;
             margin-right: auto;
         }
-
         .service-card:hover {
             transform: translateY(-5px) scale(1.03);
-           box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
-         }
-
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+        }
         .mouse-animation {
-             position: absolute;
-           bottom: 20px;
+            position: absolute;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-             display: flex;
+            display: flex;
             flex-direction: column;
-             align-items: center;
+            align-items: center;
             opacity: 0;
         }
         .mouse {
             width: 20px;
-           height: 30px;
+            height: 30px;
             border: 2px solid #333;
-             border-radius: 15px;
+            border-radius: 15px;
             position: relative;
         }
         .dark-mode .mouse {
             border-color: white;
-       }
-
-         .wheel {
+        }
+        .wheel {
             width: 4px;
-           height: 8px;
-           background-color: #333;
-             border-radius: 2px;
-             position: absolute;
+            height: 8px;
+            background-color: #333;
+            border-radius: 2px;
+            position: absolute;
             top: 4px;
-           left: 50%;
+            left: 50%;
             transform: translateX(-50%);
             animation: wheel-move 1.5s ease-in-out infinite;
-         }
-         .dark-mode .wheel {
+        }
+        .dark-mode .wheel {
             background-color: white;
         }
         .mouse-text {
-             margin-top: 10px;
-             font-size: 0.8em;
-           color: #555;
-         }
-         .dark-mode .mouse-text {
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #555;
+        }
+        .dark-mode .mouse-text {
             color: #cbd5e0;
         }
-         @keyframes wheel-move {
-           0% {
-               opacity: 0;
+        @keyframes wheel-move {
+            0% {
+                opacity: 0;
                 transform: translateX(-50%) translateY(-2px);
-           }
-             50% {
+            }
+            50% {
                 opacity: 1;
                 transform: translateX(-50%) translateY(8px);
-           }
+            }
             100% {
-               opacity: 0;
-               transform: translateX(-50%) translateY(10px);
-           }
+                opacity: 0;
+                transform: translateX(-50%) translateY(10px);
+            }
         }
-         .card-container-wrapper {
-             height: 100vh;
-            overflow-y: hidden;
-        }
-         .card-container {
-            height: fit-content;
-            overflow-y: auto;
-             scroll-snap-type: y mandatory;
-           display: flex;
+
+        .card-container {
+           padding: 20px;
+            display: flex;
             flex-direction: column;
-              padding: 20px;
-              padding-bottom: 60px;
-         }
-         .card-container > div {
-             scroll-snap-align: start;
-             scroll-snap-stop: always;
+            align-items: center; /* Center items horizontally */
+             position: relative;/* Required for the absolute positioning of the background */
+              padding-bottom: 80px; /* Padding to make sure the last card is visible */
         }
-         #heroText {
+
+       .card-container > div {
+         width: 100%; /* Ensure card takes full width of container */
+       }
+
+
+        #heroText {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 1s ease, transform 1s ease;
-         }
-       .hero-background-animation {
+        }
+        .hero-background-animation {
             animation: backgroundFadeIn 2s ease forwards;
-       }
+        }
         @keyframes backgroundFadeIn {
             from {
                 opacity: 0;
@@ -195,12 +186,12 @@
             to {
                 opacity: 1;
             }
-       }
+        }
         .page {
-            display: none; /* Initially hide all pages */
+            display: none;
         }
         .active-page {
-            display: block; /* Show active page */
+            display: block;
         }
         .contact-email {
             display: flex;
@@ -213,9 +204,9 @@
         .container {
             max-width: 800px;
             margin-left: auto;
-           margin-right: auto;
-           padding-left: 20px;
-           padding-right: 20px;
+            margin-right: auto;
+            padding-left: 20px;
+            padding-right: 20px;
         }
         .form-container {
             position: fixed;
@@ -230,21 +221,21 @@
             z-index: 1000;
         }
         .form-content {
-           background-color: #fff;
+            background-color: #fff;
             padding: 20px;
-           border-radius: 10px;
+            border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             max-width: 500px;
             width: 90%;
             position: relative;
         }
-         .form-content h2 {
-             margin-bottom: 20px;
+        .form-content h2 {
+            margin-bottom: 20px;
         }
-         .form-content label {
+        .form-content label {
             display: block;
             margin-bottom: 5px;
-           font-weight: bold;
+            font-weight: bold;
         }
         .form-content input[type="text"],
         .form-content textarea,
@@ -255,23 +246,23 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
-         .form-content button[type="submit"] {
+        .form-content button[type="submit"] {
             background-color: #333;
-           color: white;
+            color: white;
             padding: 10px 20px;
             border: none;
-           border-radius: 5px;
+            border-radius: 5px;
             cursor: pointer;
-             transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease;
         }
         .form-content button[type="submit"]:hover {
-             background-color: #555;
+            background-color: #555;
         }
         .close-form-button {
             position: absolute;
-           top: 10px;
+            top: 10px;
             right: 10px;
-             background: none;
+            background: none;
             border: none;
             font-size: 20px;
             cursor: pointer;
@@ -284,23 +275,45 @@
         .dark-mode .navbar-toggle-icon {
             filter: invert(1);
         }
+
+      /* Optimized mobile view */
+        @media (max-width: 768px) {
+            .service-card {
+                margin-left: 10px;
+                margin-right: 10px;
+                padding: 20px;
+                margin-bottom: 20px;
+                max-width: 100%;
+            }
+              .mouse-animation {
+               bottom: 10px;
+            }
+            #heroText {
+                font-size: 5xl;
+            }
+
+            .card-container {
+              padding-bottom: 80px;
+            }
+
+        }
+
     </style>
 </head>
 <body class="relative">
-    
 
-     <header class="relative h-screen flex flex-col justify-center items-center text-center" id="home-page">
+    <header class="relative h-screen flex flex-col justify-center items-center text-center" id="home-page">
         <div class="hero-background hero-background-animation"></div>
-         <nav class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
+        <nav class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
             <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
             <div class="space-x-4">
-                 <button onclick="showPage('apropos.html')" class="text-gray-700 hover:text-gray-900">A propos</button>
+                <button onclick="showPage('apropos.html')" class="text-gray-700 hover:text-gray-900">A propos</button>
                 <button onclick="showPage('contact.html')" class="text-gray-700 hover:text-gray-900">Contact</button>
             </div>
-       </nav>
+        </nav>
         <h1 id="heroText" class="text-7xl md:text-9xl font-bold mb-8" style="font-family: 'Courier Prime', monospace;">Doc2AI</h1>
         <button id="openFormButton" class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900 transition-colors">Faire une demande</button>
-       <div class="mouse-animation">
+        <div class="mouse-animation">
             <div class="mouse">
                 <div class="wheel"></div>
             </div>
@@ -308,25 +321,23 @@
         </div>
     </header>
 
-    <section class="relative h-full page active-page" id="services-page">
+    <section class="relative  page active-page" id="services-page">
         <div class="services-background"></div>
-        <div class="card-container-wrapper">
-            <div class="card-container">
-                <div class="service-card transform hover:scale-105 transition-transform duration-300">
-                    <h2 class="text-2xl font-bold mb-4">Numérisation de Documents</h2>
-                   <p class="text-gray-700">Nous transformons vos documents papier en fichiers numériques de haute qualité.</p>
-                </div>
-                <div class="service-card transform hover:scale-105 transition-transform duration-300">
-                   <h2 class="text-2xl font-bold mb-4">Traitement Intelligent</h2>
-                   <p class="text-gray-700">L'intelligence artificielle pour l'organisation, la recherche et l'analyse de vos documents.</p>
-                  <img src="/swiss-logo.png" alt="Swiss Quality Logo" class="h-12 mt-4">
-                </div>
-                 <div class="service-card transform hover:scale-105 transition-transform duration-300">
-                   <h2 class="text-2xl font-bold mb-4">Solutions Sur Mesure</h2>
-                   <p class="text-gray-700">Des solutions adaptées à vos besoins spécifiques, de la petite entreprise aux grands groupes.</p>
-                 </div>
-           </div>
-       </div>
+        <div class="card-container">
+            <div class="service-card transform hover:scale-105 transition-transform duration-300">
+                <h2 class="text-2xl font-bold mb-4">Numérisation de Documents</h2>
+                <p class="text-gray-700">Nous transformons vos documents papier en fichiers numériques de haute qualité.</p>
+            </div>
+            <div class="service-card transform hover:scale-105 transition-transform duration-300">
+                <h2 class="text-2xl font-bold mb-4">Traitement Intelligent</h2>
+                <p class="text-gray-700">L'intelligence artificielle pour l'organisation, la recherche et l'analyse de vos documents.</p>
+                <img src="/swiss-logo.png" alt="Swiss Quality Logo" class="h-12 mt-4">
+            </div>
+            <div class="service-card transform hover:scale-105 transition-transform duration-300">
+                <h2 class="text-2xl font-bold mb-4">Solutions Sur Mesure</h2>
+                <p class="text-gray-700">Des solutions adaptées à vos besoins spécifiques, de la petite entreprise aux grands groupes.</p>
+            </div>
+        </div>
     </section>
 
     <div id="form-container" class="form-container">
@@ -334,87 +345,83 @@
             <button class="close-form-button">&times;</button>
             <h2 class="text-2xl font-bold mb-6 text-center">Formulaire de Demande</h2>
             <form id="demande-form" onsubmit="handleFormSubmit(event)">
-               <label for="name">Nom:</label>
-                 <input type="text" id="name" name="name" required>
-                 <label for="email">Email:</label>
+                <label for="name">Nom:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
-                 <label for="message">Message:</label>
+                <label for="message">Message:</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
                 <button type="submit" class="block w-full mx-auto">Envoyer</button>
-             </form>
-       </div>
+            </form>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script>
-          document.addEventListener('DOMContentLoaded', function() {
-             // Hero text fade-in animation
-             const heroText = document.getElementById('heroText');
-             gsap.to(heroText, {
-                 opacity: 1,
-                 y: 0,
-                 duration: 1,
-                 delay:0.2
-             });
-           // Mouse animation fade-in
-           const mouseAnimation = document.querySelector('.mouse-animation');
-             gsap.to(mouseAnimation, {
-                 opacity: 1,
-                 duration: 1,
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero text fade-in animation
+            const heroText = document.getElementById('heroText');
+            gsap.to(heroText, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay:0.2
+            });
+            // Mouse animation fade-in
+            const mouseAnimation = document.querySelector('.mouse-animation');
+            gsap.to(mouseAnimation, {
+                opacity: 1,
+                duration: 1,
                 delay: 1
             });
             const openFormButton = document.getElementById('openFormButton');
-           openFormButton.addEventListener('click', () => {
-             window.location.href = 'demande.html';
+            openFormButton.addEventListener('click', () => {
+              window.location.href = 'demande.html';
            });
-
            const closeFormButton = document.querySelector('.close-form-button');
-             closeFormButton.addEventListener('click', () => {
-               document.getElementById('form-container').style.display = 'none';
-          });
-               // Check if the user has a preference for dark mode
-               const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-               // Initially set dark mode based on user's preference or previously set value
-               let darkMode = localStorage.getItem('darkMode') === 'enabled';
-               if (prefersDark && localStorage.getItem('darkMode') === null) {
-                  darkMode = true;
-                   localStorage.setItem('darkMode', 'enabled'); // Set it in localStorage for next visit
-              }
-
-                updateDarkMode(darkMode);
-            //Function to update dark mode
+           closeFormButton.addEventListener('click', () => {
+              document.getElementById('form-container').style.display = 'none';
+           });
+            // Check if the user has a preference for dark mode
+           const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            // Initially set dark mode based on user's preference or previously set value
+            let darkMode = localStorage.getItem('darkMode') === 'enabled';
+            if (prefersDark && localStorage.getItem('darkMode') === null) {
+                darkMode = true;
+                localStorage.setItem('darkMode', 'enabled'); // Set it in localStorage for next visit
+            }
+           updateDarkMode(darkMode);
+           //Function to update dark mode
             function updateDarkMode(isDarkMode) {
-                 const body = document.body;
+                const body = document.body;
                 if (isDarkMode) {
                     body.classList.add('dark-mode');
-                 } else {
+                } else {
                     body.classList.remove('dark-mode');
-               }
-           }
-        });
+                }
+            }
+       });
 
         function handleFormSubmit(event) {
-           event.preventDefault(); // Prevent the default form submission
-          // Get form data
-           const formData = new FormData(event.target);
-           const name = formData.get('name');
-           const email = formData.get('email');
+            event.preventDefault(); // Prevent the default form submission
+            // Get form data
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
             const message = formData.get('message');
-
             // Here you would typically send the data to a server using fetch
-           // For this example, let's just log it
+            // For this example, let's just log it
             console.log('Form data submitted:');
             console.log('Name:', name);
             console.log('Email:', email);
             console.log('Message:', message);
             //Close the form
-           document.getElementById('form-container').style.display = 'none';
+            document.getElementById('form-container').style.display = 'none';
             alert('Thank you for your request, we will contact you shortly.');
         }
-       function showPage(pageUrl) {
+        function showPage(pageUrl) {
             window.open(pageUrl, '_self');
-      }
+        }
     </script>
 </body>
 </html>
