@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc2AI - Contact</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <style>
+        body {
+            font-family: 'Courier Prime', monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #f0f0f0;
+        }
+         .hero-background {
+             position: absolute;
+            top: 0;
+            left: 0;
+             width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+            pointer-events: none;
+            z-index: 0;
+        }
+        .services-background {
+            position: absolute;
+            top: 0;
+           left: 0;
+            width: 100%;
+           height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            pointer-events: none;
+             z-index: 0;
+        }
+         .service-card {
+            background-color: rgba(255, 255, 255, 0.3); /* Reduced opacity */
+            backdrop-filter: blur(5px); /* Blur effect */
+            border-radius: 20px;
+            padding: 30px; /* Increased padding */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* More shadow */
+            margin-bottom: 30px; /* Increased bottom margin */
+            transition: all 0.3s ease;
+            max-width: 600px;
+             margin-left: auto;
+            margin-right: auto;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px) scale(1.03);
+           box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+         }
+        
+        .mouse-animation {
+             position: absolute;
+           bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+             display: flex;
+            flex-direction: column;
+             align-items: center;
+            opacity: 0;
+        }
+        .mouse {
+            width: 20px;
+           height: 30px;
+            border: 2px solid #333;
+             border-radius: 15px;
+            position: relative;
+        }
+         .wheel {
+            width: 4px;
+           height: 8px;
+           background-color: #333;
+             border-radius: 2px;
+             position: absolute;
+            top: 4px;
+           left: 50%;
+            transform: translateX(-50%);
+            animation: wheel-move 1.5s ease-in-out infinite;
+         }
+        .mouse-text {
+             margin-top: 10px;
+             font-size: 0.8em;
+           color: #555;
+         }
+         @keyframes wheel-move {
+           0% {
+               opacity: 0;
+                transform: translateX(-50%) translateY(-2px);
+           }
+             50% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(8px);
+           }
+            100% {
+               opacity: 0;
+               transform: translateX(-50%) translateY(10px);
+           }
+        }
+         .card-container-wrapper {
+             height: 100vh;
+            overflow-y: hidden;
+        }
+         .card-container {
+            height: fit-content;
+            overflow-y: auto;
+             scroll-snap-type: y mandatory;
+           display: flex;
+            flex-direction: column;
+              padding: 20px;
+              padding-bottom: 60px;
+         }
+         .card-container > div {
+             scroll-snap-align: start;
+             scroll-snap-stop: always;
+        }
+         #heroText {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+         }
+       .hero-background-animation {
+            animation: backgroundFadeIn 2s ease forwards;
+       }
+        @keyframes backgroundFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+       }
+        .page {
+            display: none; /* Initially hide all pages */
+        }
+        .active-page {
+            display: block; /* Show active page */
+        }
+        .contact-email {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .contact-email i {
+            font-size: 1.2em;
+        }
+        .container {
+            max-width: 800px;
+            margin-left: auto;
+           margin-right: auto;
+           padding-left: 20px;
+           padding-right: 20px;
+        }
+        .contact-container {
+            background-color: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 700px;
+            margin: 20px auto;
+            transition: all 0.3s ease;
+        }
+        .contact-container:hover{
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.25);
+        }
+       .contact-item {
+           margin-bottom: 20px;
+           display: flex;
+           align-items: center;
+          gap: 10px;
+           color: #333;
+       }
+       .contact-item i {
+            font-size: 1.5em;
+           color: #333;
+       }
+        .contact-item span {
+           font-size: 1.1em;
+       }
+       #map-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden; /* to hide overflowing map content */
+        }
+        .back-button{
+           position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            border-radius: 50%;
+            width: 40px;
+           height: 40px;
+           display: flex;
+            justify-content: center;
+           align-items: center;
+            cursor: pointer;
+            z-index: 10;
+             transition: background-color 0.3s ease;
+
+       }
+       .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+
+       }
+
+       .back-button i{
+            font-size: 1.3em;
+            color: #333;
+       }
+        .contact-container {
+            animation: contactFadeIn 0.5s ease forwards;
+        }
+        @keyframes contactFadeIn {
+            from {
+                opacity: 0;
+               transform: translateY(20px)
+            }
+            to {
+                opacity: 1;
+               transform: translateY(0)
+            }
+       }
+
+    </style>
+</head>
+<body class="relative">
+    <div class="hero-background"></div>
+    <button onclick="goBack()" class="back-button"><i class="fas fa-arrow-left"></i></button>
+    <div class="container">
+        <div class="contact-container">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>Email: <a href="mailto:contact@doc2ai.com">contact@doc2ai.com</a></span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Adresse: Chem. Saint-Hubert 2, 1950 Sion</span>
+            </div>
+              <div id="map-container">
+               <iframe
+                    width="100%"
+                    height="100%"
+                    frameborder="0"
+                    style="border:0"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.1116311085963!2d7.342130111965687!3d46.228657340218616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e6e06b452d48f%3A0x946f7460083a513e!2sChemin%20Saint-Hubert%202%2C%201950%20Sion%2C%20Switzerland!5e0!3m2!1sen!2s!4v1718636748158!5m2!1sen!2s"
+                    allowfullscreen>
+                </iframe>
+             </div>
+        </div>
+    </div>
+    <script>
+        function goBack(){
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
