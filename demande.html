@@ -1,445 +1,590 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demande de Numérisation - Doctofiles</title>
+    <title>Doc2AI - Demande de Service</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <style>
         body {
             font-family: 'Courier Prime', monospace;
-            background-color: #f0f0f0;
-            color: #333;
-            transition: background-color 0.3s ease, color 0.3s ease;
             margin: 0;
-             padding: 0;
-             overflow-x: hidden;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #f0f0f0;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
+
         .dark-mode {
             background-color: #1a202c;
+            color: white;
+        }
+
+        .dark-mode .text-gray-700 {
             color: #cbd5e0;
         }
-          .dark-mode .form-container {
-            background-color: rgba(26, 32, 44, 0.7);
-            }
-           .dark-mode .form-content {
+
+        .dark-mode .hover\:text-gray-900:hover {
+            color: white;
+        }
+
+        .dark-mode .service-card {
+            background-color: rgba(26, 32, 44, 0.5);
+            color: white;
+        }
+
+        .dark-mode .service-card .text-gray-700 {
+            color: #cbd5e0;
+        }
+
+        .dark-mode .form-content {
             background-color: #2d3748;
             color: white;
-          }
+        }
 
-          .dark-mode .form-content input,
-          .dark-mode .form-content select,
-          .dark-mode .form-content textarea {
-             border: 1px solid #4a5568;
+        .dark-mode .form-content input[type="text"],
+        .dark-mode .form-content textarea,
+        .dark-mode .form-content input[type="email"] {
+            border: 1px solid #4a5568;
             background-color: #4a5568;
             color: white;
-           }
-            .dark-mode .form-content button[type="submit"] {
-             background-color: #cbd5e0;
-             color: #2d3748;
-           }
-            .dark-mode .form-content button[type="submit"]:hover {
+        }
+
+        .dark-mode .form-content button[type="submit"] {
+            background-color: #cbd5e0;
+            color: #2d3748;
+        }
+
+        .dark-mode .form-content button[type="submit"]:hover {
             background-color: #edf2f7;
-            }
-            .dark-mode .back-button {
-               color: white;
-            }
-           .dark-mode .back-button:hover {
-                 color: #cbd5e0;
-            }
-           .dark-mode .form-content .total-price {
+        }
+
+        .dark-mode .close-form-button {
             color: #cbd5e0;
+        }
+
+        .dark-mode .close-form-button:hover {
+            color: white;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+            pointer-events: none;
+            z-index: 0;
+            transition: background 0.3s ease;
+        }
+
+        .dark-mode .hero-background {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+        }
+
+        .services-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            pointer-events: none;
+            z-index: 0;
+            transition: background 0.3s ease;
+        }
+
+        .dark-mode .services-background {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+        }
+
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 600px;
+             margin-left: auto;
+            margin-right: auto;
+        }
+          .dark-mode .service-card {
+            background-color: rgba(26, 32, 44, 0.5);
+            color: white;
+             box-shadow: 0 10px 20px rgba(255, 255, 255, 0.15);
+        }
+
+
+        .service-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+        }
+         .dark-mode .service-card:hover {
+             box-shadow: 0 15px 25px rgba(255, 255, 255, 0.25);
+        }
+
+        .mouse-animation {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+        }
+
+        .mouse {
+            width: 20px;
+            height: 30px;
+            border: 2px solid #333;
+            border-radius: 15px;
+            position: relative;
+        }
+
+       .dark-mode .mouse {
+           border-color: white;
+        }
+
+        .wheel {
+            width: 4px;
+            height: 8px;
+            background-color: #333;
+            border-radius: 2px;
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+           animation: wheel-move 1.5s ease-in-out infinite;
+        }
+          .dark-mode .wheel {
+            background-color: white;
+        }
+        .mouse-text {
+           margin-top: 10px;
+            font-size: 0.8em;
+           color: #555;
+        }
+        .dark-mode .mouse-text {
+           color: #cbd5e0;
+        }
+
+        @keyframes wheel-move {
+            0% {
+                opacity: 0;
+               transform: translateX(-50%) translateY(-2px);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(8px);
            }
 
-        .form-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-             position: relative; /* Added this to contain absolute elements */
-              min-height: 100vh; /* Ensures form stretches to the full viewport height */
+            100% {
+               opacity: 0;
+                transform: translateX(-50%) translateY(10px);
+           }
         }
+         .card-container {
+             padding: 20px;
+            display: flex;
+            flex-direction: column;
+           align-items: center; /* Center items horizontally */
+            position: relative;/* Required for the absolute positioning of the background */
+            padding-bottom: 80px; /* Padding to make sure the last card is visible */
+        }
+
+         .card-container > div {
+            width: 100%; /* Ensure card takes full width of container */
+        }
+
+        #heroText {
+            opacity: 0;
+            transform: translateY(20px);
+           transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .hero-background-animation {
+           animation: backgroundFadeIn 2s ease forwards;
+        }
+
+        @keyframes backgroundFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+           }
+        }
+
+       .page {
+            display: none;
+        }
+
+       .active-page {
+           display: block;
+        }
+
+        .contact-email {
+            display: flex;
+           align-items: center;
+            gap: 5px;
+       }
+
+        .contact-email i {
+            font-size: 1.2em;
+        }
+
+       .container {
+           max-width: 800px;
+           margin-left: auto;
+           margin-right: auto;
+           padding-left: 20px;
+           padding-right: 20px;
+       }
+        .form-container {
+            position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+           justify-content: center;
+            align-items: center;
+            z-index: 1000;
+       }
+
         .form-content {
             background-color: #fff;
-            padding: 30px;
-            border-radius: 15px; /* Rounded corners */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* More defined shadow */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
             width: 90%;
-            max-width: 700px;
-            margin-left: auto;
-             margin-right: auto;
-               position: relative; /* Needed for the absolute positioning of the back button */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation */
+            position: relative;
         }
-        .form-content:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-        }
+
         .form-content h2 {
             margin-bottom: 20px;
-            text-align: center;
-        }
-         .form-content label {
+       }
+        .form-content label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold;
-         }
-        .form-content input,
-        .form-content select,
-        .form-content textarea {
-            width: calc(100% - 20px);
+           font-weight: bold;
+        }
+
+        .form-content input[type="text"],
+        .form-content textarea,
+        .form-content input[type="email"] {
+           width: calc(100% - 20px);
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ddd;
-            border-radius: 8px; /* Rounded corners for inputs */
-            transition: border-color 0.3s ease;
-         }
-         .form-content input:focus,
-         .form-content select:focus,
-         .form-content textarea:focus {
-           border-color: #333;
-           outline: none;
-         }
-         .form-content select {
-            appearance: none; /* Remove default arrow */
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23777' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-             background-position: right 10px center;
-             background-size: 20px;
-          }
-         .dark-mode .form-content select {
-              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-           }
-        .form-content button[type="submit"] {
+           border-radius: 5px;
+       }
+
+       .form-content button[type="submit"] {
            background-color: #333;
            color: white;
-           padding: 10px 20px;
+            padding: 10px 20px;
            border: none;
-           border-radius: 8px;
-           cursor: pointer;
-           transition: background-color 0.3s ease;
-           display: block; /* Make button a block to center it */
-           margin-left: auto;
-           margin-right: auto; /* Center the button */
-           margin-top: 20px;
-         }
-        .form-content button[type="submit"]:hover {
-            background-color: #555;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .form-content .total-price {
-          font-size: 1.2em;
-          font-weight: bold;
-          margin-top: 15px;
-          text-align: center;
-        }
-        .back-button {
-             position: absolute;
-              top: 10px; /* Position the back button at the top right corner */
-              left: 10px;
-              background: none;
-              border: none;
-              font-size: 20px;
-              cursor: pointer;
-             color: #777;
-            transition: color 0.3s ease;
-         }
-          .back-button:hover {
-             color: #333;
-         }
-          .load-document-container {
-               margin-top: 15px;
-               padding: 15px;
-              border: 1px dashed #ddd;
-              border-radius: 8px;
-              text-align: center;
-          }
-         .load-document-container input[type="file"]{
-            display: none;
-         }
-          .load-document-container label{
-               cursor: pointer;
-               background-color: #f0f0f0;
-               padding: 10px 15px;
-                border: 1px solid #ddd;
-               border-radius: 5px;
-               display: inline-block;
-             transition: background-color 0.3s ease;
-         }
-         .load-document-container label:hover {
-            background-color: #e0e0e0;
-         }
-          .dark-mode .load-document-container label {
-               background-color: #4a5568;
-               color: white;
-               border-color: #4a5568;
-         }
-         .dark-mode .load-document-container label:hover {
-             background-color: #3d4857;
-         }
-          /* Optimized mobile view */
-        @media (max-width: 768px) {
-          .form-content {
-               padding: 20px;
-               width: 95%;
-           }
-           .form-content input,
-          .form-content select,
-          .form-content textarea {
-              margin-bottom: 10px;
-          }
-             .form-content select {
-                 background-position: right 5px center;
-             }
 
+        .form-content button[type="submit"]:hover {
+           background-color: #555;
+        }
+       .close-form-button {
+           position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+           border: none;
+            font-size: 20px;
+           cursor: pointer;
+           color: #777;
+           transition: color 0.3s ease;
+        }
+
+       .close-form-button:hover {
+           color: #333;
+        }
+        .dark-mode .navbar-toggle-icon {
+            filter: invert(1);
+       }
+        #map-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+           overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+       .form-control {
+            width: 100%;
+           padding: 10px;
+            margin-bottom: 15px;
+           border: 1px solid #ddd;
+           border-radius: 5px;
+       }
+        .form-control.number {
+            width: 80px;
+           display: inline-block;
+           vertical-align: middle;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .checkbox-label {
+           display: flex;
+            align-items: center;
+            gap: 5px;
+           cursor: pointer;
+            margin-bottom: 15px;
+       }
+        .checkbox-label input[type="checkbox"]{
+            appearance: none;
+            -webkit-appearance: none;
+           -moz-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            position: relative;
+           cursor: pointer;
+        }
+        .checkbox-label input[type="checkbox"]:checked::before {
+            content: "\2713";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+           font-size: 14px;
+            color: #007bff; /* Checkmark color */
+        }
+
+       .checkbox-label input[type="checkbox"]:focus {
+           outline: none; /* Remove focus outline for cleaner look */
+            border-color: #007bff;
+        }
+       .cloud-link-input {
+            width: 100%;
+           padding: 10px;
+            border: 1px solid #ddd;
+           border-radius: 5px;
+           margin-bottom: 15px;
+           display: none;
+       }
+       .checkbox-label input[type="checkbox"]:checked + .cloud-link-input {
+           display: block;
+       }
+     /* Optimized mobile view */
+       @media (max-width: 768px) {
+            .service-card {
+                margin-left: 10px;
+                margin-right: 10px;
+               padding: 20px;
+               margin-bottom: 20px;
+                max-width: 100%;
+            }
+           .mouse-animation {
+                bottom: 10px;
+            }
+            #heroText {
+                font-size: 5xl;
+           }
+            .card-container {
+                padding-bottom: 80px;
+           }
         }
     </style>
 </head>
+
 <body class="relative">
-   <div class="form-container">
-    <div class="form-content">
-        <button class="back-button" onclick="goBack()">&lt; Back</button>
-         <h2 class="text-2xl font-bold mb-6">Demande de Numérisation</h2>
-        <form id="demande-form">
-            <label for="documentType">Type de document source:</label>
-            <select id="documentType" name="documentType" required>
-                <option value="">Sélectionnez une option</option>
-                <option value="manuscrit">Document manuscrit</option>
-                <option value="digital">Document digital</option>
-            </select>
 
-            <div id="manuscritOptions" class="hidden">
-                <label for="manuscritNature">Nature du document manuscrit:</label>
-                <select id="manuscritNature" name="manuscritNature">
-                    <option value="">Sélectionnez une option</option>
-                    <option value="notes_cours">Notes de cours</option>
-                    <option value="note_journaliere">Note journalière</option>
-                    <option value="biographie">Biographie</option>
-                    <option value="cv">CV</option>
-                    <option value="devoirs">Devoirs</option>
-                    <option value="scripts_cour">Scripts de cour</option>
-                    <option value="livre">Livre</option>
-                     <option value="autre_manuscrit">Autre</option>
-                   </select>
-                <div id="manuscritAutre" class="hidden">
-                   <label for="manuscritAutreText">Préciser:</label>
-                   <input type="text" id="manuscritAutreText" name="manuscritAutreText" placeholder="Veuillez préciser" />
-                </div>
+    <header class="relative flex flex-col justify-center items-center text-center" style="height: 30vh;">
+        <div class="hero-background hero-background-animation"></div>
+       <nav class="absolute top-0 left-0 right-0 p-4 flex justify-end items-center">
+            <div class="space-x-4">
+               <button onclick="showPage('index.html')" class="text-gray-700 hover:text-gray-900">Accueil</button>
             </div>
+        </nav>
+        <h1 id="heroText" class="text-5xl md:text-7xl font-bold mb-8" style="font-family: 'Courier Prime', monospace;">Demande
+            de service</h1>
+   </header>
 
-            <div id="digitalOptions" class="hidden">
-                <label for="digitalNature">Nature du document digital:</label>
-                <select id="digitalNature" name="digitalNature">
-                    <option value="">Sélectionnez une option</option>
-                     <option value="pdf">PDF</option>
-                    <option value="notes_cours_digital">Note de cours digital</option>
-                   <option value="livre_digital">Livre</option>
-                    <option value="scripts_cour_digital">Scripts de cour</option>
-                   <option value="email">Email</option>
-                    <option value="autre_digital">Autre</option>
-                </select>
-                <div id="digitalAutre" class="hidden">
-                  <label for="digitalAutreText">Préciser:</label>
-                 <input type="text" id="digitalAutreText" name="digitalAutreText" placeholder="Veuillez préciser"/>
-             </div>
-            <div id="load-document-section" class="load-document-container hidden">
-                  <label for="file-upload">
-                    <i class="fas fa-upload"></i> Charger vos documents
-                  </label>
-                  <input type="file" id="file-upload" name="file-upload" multiple accept=".pdf,.doc,.docx,.txt,.rtf,.jpg,.jpeg,.png,.gif"/>
-               </div>
-          </div>
-            <label for="pageCount">Nombre de pages approximatif:</label>
-            <input type="number" id="pageCount" name="pageCount" min="1" required placeholder="Nombre de pages">
-            <label for="outputFormat">Format de fichier souhaité:</label>
-            <select id="outputFormat" name="outputFormat" required>
-                <option value="">Sélectionnez une option</option>
-               <option value="pdf_all_in_one">PDF all in one</option>
-               <option value="optimiser_ia">Optimiser pour IA</option>
-                <option value="base_de_donnees">Base de données</option>
-                <option value="modele_pre_entraine">Modèle pré-entraîné</option>
-            </select>
-           <div id="envoiOptions" class="hidden">
-              <label for="envoiMethode">Méthode d'envoi des documents:</label>
-                <select id="envoiMethode" name="envoiMethode">
-                    <option value="">Sélectionnez une option</option>
-                    <option value="envoi_postal">Envoi postal</option>
-                 </select>
-                  <div id="adressePostale" class="hidden">
-                        <label for="adresse">Adresse postale: <span style="font-size: 0.8em; color: #777; display: block;">Nous vous enverrons une boîte à cette adresse pour y déposer vos documents.</span></label>
-                        <input type="text" id="adresse" name="adresse" placeholder="Votre adresse"/>
-                     </div>
-             </div>
-           <div class="total-price" id="totalPrice">Prix total estimé: 0 CHF</div>
-            <button type="submit">Passer commande</button>
-        </form>
-    </div>
-   </div>
+   <section class="relative  page active-page" id="demande-page">
+       <div class="services-background"></div>
+       <div class="card-container">
+            <div class="service-card transform  transition-transform duration-300">
+                <h2 class="text-2xl font-bold mb-4">Formulaire de Demande</h2>
+               <form id="demande-form" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                       <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required autocomplete="email">
+                    </div>
+                   <div class="form-group">
+                        <label for="address">Adresse:</label>
+                        <input type="text" id="address" name="address" class="form-control" required
+                           onblur="updateMap()" autocomplete="address-line1">
+                   </div>
+                   <div id="map-container">
+                       <iframe width="100%" height="100%" frameborder="0" style="border:0; border-radius: 10px;"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.1116311085963!2d7.342130111965687!3d46.228657340218616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e6e06b452d48f%3A0x946f7460083a513e!2sChemin%20Saint-Hubert%202%2C%201950%20Sion%2C%20Switzerland!5e0!3m2!1sen!2s!4v1718636748158!5m2!1sen!2s"
+                            allowfullscreen></iframe>
+                   </div>
+                    <div class="form-group">
+                       <label class="checkbox-label">
+                            <input type="checkbox" id="document-upload-checkbox" name="documentUpload"
+                                onclick="toggleCloudLinkInput()">
+                           <span>J'ai des documents à scanner dans un dossier cloud</span>
+                           <input type="text" id="cloud-link" name="cloudLink" class="cloud-link-input"
+                                placeholder="Coller le lien du dossier">
+                        </label>
+                    </div>
+                   <div class="form-group">
+                        <label for="output-format">Format de sortie:</label>
+                        <select id="output-format" name="outputFormat" class="form-control" required>
+                            <option value="pdf">PDF</option>
+                            <option value="database">Database</option>
+                            <option value="txt">TXT</option>
+                            <option value="image">Image</option>
+                            <option value="json">JSON</option>
+                            <option value="csv">CSV</option>
+                        </select>
+                   </div>
+                   <div class="text-right">
+                        <button type="submit"
+                            class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-900 transition-colors">
+                            Calculer le prix et Payer
+                        </button>
+                    </div>
+                </form>
+            </div>
+       </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-           // Dark mode toggle logic
-            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+       document.addEventListener('DOMContentLoaded', function () {
+            // Hero text fade-in animation
+            const heroText = document.getElementById('heroText');
+            gsap.to(heroText, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+               delay: 0.2
+            });
+           // Mouse animation fade-in
+            const mouseAnimation = document.querySelector('.mouse-animation');
+            gsap.to(mouseAnimation, {
+                opacity: 1,
+               duration: 1,
+                delay: 1
+            });
+            // Dark mode toggle logic
+           const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             let darkMode = localStorage.getItem('darkMode') === 'enabled';
             if (prefersDark && localStorage.getItem('darkMode') === null) {
-                darkMode = true;
-                localStorage.setItem('darkMode', 'enabled'); // Set it in localStorage for next visit
-            }
-             updateDarkMode(darkMode);
-            function updateDarkMode(isDarkMode) {
+               darkMode = true;
+               localStorage.setItem('darkMode', 'enabled'); // Set it in localStorage for next visit
+           }
+           updateDarkMode(darkMode);
+
+            //Function to update dark mode
+           function updateDarkMode(isDarkMode) {
                 const body = document.body;
-                if (isDarkMode) {
+               if (isDarkMode) {
                     body.classList.add('dark-mode');
                 } else {
                     body.classList.remove('dark-mode');
                 }
             }
-
-          const documentTypeSelect = document.getElementById('documentType');
-            const manuscritOptionsDiv = document.getElementById('manuscritOptions');
-            const digitalOptionsDiv = document.getElementById('digitalOptions');
-            const manuscritNatureSelect = document.getElementById('manuscritNature');
-            const manuscritAutreDiv = document.getElementById('manuscritAutre');
-            const digitalNatureSelect = document.getElementById('digitalNature');
-            const digitalAutreDiv = document.getElementById('digitalAutre');
-            const envoiOptionsDiv = document.getElementById('envoiOptions');
-            const envoiMethodeSelect = document.getElementById('envoiMethode');
-             const adressePostaleDiv = document.getElementById('adressePostale');
-             const loadDocumentSection = document.getElementById('load-document-section');
-
-             // Function for fade-in animation
-          function fadeIn(element, duration = 300) {
-              element.style.opacity = 0;
-              element.classList.remove('hidden');
-              let opacity = 0;
-             const interval = setInterval(function() {
-                opacity += 0.1;
-                element.style.opacity = opacity;
-                 if (opacity >= 1) {
-                    clearInterval(interval);
-                   }
-               }, duration / 10);
-             }
-
-              // Function for fade-out animation
-            function fadeOut(element, duration = 300) {
-               let opacity = 1;
-                const interval = setInterval(function() {
-                    opacity -= 0.1;
-                    element.style.opacity = opacity;
-                    if (opacity <= 0) {
-                        element.classList.add('hidden');
-                       clearInterval(interval);
-                    }
-              }, duration / 10);
-           }
-
-            documentTypeSelect.addEventListener('change', function() {
-                 if (!manuscritOptionsDiv.classList.contains('hidden')) {
-                   fadeOut(manuscritOptionsDiv);
-               }
-                 if (!digitalOptionsDiv.classList.contains('hidden')) {
-                    fadeOut(digitalOptionsDiv);
-                }
-                 if (!envoiOptionsDiv.classList.contains('hidden')) {
-                   fadeOut(envoiOptionsDiv);
-                }
-                if (!adressePostaleDiv.classList.contains('hidden')) {
-                    fadeOut(adressePostaleDiv);
-                 }
-                  if (!loadDocumentSection.classList.contains('hidden')) {
-                    fadeOut(loadDocumentSection);
-                 }
-
-               if (this.value === 'manuscrit') {
-                   fadeIn(manuscritOptionsDiv);
-                    fadeIn(envoiOptionsDiv);
-                   if (envoiMethodeSelect.value === 'envoi_postal') {
-                       fadeIn(adressePostaleDiv);
-                   }
-                } else if (this.value === 'digital') {
-                   fadeIn(digitalOptionsDiv);
-                    fadeIn(loadDocumentSection)
-               }
-                updatePrice();
-            });
-
-            manuscritNatureSelect.addEventListener('change', function() {
-               if (!manuscritAutreDiv.classList.contains('hidden')) {
-                    fadeOut(manuscritAutreDiv);
-                }
-               if (this.value === 'autre_manuscrit') {
-                   fadeIn(manuscritAutreDiv);
-               }
-                updatePrice();
-            });
-
-             digitalNatureSelect.addEventListener('change', function() {
-               if (!digitalAutreDiv.classList.contains('hidden')) {
-                   fadeOut(digitalAutreDiv);
-               }
-               if (this.value === 'autre_digital') {
-                   fadeIn(digitalAutreDiv);
-               }
-                updatePrice();
-            });
-
-           envoiMethodeSelect.addEventListener('change', function() {
-                if (!adressePostaleDiv.classList.contains('hidden')) {
-                  fadeOut(adressePostaleDiv);
-                }
-               if (this.value === 'envoi_postal') {
-                   fadeIn(adressePostaleDiv);
-               }
-               updatePrice();
-           });
+        });
 
 
-             const pageCountInput = document.getElementById('pageCount');
-             const outputFormatSelect = document.getElementById('outputFormat');
-            pageCountInput.addEventListener('input', updatePrice);
-            outputFormatSelect.addEventListener('change', updatePrice);
-            function updatePrice() {
-              let basePrice = 5;   // Lowered base price
-               let pagePrice = 0.05;  // Lowered price per page
-                 let formatPriceModifier = 1;
-                let envoiPrice = 0;
-                const pageCount = parseInt(document.getElementById('pageCount').value, 10) || 0;
-                 const outputFormat = document.getElementById('outputFormat').value;
-                 const envoiMethode = document.getElementById('envoiMethode')?.value;
-                if (envoiMethode === 'envoi_postal') {
-                    envoiPrice = 2;   // Lowered envoi price
-                  }
-                if (outputFormat === 'optimiser_ia') {
-                   formatPriceModifier = 1.3;
-                 }else if (outputFormat === 'base_de_donnees') {
-                   formatPriceModifier = 1.7;
-               }else if (outputFormat === 'modele_pre_entraine') {
-                    formatPriceModifier = 2;
-                 }
-                 const totalPrice = basePrice + (pageCount * pagePrice) * formatPriceModifier + envoiPrice;
-                document.getElementById('totalPrice').textContent = `Prix total estimé: ${totalPrice.toFixed(2)} CHF`;
+       function handleFormSubmit(event) {
+           event.preventDefault();
+           const formData = new FormData(event.target);
+           const hasDocuments = formData.get('documentUpload') === 'on';
+            const cloudLink = formData.get('cloudLink');
+           const outputFormat = formData.get('outputFormat');
+            const email = formData.get('email');
+           const address = formData.get('address');
+            let basePrice = 10;
+            let documentPrice = 0;
+           let formatPrice = 0;
+           if (hasDocuments) {
+                documentPrice = 20;
             }
-
-             const form = document.getElementById('demande-form');
-             form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                 const formData = new FormData(form);
-                const data = {};
-                formData.forEach((value, key) => {
-                  data[key] = value;
-                });
-                  const totalPrice = parseFloat(document.getElementById('totalPrice').textContent.split(': ')[1].replace(' CHF',''));
-                data.totalPrice = totalPrice;
-               console.log('Form Data:',data); //Debug line
-                sessionStorage.setItem('formData', JSON.stringify(data));
-                window.location.href = 'checkout.html';
-             });
-           });
-
-        function goBack() {
-          window.location.href = 'index.html';
-      }
+           switch (outputFormat) {
+                case 'pdf':
+                    formatPrice = 0;
+                    break;
+               case 'database':
+                   formatPrice = 10;
+                    break;
+               case 'txt':
+                   formatPrice = 0;
+                   break;
+                case 'image':
+                    formatPrice = 5;
+                   break;
+               case 'json':
+                   formatPrice = 5;
+                    break;
+               case 'csv':
+                    formatPrice = 5;
+                    break;
+                default:
+                    formatPrice = 0;
+            }
+            const totalPrice = basePrice + documentPrice + formatPrice;
+           const data = {
+                email: email,
+                address: address,
+               hasDocuments: hasDocuments,
+                cloudLink: cloudLink,
+               outputFormat: outputFormat,
+                totalPrice: totalPrice,
+            };
+           sessionStorage.setItem('formData', JSON.stringify(data));
+            window.location.href = 'checkout.html';
+        }
+        function showPage(pageUrl) {
+           window.open(pageUrl, '_self');
+       }
+       function updateMap() {
+            const address = document.getElementById('address').value;
+           if (address) {
+               const iframe = document.querySelector('#map-container iframe');
+                iframe.src = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.1116311085963!2d7.342130111965687!3d46.228657340218616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e6e06b452d48f%3A0x946f7460083a513e!2s${encodeURIComponent(address)}!5e0!3m2!1sen!2s!4v1718636748158!5m2!1sen!2s`
+            }
+        }
+       function toggleCloudLinkInput() {
+            const checkbox = document.getElementById('document-upload-checkbox');
+           const cloudLinkInput = document.getElementById('cloud-link');
+            if (checkbox.checked) {
+               cloudLinkInput.style.display = 'block';
+               cloudLinkInput.placeholder = "Coller le lien du dossier";
+           } else {
+                cloudLinkInput.style.display = 'none';
+               cloudLinkInput.placeholder = "";
+            }
+        }
     </script>
 </body>
+
 </html>
