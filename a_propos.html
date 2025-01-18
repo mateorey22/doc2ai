@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos - Doctofiles</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <style>
+          body {
+            font-family: 'Courier Prime', monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+             background-color: #f0f0f0;
+         }
+         .hero-background {
+             position: absolute;
+            top: 0;
+             left: 0;
+            width: 100%;
+             height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+             pointer-events: none;
+             z-index: 0;
+        }
+         .about-container {
+             max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .about-section {
+           background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+           border-radius: 20px;
+             padding: 30px;
+             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+             transition: all 0.3s ease;
+         }
+         .about-section:hover {
+             transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+         }
+         .page {
+            display: none; /* Initially hide all pages */
+         }
+          .active-page {
+            display: block; /* Show active page */
+         }
+          .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+           border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+            transition: color 0.3s ease;
+            z-index: 10;
+          }
+        .back-button:hover {
+            color: #555;
+         }
+          .animated-text {
+             opacity: 0;
+           transform: translateY(20px);
+           transition: opacity 1s ease, transform 1s ease;
+        }
+       .hero-background-animation {
+            animation: backgroundFadeIn 2s ease forwards;
+       }
+        @keyframes backgroundFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="relative">
+    <header class="relative h-screen flex flex-col justify-center items-center text-center" id="about-page">
+       <div class="hero-background hero-background-animation"></div>
+          <nav class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
+            <img src="/logo.png" alt="Doc2AI Logo" class="h-10">
+             <div class="space-x-4">
+                <button onclick="showPage('index.html')" class="text-gray-700 hover:text-gray-900">Accueil</button>
+                <button onclick="showPage('contact.html')" class="text-gray-700 hover:text-gray-900">Contact</button>
+            </div>
+        </nav>
+         <h1 class="text-5xl md:text-7xl font-bold mb-8 animated-text" style="font-family: 'Courier Prime', monospace;">À propos de Doctofiles</h1>
+    </header>
+
+     <section class="relative h-full page active-page">
+        <div class="about-container">
+            <div class="about-section animated-text">
+                 <p class="text-gray-700 mb-4">
+                    Doctofiles est né d'une idée simple : faciliter la vie des étudiants. Nous sommes une équipe de jeunes passionnés par la technologie, tous âgés de 17 ans et étudiants à l'EPTM en Suisse.
+                </p>
+                <p class="text-gray-700 mb-4">
+                    Face aux montagnes de feuilles volantes, de polycopiés et de notes manuscrites qui s'accumulaient sur nos bureaux, nous avons réalisé qu'il devait exister une solution plus pratique et plus efficace.
+                </p>
+                <p class="text-gray-700 mb-4">
+                     C'est ainsi que Doctofiles a vu le jour.  Notre mission ?  Libérer les étudiants du poids du papier en leur offrant un service de numérisation simple, rapide et sécurisé, le tout avec une touche suisse !
+                </p>
+             </div>
+              <div class="about-section animated-text">
+                <p class="text-gray-700 mb-4">
+                     Nous sommes convaincus que la digitalisation est un outil essentiel pour améliorer l'organisation, la productivité et la réussite scolaire.  Avec Doctofiles,  vos documents sont accessibles partout,  à tout moment,  et en toute sécurité.
+                 </p>
+                 <p class="text-gray-700 mb-4">
+                     Plus besoin de transporter des kilos de papier, plus de risque de perdre des notes importantes, et plus d'excuses pour ne pas réviser !
+                 </p>
+                <p class="text-gray-700 mb-4">
+                    Rejoignez-nous et découvrez une nouvelle façon d'apprendre, plus légère et plus efficace.
+               </p>
+           </div>
+       </div>
+    </section>
+
+  <button class="back-button" onclick="showPage('index.html')">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fade-in and slide-in animation for multiple elements
+             const animatedElements = document.querySelectorAll('.animated-text');
+            animatedElements.forEach((element, index) => {
+              gsap.to(element, {
+                   opacity: 1,
+                    y: 0,
+                  duration: 1,
+                   delay: 0.2 + (index * 0.2)
+                });
+            });
+
+        });
+
+          function showPage(pageUrl) {
+            window.open(pageUrl, '_self');
+        }
+    </script>
+</body>
+</html>
