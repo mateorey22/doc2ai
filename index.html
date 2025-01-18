@@ -15,7 +15,53 @@
             padding: 0;
             overflow-x: hidden;
             background-color: #f0f0f0;
+             transition: background-color 0.3s ease;
         }
+         body.dark-mode {
+            background-color: #1a202c;
+            color: white;
+        }
+
+         .dark-mode .text-gray-700 {
+             color: #cbd5e0;
+        }
+
+         .dark-mode .hover\:text-gray-900:hover {
+              color: white;
+         }
+
+         .dark-mode .service-card {
+             background-color: rgba(26, 32, 44, 0.5);
+             color: white;
+        }
+
+        .dark-mode .service-card .text-gray-700 {
+           color: #cbd5e0;
+        }
+        .dark-mode .form-content {
+            background-color: #2d3748;
+            color: white;
+        }
+        .dark-mode .form-content input[type="text"],
+        .dark-mode .form-content textarea,
+        .dark-mode .form-content input[type="email"] {
+             border: 1px solid #4a5568;
+            background-color: #4a5568;
+             color: white;
+        }
+         .dark-mode .form-content button[type="submit"] {
+            background-color: #cbd5e0;
+             color: #2d3748;
+        }
+        .dark-mode .form-content button[type="submit"]:hover {
+            background-color: #edf2f7;
+        }
+         .dark-mode .close-form-button {
+            color: #cbd5e0;
+        }
+         .dark-mode .close-form-button:hover {
+             color: white;
+         }
          .hero-background {
              position: absolute;
             top: 0;
@@ -26,6 +72,9 @@
             pointer-events: none;
             z-index: 0;
         }
+        .dark-mode .hero-background {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+        }
         .services-background {
             position: absolute;
             top: 0;
@@ -35,6 +84,9 @@
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
             pointer-events: none;
              z-index: 0;
+        }
+        .dark-mode .services-background {
+             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
         }
          .service-card {
             background-color: rgba(255, 255, 255, 0.3); /* Reduced opacity */
@@ -53,7 +105,7 @@
             transform: translateY(-5px) scale(1.03);
            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
          }
-        
+
         .mouse-animation {
              position: absolute;
            bottom: 20px;
@@ -71,6 +123,10 @@
              border-radius: 15px;
             position: relative;
         }
+        .dark-mode .mouse {
+            border-color: white;
+       }
+
          .wheel {
             width: 4px;
            height: 8px;
@@ -82,11 +138,17 @@
             transform: translateX(-50%);
             animation: wheel-move 1.5s ease-in-out infinite;
          }
+         .dark-mode .wheel {
+            background-color: white;
+        }
         .mouse-text {
              margin-top: 10px;
              font-size: 0.8em;
            color: #555;
          }
+         .dark-mode .mouse-text {
+            color: #cbd5e0;
+        }
          @keyframes wheel-move {
            0% {
                opacity: 0;
@@ -219,9 +281,13 @@
         .close-form-button:hover {
             color: #333;
         }
+        .dark-mode .navbar-toggle-icon {
+            filter: invert(1);
+        }
     </style>
 </head>
 <body class="relative">
+    
 
      <header class="relative h-screen flex flex-col justify-center items-center text-center" id="home-page">
         <div class="hero-background hero-background-animation"></div>
@@ -262,7 +328,7 @@
            </div>
        </div>
     </section>
-       
+
     <div id="form-container" class="form-container">
         <div class="form-content">
             <button class="close-form-button">&times;</button>
@@ -306,6 +372,26 @@
              closeFormButton.addEventListener('click', () => {
                document.getElementById('form-container').style.display = 'none';
           });
+               // Check if the user has a preference for dark mode
+               const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+               // Initially set dark mode based on user's preference or previously set value
+               let darkMode = localStorage.getItem('darkMode') === 'enabled';
+               if (prefersDark && localStorage.getItem('darkMode') === null) {
+                  darkMode = true;
+                   localStorage.setItem('darkMode', 'enabled'); // Set it in localStorage for next visit
+              }
+
+                updateDarkMode(darkMode);
+            //Function to update dark mode
+            function updateDarkMode(isDarkMode) {
+                 const body = document.body;
+                if (isDarkMode) {
+                    body.classList.add('dark-mode');
+                 } else {
+                    body.classList.remove('dark-mode');
+               }
+           }
         });
 
         function handleFormSubmit(event) {
